@@ -1,25 +1,28 @@
-import {View, Text, ImageBackground} from 'react-native';
-import React from 'react';
-import {SplashLogo} from '../../../Assets/images/index';
+import {View, Image} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  // LogoDark,
+  LogoLight,
+  // LoadingDark,
+  LoadingLight,
+} from '../../../Assets/images/index';
+import styles from './styles';
 
-const Splash = () => {
+const Splash = (props: any) => {
+  useEffect(() => {
+    setInterval(() => {
+      props.navigation.navigate('Welcome');
+    }, 1500);
+  });
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      }}>
-      <ImageBackground
-        source={SplashLogo}
-        style={{
-          height: 110,
-          width: 70,
-          justifyContent: 'center',
-        }}></ImageBackground>
+    <View style={styles.container}>
+      <View style={[styles.viewLogo, styles.center]}>
+        <Image source={LogoLight} style={styles.logo} />
+      </View>
+      <View style={styles.viewLoading}>
+        <Image source={LoadingLight} style={styles.loading} />
+      </View>
     </View>
   );
 };
-
 export default Splash;

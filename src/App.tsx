@@ -1,21 +1,26 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Splash} from './General/Screens/index';
+import {Splash, Welcome} from './General/Screens/index';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
-  const Welcome = () => {
+  const WelcomeStack = () => {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Welcome" component={Welcome} />
       </Stack.Navigator>
     );
   };
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="WelcomeStack" component={WelcomeStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );
