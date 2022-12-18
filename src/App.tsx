@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   NavigationContainer,
-  DarkTheme,
+  // DarkTheme,
   DefaultTheme,
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -11,7 +11,8 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const WelcomeStack = () => {
     return (
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        screenOptions={{headerShown: false, gestureEnabled: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Welcome" component={Welcome} />
       </Stack.Navigator>
