@@ -11,7 +11,7 @@ import styles from './styles';
 import {onboardingData} from '../../../utils/Const';
 import {Button} from '../Widgets/index';
 
-const Onboarding = () => {
+const Onboarding = ({navigation}: {navigation: any}) => {
   const {width} = useWindowDimensions();
 
   const lengthData = onboardingData.length - 1;
@@ -79,6 +79,8 @@ const Onboarding = () => {
         index: currentIndex + 1,
         animated: true,
       });
+    } else {
+      navigation.navigate('LetIsInStack', {screen: 'LetIsIn'});
     }
   };
   return (

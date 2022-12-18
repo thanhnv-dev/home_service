@@ -6,3 +6,6 @@ export {default as LoadingDark} from './LoadingDark.gif';
 export {default as Onboarding1} from './Onboarding1.png';
 export {default as Onboarding2} from './Onboarding2.png';
 export {default as Onboarding3} from './Onboarding3.png';
+export {default as fb_logo} from './fb_logo.png';
+export {default as g_logo} from './g_logo.png';
+export {default as a_logo} from './a_logo.png';

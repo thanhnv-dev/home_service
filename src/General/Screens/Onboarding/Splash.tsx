@@ -16,7 +16,7 @@ const Splash = (props: any) => {
     let Go: any = null;
     if (isFocused) {
       Go = setInterval(() => {
-        props.navigation.navigate('Welcome');
+        props.navigation.navigate('Onboarding');
       }, 1500);
     }
     return () => {
