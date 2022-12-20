@@ -1,40 +1,11 @@
-import * as React from 'react';
-import {
-  NavigationContainer,
-  // DarkTheme,
-  DefaultTheme,
-} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Splash, Onboarding, LetIsIn} from './General/Screens/index';
+import React from 'react';
+import AppNaviagtor from './navigation/AppNavigator';
+import * as eva from '@eva-design/eva';
+import {ApplicationProvider} from '@ui-kitten/components';
 
-const Stack = createNativeStackNavigator();
-const App = () => {
-  const OnboardingStack = () => {
-    return (
-      <Stack.Navigator
-        screenOptions={{headerShown: false, gestureEnabled: false}}>
-        <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="Onboarding" component={Onboarding} />
-      </Stack.Navigator>
-    );
-  };
-
-  const LetIsInStack = () => {
-    return (
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="LetIsIn" component={LetIsIn} />
-      </Stack.Navigator>
-    );
-  };
-
-  return (
-    <NavigationContainer theme={DefaultTheme}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="OnboardingStack" component={OnboardingStack} />
-        <Stack.Screen name="LetIsInStack" component={LetIsInStack} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-
+const App = () => (
+  <ApplicationProvider {...eva} theme={eva.dark}>
+    <AppNaviagtor />
+  </ApplicationProvider>
+);
 export default App;

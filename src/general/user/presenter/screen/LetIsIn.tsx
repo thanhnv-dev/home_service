@@ -1,10 +1,10 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from './styles';
-import {Logo, fb_logo, g_logo, a_logo} from '../../../Assets/images/index';
-import {Button} from '../Widgets/index';
+import styles from '../styles';
+import {Logo, fb_logo, g_logo, a_logo} from '../../../../assets/images/index';
+import {Button} from '../../../widgets/index';
 
-const LetIsIn = () => {
+const LetIsIn = ({navigation}: {navigation: any}) => {
   const ButtonLoginWith = ({
     // onPress,
     icon,
@@ -21,6 +21,9 @@ const LetIsIn = () => {
       </TouchableOpacity>
     );
   };
+
+  const goLogin = () => navigation.navigate('Login');
+
   return (
     <View style={styles.container}>
       <View style={styles.viewBack} />
@@ -41,7 +44,7 @@ const LetIsIn = () => {
         <View style={styles.line} />
       </View>
       <View style={[styles.viewSignInButtons, styles.center]}>
-        <Button title="Sign in with password" onPress={() => {}} />
+        <Button title="Sign in with password" onPress={() => goLogin()} />
       </View>
       <View style={[styles.viewSignUpButton, styles.center]}>
         <Text style={styles.textOr}>Don't have an account? </Text>

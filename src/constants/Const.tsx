@@ -1,4 +1,4 @@
-import {Onboarding1, Onboarding2, Onboarding3} from '../Assets/images/index';
+import {Onboarding1, Onboarding2, Onboarding3} from '../assets/images/index';
 const onboardingData = [
   {
     id: 1,

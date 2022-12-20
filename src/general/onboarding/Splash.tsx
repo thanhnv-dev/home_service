@@ -5,7 +5,7 @@ import {
   LogoLight,
   // LoadingDark,
   LoadingLight,
-} from '../../../Assets/images/index';
+} from '../../assets/images/index';
 import styles from './styles';
 import {useIsFocused} from '@react-navigation/native';
 
