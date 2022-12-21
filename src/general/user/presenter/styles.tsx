@@ -74,6 +74,33 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: Color.violet,
   },
+  viewTitleIconBack: {
+    flex: 9,
+    marginTop: 30,
+    justifyContent: 'space-around',
+  },
+  viewInput: {
+    backgroundColor: Color.violet,
+    flex: 6,
+  },
+  viewButtonSign: {
+    flex: 7,
+  },
+  viewOrWith: {
+    backgroundColor: Color.violet,
+    flex: 3,
+  },
+  viewButtonSignWith: {
+    flex: 3,
+  },
+  viewButtonText: {
+    backgroundColor: Color.violet,
+    flex: 3,
+  },
+  iconBack: {
+    width: 30,
+    height: 30,
+  },
 });
 
 export default styles;
