@@ -1,23 +1,16 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from '../styles';
-import {Logo, fb_logo, g_logo, a_logo} from '../../../../assets/images/index';
+import {fb_logo, g_logo, a_logo, Logo} from '../../../../assets/images/index';
 import {Button} from '../../../widgets/index';
+import {Layout, Text} from '@ui-kitten/components';
 
 const LetIsIn = ({navigation}: {navigation: any}) => {
-  const ButtonLoginWith = ({
-    // onPress,
-    icon,
-    title,
-  }: {
-    // onPress: any;
-    icon: any;
-    title: string;
-  }) => {
+  const ButtonLoginWith = (props: any) => {
     return (
       <TouchableOpacity style={[styles.button, styles.center]}>
-        <Image source={icon} style={styles.icon} />
-        <Text style={styles.fs14bold}>{title}</Text>
+        <Image source={props.icon} style={styles.icon} />
+        <Text style={styles.fs14bold}>{props.title}</Text>
       </TouchableOpacity>
     );
   };
@@ -25,7 +18,7 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
   const goLogin = () => navigation.navigate('Login');
 
   return (
-    <View style={styles.container}>
+    <Layout style={styles.container}>
       <View style={styles.viewBack} />
       <View style={[styles.viewLogo, styles.center]}>
         <Image source={Logo} style={styles.logo} />
@@ -52,7 +45,7 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
           <Text style={styles.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Layout>
   );
 };
 

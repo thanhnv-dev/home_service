@@ -4,7 +4,6 @@ import Color from '../../../constants/Color';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.while,
   },
   viewBack: {
     marginTop: 30,
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    height: 200,
+    height: 250,
     width: 250,
   },
   title: {
