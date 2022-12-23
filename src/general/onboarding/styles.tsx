@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: Color.violet,
     height: 50,
-    width: '80%',
     borderRadius: 100,
     shadowColor: Color.violet,
     shadowOpacity: 0.1,
@@ -71,6 +70,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 5,
     backgroundColor: Color.violet,
+  },
+  size80: {
+    width: '80%',
   },
 });
 

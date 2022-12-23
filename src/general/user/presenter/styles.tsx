@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  childContainer: {
+    marginHorizontal: 20,
+    flex: 1,
+  },
   viewBack: {
     marginTop: 30,
     flex: 0.6,
@@ -74,32 +78,114 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: Color.violet,
   },
+  viewChange: {
+    flex: 24,
+  },
   viewTitleIconBack: {
-    flex: 9,
+    flex: 5,
     marginTop: 30,
     justifyContent: 'space-around',
   },
-  viewInput: {
-    backgroundColor: Color.violet,
+  viewInputSubmit: {
     flex: 6,
   },
+  viewInput: {
+    flex: 4,
+    justifyContent: 'space-around',
+  },
   viewButtonSign: {
-    flex: 7,
+    flex: 4,
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   viewOrWith: {
-    backgroundColor: Color.violet,
-    flex: 3,
+    flex: 4,
+    flexDirection: 'row',
   },
   viewButtonSignWith: {
-    flex: 3,
+    flex: 2.5,
+    flexDirection: 'row',
   },
   viewButtonText: {
-    backgroundColor: Color.violet,
-    flex: 3,
+    flex: 4.5,
+    flexDirection: 'row',
   },
   iconBack: {
     width: 30,
     height: 30,
+  },
+  iconInput: {
+    width: 20,
+    height: 20,
+  },
+  viewIconBack: {
+    width: 30,
+    height: 30,
+  },
+  textTitle: {
+    fontSize: 45,
+    fontWeight: '700',
+  },
+  boxInput: {
+    flexDirection: 'row',
+    height: 55,
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  input: {
+    flex: 1,
+  },
+  viewInputEmail: {
+    flex: 9.5,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  viewInputPass: {
+    flex: 8,
+  },
+  viewIconInput: {
+    flex: 1.5,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  viewIconEye: {
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  viewIconCheck: {
+    height: 20,
+    width: 20,
+    borderRadius: 5,
+    borderWidth: 2.3,
+    borderColor: Color.violet,
+  },
+  iconChecked: {
+    height: 16,
+    width: 16,
+  },
+  viewRemember: {
+    flexDirection: 'row',
+  },
+  textForgot: {
+    color: Color.violet,
+  },
+  size80: {
+    width: '80%',
+  },
+  sizeFull: {
+    width: '100%',
+  },
+  icon3rd: {
+    height: 25,
+    width: 25,
+  },
+  buttonSignWith: {
+    flex: 1,
+    marginHorizontal: 20,
+    marginVertical: 5,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Color.border,
   },
 });
 

@@ -9,7 +9,7 @@ import {
 import React, {useRef, useState} from 'react';
 import styles from './styles';
 import {onboardingData} from '../../constants/Const';
-import {Button} from '../widgets/index';
+import {Button1} from '../widgets/index';
 
 const Onboarding = ({navigation}: {navigation: any}) => {
   const {width} = useWindowDimensions();
@@ -110,9 +110,10 @@ const Onboarding = ({navigation}: {navigation: any}) => {
         {onboardingData?.map(renderPaginator)}
       </View>
       <View style={styles.viewButton}>
-        <Button
+        <Button1
           onPress={() => nextPage()}
           title={currentIndex < lengthData ? 'Next' : 'Get Started'}
+          style={styles.size80}
         />
       </View>
     </View>

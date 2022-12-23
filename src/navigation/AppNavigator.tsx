@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Splash, Onboarding, LetIsIn, Login} from '../general/index';
+import {Splash, Onboarding, LetIsIn, AccountForm} from '../general/index';
 
 const Stack = createNativeStackNavigator();
 const AppNaviagtor = () => {
@@ -19,7 +19,7 @@ const AppNaviagtor = () => {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LetIsIn" component={LetIsIn} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="AccountForm" component={AccountForm} />
       </Stack.Navigator>
     );
   };

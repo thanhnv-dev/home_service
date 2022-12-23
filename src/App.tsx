@@ -8,7 +8,7 @@ import {ThemeContext} from './theme/theme-context';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
 const App = () => {
-  const [theme, setTheme] = React.useState(eva.dark);
+  const [theme, setTheme] = React.useState(eva.light);
 
   const toggleTheme = () => {
     const nextTheme = theme === eva.light ? eva.dark : eva.light;

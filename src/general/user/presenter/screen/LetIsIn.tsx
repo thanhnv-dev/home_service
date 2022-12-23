@@ -2,7 +2,7 @@ import {View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from '../styles';
 import {fb_logo, g_logo, a_logo, Logo} from '../../../../assets/images/index';
-import {Button} from '../../../widgets/index';
+import {Button1} from '../../../widgets/index';
 import {Layout, Text} from '@ui-kitten/components';
 
 const LetIsIn = ({navigation}: {navigation: any}) => {
@@ -15,7 +15,10 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
     );
   };
 
-  const goLogin = () => navigation.navigate('Login');
+  const nextPage = (type: string) =>
+    navigation.navigate('AccountForm', {
+      type: type,
+    });
 
   return (
     <Layout style={styles.container}>
@@ -37,11 +40,15 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
         <View style={styles.line} />
       </View>
       <View style={[styles.viewSignInButtons, styles.center]}>
-        <Button title="Sign in with password" onPress={() => goLogin()} />
+        <Button1
+          title="Sign in with password"
+          onPress={() => nextPage('signIn')}
+          style={styles.size80}
+        />
       </View>
       <View style={[styles.viewSignUpButton, styles.center]}>
         <Text style={styles.textOr}>Don't have an account? </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => nextPage('signUp')}>
           <Text style={styles.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
       </View>
