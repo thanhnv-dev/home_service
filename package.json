@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.5.1",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.6",
+    "@reduxjs/toolkit": "^1.9.1",
     "@tanstack/react-query": "^4.20.4",
     "@ui-kitten/components": "^5.1.2",
     "@ui-kitten/eva-icons": "^5.1.2",
@@ -34,6 +35,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-vector-image": "^0.3.3",
     "react-query": "^3.39.2",
+    "redux": "^4.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -53,6 +55,14 @@
     "typescript": "^4.9.4"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

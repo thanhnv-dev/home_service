@@ -114,6 +114,7 @@ const Onboarding = ({navigation}: {navigation: any}) => {
           onPress={() => nextPage()}
           title={currentIndex < lengthData ? 'Next' : 'Get Started'}
           style={styles.size80}
+          disabled={false}
         />
       </View>
     </View>

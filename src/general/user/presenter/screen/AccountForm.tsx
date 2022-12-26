@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   TextInput,
   TouchableOpacity,
@@ -15,14 +15,17 @@ import {Button1} from '../../../widgets/index';
 import {Formik} from 'formik';
 import styles from '../styles';
 import {fb_logo, g_logo, a_logo} from '../../../../assets/images/index';
-// import {SignupSchema} from '../../../../validation/SchemaValidation';
+import {SignupSchema} from '../../../../validation/SchemaValidation';
 
 const AccountForm = (props: any) => {
-  const type = props.route?.params?.type;
+  const [type, setType] = useState(props.route?.params?.type);
   const checkType = type === 'signIn' ? true : false;
-  const [focusBox, setFocusBox] = React.useState('');
-  const [checked, setChecked] = React.useState(false);
-  const [secureTextEntry, setSecureTextEntry] = React.useState(false);
+  const [focusBox, setFocusBox] = useState('');
+  const [remenber, setRemenber] = useState(false);
+  const [secureTextEntry, setSecureTextEntry] = useState(false);
+  const SignUp = () => {
+    setType(checkType ? 'signUp' : 'signIn');
+  };
 
   const focusedColorBoxEmail = (color1: any, color2: any) =>
     FocusedColor({
@@ -39,7 +42,7 @@ const AccountForm = (props: any) => {
       unFocusedColor: color2,
     });
 
-  const arrowIcon = () => (
+  const ArrowIcon = () => (
     <Icon name="arrow-back-outline" fill="#8F9BB3" style={styles.iconBack} />
   );
 
@@ -84,7 +87,12 @@ const AccountForm = (props: any) => {
     <Layout style={styles.container}>
       <TouchableWithoutFeedback
         style={styles.container}
-        onPress={() => Keyboard.dismiss()}>
+        onPress={() => {
+          Keyboard.dismiss();
+          if (focusBox !== '') {
+            setFocusBox('');
+          }
+        }}>
         <Layout style={styles.childContainer}>
           <KeyboardAvoidingView
             style={styles.viewChange}
@@ -93,7 +101,7 @@ const AccountForm = (props: any) => {
               <Button
                 style={styles.viewIconBack}
                 appearance="ghost"
-                accessoryLeft={arrowIcon}
+                accessoryLeft={ArrowIcon}
                 onPress={() => props.navigation.goBack()}
               />
               <Text style={styles.textTitle}>
@@ -104,8 +112,19 @@ const AccountForm = (props: any) => {
             </Layout>
             <Formik
               initialValues={{email: '', password: ''}}
-              onSubmit={values => console.log(values)}>
-              {({handleChange, handleBlur, handleSubmit, values}) => (
+              validationSchema={SignupSchema}
+              onSubmit={values => {
+                console.log(values);
+                Keyboard.dismiss();
+              }}>
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                touched,
+              }) => (
                 <Layout style={styles.viewInputSubmit}>
                   <Layout style={styles.viewInput}>
                     <Layout
@@ -147,10 +166,18 @@ const AccountForm = (props: any) => {
                           onChangeText={handleChange('email')}
                           onBlur={handleBlur('email')}
                           onFocus={() => setFocusBox('emailBox')}
-                          style={styles.input}
+                          style={[
+                            styles.input,
+                            {
+                              color: errors.email ? Color.error : Color.violet,
+                            },
+                          ]}
                         />
                       </Layout>
                     </Layout>
+                    {errors.email && touched.email ? (
+                      <Text style={{color: Color.error}}>{errors.email}</Text>
+                    ) : null}
                     <Layout
                       style={[
                         styles.boxInput,
@@ -191,7 +218,14 @@ const AccountForm = (props: any) => {
                           onBlur={handleBlur('password')}
                           onFocus={() => setFocusBox('passBox')}
                           secureTextEntry={secureTextEntry}
-                          style={styles.input}
+                          style={[
+                            styles.input,
+                            {
+                              color: errors.password
+                                ? Color.error
+                                : Color.violet,
+                            },
+                          ]}
                         />
                       </Layout>
                       <Button
@@ -209,6 +243,11 @@ const AccountForm = (props: any) => {
                         onPress={() => setSecureTextEntry(!secureTextEntry)}
                       />
                     </Layout>
+                    {errors.password && touched.password ? (
+                      <Text style={{color: Color.error}}>
+                        {errors.password}
+                      </Text>
+                    ) : null}
                   </Layout>
                   <Layout style={styles.viewButtonSign}>
                     <Layout style={[styles.viewRemember, styles.center]}>
@@ -217,17 +256,18 @@ const AccountForm = (props: any) => {
                           styles.viewIconCheck,
                           styles.center,
                           {
-                            backgroundColor: checked
+                            backgroundColor: remenber
                               ? Color.violet
                               : Color.while,
                           },
                         ]}
-                        onPress={() => setChecked(!checked)}>
+                        onPress={() => setRemenber(!remenber)}>
                         <CheckedIcon />
                       </TouchableOpacity>
                       <Text>{'  Remenber me'}</Text>
                     </Layout>
                     <Button1
+                      disabled={errors.password || errors.email ? true : false}
                       title={checkType ? 'Sign in' : 'Sign up'}
                       onPress={handleSubmit}
                       style={styles.sizeFull}
@@ -261,9 +301,15 @@ const AccountForm = (props: any) => {
             </TouchableOpacity>
           </Layout>
           <Layout style={[styles.viewButtonText, styles.center]}>
-            <Text style={styles.textOr}>Don't have an account? </Text>
-            <TouchableOpacity>
-              <Text style={styles.textSignUp}>Sign Up</Text>
+            <Text style={styles.textOr}>
+              {checkType
+                ? 'Don`t have an account? '
+                : 'Already have an account? '}
+            </Text>
+            <TouchableOpacity onPress={() => SignUp()}>
+              <Text style={styles.textSignUp}>
+                {checkType ? 'Sign Up' : 'Sign In'}
+              </Text>
             </TouchableOpacity>
           </Layout>
         </Layout>

@@ -44,6 +44,7 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
           title="Sign in with password"
           onPress={() => nextPage('signIn')}
           style={styles.size80}
+          disabled={false}
         />
       </View>
       <View style={[styles.viewSignUpButton, styles.center]}>

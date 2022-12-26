@@ -4,4 +4,6 @@ export default {
   border: '#F1F1F1',
   backgroundColorViolet: '#F4ECFF',
   grayIcon: '#929DB5',
+  error: '#ff3333',
+  success: '#2AA745',
 };
