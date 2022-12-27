@@ -15,10 +15,8 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
     );
   };
 
-  const nextPage = (type: string) =>
-    navigation.navigate('AccountForm', {
-      type: type,
-    });
+  const goSignIn = () => navigation.navigate('SignIn');
+  const goSignUp = () => navigation.navigate('SignUp');
 
   return (
     <Layout style={styles.container}>
@@ -42,14 +40,14 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
       <View style={[styles.viewSignInButtons, styles.center]}>
         <Button1
           title="Sign in with password"
-          onPress={() => nextPage('signIn')}
+          onPress={() => goSignIn()}
           style={styles.size80}
           disabled={false}
         />
       </View>
       <View style={[styles.viewSignUpButton, styles.center]}>
         <Text style={styles.textOr}>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => nextPage('signUp')}>
+        <TouchableOpacity onPress={() => goSignUp()}>
           <Text style={styles.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
       </View>

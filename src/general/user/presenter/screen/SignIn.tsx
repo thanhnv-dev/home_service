@@ -9,7 +9,11 @@ import {
   Image,
 } from 'react-native';
 import {Button, Layout, Icon, Text} from '@ui-kitten/components';
-import {FocusedColor} from './Function';
+import {
+  FocusedColor,
+  FocusedColorBoxEmail,
+  FocusedColorBoxPass,
+} from '../../../widgets';
 import Color from '../../../../constants/Color';
 import {Button1} from '../../../widgets/index';
 import {Formik} from 'formik';
@@ -17,35 +21,17 @@ import styles from '../styles';
 import {fb_logo, g_logo, a_logo} from '../../../../assets/images/index';
 import {SignupSchema} from '../../../../validation/SchemaValidation';
 import {signUp} from '../../../../network/controllers/userControllers';
+import {IconApp} from '../../../widgets';
 
-const AccountForm = (props: any) => {
-  const [type, setType] = useState(props.route?.params?.type);
-  const checkType = type === 'signIn' ? true : false;
+const SignIn = (props: any) => {
   const [focusBox, setFocusBox] = useState('');
   const [remenber, setRemenber] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(false);
-  const SignUp = () => {
-    setType(checkType ? 'signUp' : 'signIn');
-  };
+  const goSignUp = () => props.navigation.navigate('SignUp');
 
-  const focusedColorBoxEmail = (color1: any, color2: any) =>
-    FocusedColor({
-      typeBox: 'emailBox',
-      focusBox: focusBox,
-      focusedColor: color1,
-      unFocusedColor: color2,
-    });
-  const focusedColorBoxPass = (color1: any, color2: any) =>
-    FocusedColor({
-      typeBox: 'passBox',
-      focusBox: focusBox,
-      focusedColor: color1,
-      unFocusedColor: color2,
-    });
-
-  const ArrowIcon = () => (
-    <Icon name="arrow-back-outline" fill="#8F9BB3" style={styles.iconBack} />
-  );
+  // const ArrowIcon = () => (
+  //   <Icon name="arrow-back-outline" fill="#8F9BB3" style={styles.iconBack} />
+  // );
 
   const EmailIcon = () => (
     <Icon
@@ -62,21 +48,21 @@ const AccountForm = (props: any) => {
   const LockIcon = () => (
     <Icon
       name="lock-outline"
-      fill={focusedColorBoxPass(Color.violet, Color.grayIcon)}
+      fill={FocusedColorBoxPass(Color.violet, Color.grayIcon, focusBox)}
       style={styles.iconInput}
     />
   );
-  const eyeIcon = () => (
+  const EyeIcon = () => (
     <Icon
       name="eye-outline"
-      fill={focusedColorBoxPass(Color.violet, Color.grayIcon)}
+      fill={FocusedColorBoxPass(Color.violet, Color.grayIcon, focusBox)}
       style={styles.iconInput}
     />
   );
-  const eyeOffIcon = () => (
+  const EyeOffIcon = () => (
     <Icon
       name="eye-off-outline"
-      fill={focusedColorBoxPass(Color.violet, Color.grayIcon)}
+      fill={FocusedColorBoxPass(Color.violet, Color.grayIcon, focusBox)}
       style={styles.iconInput}
     />
   );
@@ -102,14 +88,14 @@ const AccountForm = (props: any) => {
               <Button
                 style={styles.viewIconBack}
                 appearance="ghost"
-                accessoryLeft={ArrowIcon}
+                accessoryLeft={IconApp({
+                  fill: '#8F9BB3',
+                  name: 'arrow-back-outline',
+                  style: styles.iconBack,
+                })}
                 onPress={() => props.navigation.goBack()}
               />
-              <Text style={styles.textTitle}>
-                {checkType
-                  ? 'Login to your \nAccount'
-                  : 'Create your \nAccount'}
-              </Text>
+              <Text style={styles.textTitle}>{'Login to your \nAccount'}</Text>
             </Layout>
             <Formik
               initialValues={{email: '', password: ''}}
@@ -132,9 +118,10 @@ const AccountForm = (props: any) => {
                       style={[
                         styles.boxInput,
                         {
-                          borderColor: focusedColorBoxEmail(
+                          borderColor: FocusedColorBoxEmail(
                             Color.violet,
                             Color.border,
+                            focusBox,
                           ),
                         },
                       ]}>
@@ -143,9 +130,10 @@ const AccountForm = (props: any) => {
                           styles.viewIconInput,
                           styles.center,
                           {
-                            backgroundColor: focusedColorBoxEmail(
+                            backgroundColor: FocusedColorBoxEmail(
                               Color.backgroundColorViolet,
                               Color.border,
+                              focusBox,
                             ),
                           },
                         ]}>
@@ -155,9 +143,10 @@ const AccountForm = (props: any) => {
                         style={[
                           styles.viewInputEmail,
                           {
-                            backgroundColor: focusedColorBoxEmail(
+                            backgroundColor: FocusedColorBoxEmail(
                               Color.backgroundColorViolet,
                               Color.border,
+                              focusBox,
                             ),
                           },
                         ]}>
@@ -183,9 +172,10 @@ const AccountForm = (props: any) => {
                       style={[
                         styles.boxInput,
                         {
-                          borderColor: focusedColorBoxPass(
+                          borderColor: FocusedColorBoxPass(
                             Color.violet,
                             Color.border,
+                            focusBox,
                           ),
                         },
                       ]}>
@@ -194,9 +184,10 @@ const AccountForm = (props: any) => {
                           styles.viewIconInput,
                           styles.center,
                           {
-                            backgroundColor: focusedColorBoxPass(
+                            backgroundColor: FocusedColorBoxPass(
                               Color.backgroundColorViolet,
                               Color.border,
+                              focusBox,
                             ),
                           },
                         ]}>
@@ -206,9 +197,10 @@ const AccountForm = (props: any) => {
                         style={[
                           styles.viewInputPass,
                           {
-                            backgroundColor: focusedColorBoxPass(
+                            backgroundColor: FocusedColorBoxPass(
                               Color.backgroundColorViolet,
                               Color.border,
+                              focusBox,
                             ),
                           },
                         ]}>
@@ -233,14 +225,15 @@ const AccountForm = (props: any) => {
                         style={[
                           styles.viewIconEye,
                           {
-                            backgroundColor: focusedColorBoxPass(
+                            backgroundColor: FocusedColorBoxPass(
                               Color.backgroundColorViolet,
                               Color.border,
+                              focusBox,
                             ),
                           },
                         ]}
                         appearance="ghost"
-                        accessoryLeft={secureTextEntry ? eyeIcon : eyeOffIcon}
+                        accessoryLeft={secureTextEntry ? EyeIcon : EyeOffIcon}
                         onPress={() => setSecureTextEntry(!secureTextEntry)}
                       />
                     </Layout>
@@ -269,17 +262,15 @@ const AccountForm = (props: any) => {
                     </Layout>
                     <Button1
                       disabled={errors.password || errors.email ? true : false}
-                      title={checkType ? 'Sign in' : 'Sign up'}
+                      title={'Sign in'}
                       onPress={handleSubmit}
                       style={styles.sizeFull}
                     />
-                    {checkType && (
-                      <TouchableOpacity>
-                        <Text style={styles.textForgot}>
-                          Forgot the password?
-                        </Text>
-                      </TouchableOpacity>
-                    )}
+                    <TouchableOpacity>
+                      <Text style={styles.textForgot}>
+                        Forgot the password?
+                      </Text>
+                    </TouchableOpacity>
                   </Layout>
                 </Layout>
               )}
@@ -302,15 +293,9 @@ const AccountForm = (props: any) => {
             </TouchableOpacity>
           </Layout>
           <Layout style={[styles.viewButtonText, styles.center]}>
-            <Text style={styles.textOr}>
-              {checkType
-                ? 'Don`t have an account? '
-                : 'Already have an account? '}
-            </Text>
-            <TouchableOpacity onPress={() => SignUp()}>
-              <Text style={styles.textSignUp}>
-                {checkType ? 'Sign Up' : 'Sign In'}
-              </Text>
+            <Text style={styles.textOr}>Don't have an account? </Text>
+            <TouchableOpacity onPress={() => goSignUp()}>
+              <Text style={styles.textSignUp}> Sign Up</Text>
             </TouchableOpacity>
           </Layout>
         </Layout>
@@ -319,4 +304,4 @@ const AccountForm = (props: any) => {
   );
 };
 
-export default AccountForm;
+export default SignIn;

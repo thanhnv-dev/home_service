@@ -5,8 +5,9 @@ import {
   Splash,
   Onboarding,
   LetIsIn,
-  AccountForm,
+  SignIn,
   ChooseService,
+  SignUp,
 } from '../general/index';
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +26,8 @@ const AppNaviagtor = () => {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LetIsIn" component={LetIsIn} />
-        <Stack.Screen name="AccountForm" component={AccountForm} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ChooseService" component={ChooseService} />
       </Stack.Navigator>
     );
