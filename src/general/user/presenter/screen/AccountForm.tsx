@@ -16,6 +16,7 @@ import {Formik} from 'formik';
 import styles from '../styles';
 import {fb_logo, g_logo, a_logo} from '../../../../assets/images/index';
 import {SignupSchema} from '../../../../validation/SchemaValidation';
+import {signUp} from '../../../../network/controllers/userControllers';
 
 const AccountForm = (props: any) => {
   const [type, setType] = useState(props.route?.params?.type);
@@ -114,8 +115,8 @@ const AccountForm = (props: any) => {
               initialValues={{email: '', password: ''}}
               validationSchema={SignupSchema}
               onSubmit={values => {
-                console.log(values);
                 Keyboard.dismiss();
+                signUp(values);
               }}>
               {({
                 handleChange,

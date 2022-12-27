@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {APIConstants} from './APIConstants';
 import {IApiResponse} from './IApiResponse';
+import Toast from 'react-native-toast-message';
 
 async function getAxiosInstance() {
   const instance = axios.create({
@@ -9,20 +10,29 @@ async function getAxiosInstance() {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      //   Authorization:
-      //     'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjI1LCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNjU0NjcyNTExLCJleHAiOjE2NTUyNzczMTF9.AXbyzStSXyJwuEc8j6bHYkJudKvhIjNVNOGKINasmLvBfqQS9WRgtFaLUBmmczfyZGKeBVQ0VD0uWLdXyAujtwlTWkuWgeTJvLaJovHy3WaFvAC0_buiyCEx_NstCGD9obzj-SeYRMKb5EfPwLCD5FoyvUO_ZXUfXWlofobMFwmANVVbVMYma6mllNWSiCtRvHY1Xbg2Z0ueor4rAVW4V6MSJNscamNgzr_5EPsJi72VP334Xtn6Bk1oBO6VPQSn8lOp6c3QRxWxKgm62hn3iZ3I9QcNfDwOVlJW7af76ScIQDsu6ZT3iWjoH4ucBHubNCCWZwgbau1ATBwiGCmIFg',
     },
   });
 
   return instance;
 }
 
+function showToast({msg, type}: {msg: string; type: string}) {
+  Toast.show({
+    type: type,
+    text1: msg,
+  });
+}
+
 function handleResponse<T>(data: any) {
+  console.log(true);
+
   let res: IApiResponse<T> = {
     isSuccess: true,
     errors: undefined,
-    data: data as T,
+    data: data.data as T,
+    msg: data.msg as T,
   };
+  showToast({msg: data.msg, type: 'success'});
   return res;
 }
 
@@ -31,26 +41,29 @@ function handleError<T>(data: any) {
     isSuccess: false,
     errors: data,
     data: undefined,
+    msg: data.msg as T,
   };
+  showToast({msg: data.msg, type: 'error'});
   return res;
 }
 
-export async function sendPostRequest<T>(body: any, variables?: any) {
+export async function sendPostRequest<T>(endPoint: string, body: any) {
   try {
-    console.log('body', body);
     let axiosInstance = await getAxiosInstance();
     var apiResponse = await axiosInstance.post(
-      APIConstants.BASE_URL,
-      JSON.stringify({query: body, variables: variables}),
+      APIConstants.BASE_URL + endPoint,
+      JSON.stringify(body),
     );
-    if (apiResponse.status === 200) {
+    if (apiResponse?.status === 200) {
       //Success
-      return handleResponse<T>(apiResponse.data.data);
+      return handleResponse<T>(apiResponse.data);
     } else {
       //fail
-      return handleError<T>(apiResponse);
+      return handleError<T>(apiResponse.data);
     }
-  } catch (ex) {
-    return handleError(ex);
+  } catch (err) {
+    if (axios.isAxiosError(err) && err.response) {
+      return handleError(err.response?.data);
+    }
   }
 }

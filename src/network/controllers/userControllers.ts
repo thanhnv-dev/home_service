@@ -1,7 +1,6 @@
-import {CREATE_USER} from './query';
 import {sendPostRequest} from '../index';
 import {SignUpResponse} from '../apiResponses/user';
 
-export const createUser = async () => {
-  return await sendPostRequest<SignUpResponse>(CREATE_USER);
+export const signUp = async (body: any) => {
+  return await sendPostRequest<SignUpResponse>('/users/signup', body);
 };

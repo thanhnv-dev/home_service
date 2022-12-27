@@ -1,5 +1,6 @@
 import React from 'react';
 import AppNaviagtor from './navigation/AppNavigator';
+import Toast from 'react-native-toast-message';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 // import {default as themeColorDark} from './utils/custom-theme-dark.json';
@@ -26,6 +27,7 @@ const App = () => {
           <AppNaviagtor />
         </ApplicationProvider>
       </ThemeContext.Provider>
+      <Toast />
     </>
   );
 };

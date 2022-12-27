@@ -26,4 +26,9 @@ const CREATE_USER = `
   }
 `;
 
-export {USER_QUERY, CREATE_USER};
+const SignUp = {
+  email: 'test1121@example.com',
+  password: 'test',
+};
+
+export {USER_QUERY, CREATE_USER, SignUp};
