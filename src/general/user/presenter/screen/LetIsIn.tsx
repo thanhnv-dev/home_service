@@ -1,8 +1,8 @@
 import {View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from '../styles';
-import {fb_logo, g_logo, a_logo, Logo} from '../../../../assets/images/index';
-import {Button1} from '../../../widgets/index';
+import styles from '~/general/user/presenter/styles';
+import {fb_logo, g_logo, a_logo, Logo} from '~/assets/images';
+import {Button1} from '~/general/widgets';
 import {Layout, Text} from '@ui-kitten/components';
 
 const LetIsIn = ({navigation}: {navigation: any}) => {

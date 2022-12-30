@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import React, {useRef, useState} from 'react';
 import styles from './styles';
-import {onboardingData} from '../../constants/Const';
-import {Button1} from '../widgets/index';
+import {onboardingData} from '~/constants/Const';
+import {Button1} from '~/general/widgets';
 
 const Onboarding = ({navigation}: {navigation: any}) => {
   const {width} = useWindowDimensions();

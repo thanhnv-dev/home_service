@@ -13,12 +13,12 @@ import {
   FocusedColor,
   FocusedColorBoxEmail,
   FocusedColorBoxPass,
-} from '../../../widgets';
-import Color from '../../../../constants/Color';
-import {Button1} from '../../../widgets/index';
+  Button1,
+} from '~/general/widgets';
+import Color from '~/constants/Color';
 import {Formik} from 'formik';
-import styles from '../styles';
-import {fb_logo, g_logo, a_logo} from '../../../../assets/images/index';
+import styles from '~/general/user/presenter/styles';
+import {fb_logo, g_logo, a_logo} from '~/assets/images';
 import {SignupSchema} from '../../../../validation/SchemaValidation';
 import {signUp} from '../../../../network/controllers/userControllers';
 import {IconApp} from '../../../widgets';
