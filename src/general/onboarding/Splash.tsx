@@ -13,14 +13,14 @@ const Splash = (props: any) => {
   const isFocused: boolean = useIsFocused();
 
   useEffect(() => {
-    let Go: any = null;
+    let newPage: any = null;
     if (isFocused) {
-      Go = setInterval(() => {
+      newPage = setInterval(() => {
         props.navigation.navigate('Onboarding');
       }, 1500);
     }
     return () => {
-      clearInterval(Go);
+      clearInterval(newPage);
     };
   }, [isFocused, props.navigation]);
   return (

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {APIConstants} from './APIConstants';
 import {IApiResponse} from './IApiResponse';
-import Toast from 'react-native-toast-message';
+import {showToast} from '~/utils/helper';
 
 async function getAxiosInstance() {
   const instance = axios.create({
@@ -16,23 +16,14 @@ async function getAxiosInstance() {
   return instance;
 }
 
-function showToast({msg, type}: {msg: string; type: string}) {
-  Toast.show({
-    type: type,
-    text1: msg,
-  });
-}
-
 function handleResponse<T>(data: any) {
-  console.log(true);
-
   let res: IApiResponse<T> = {
     isSuccess: true,
     errors: undefined,
     data: data.data as T,
     msg: data.msg as T,
   };
-  showToast({msg: data.msg, type: 'success'});
+  // showToast({msg: data.msg, type: 'success'});
   return res;
 }
 
@@ -63,7 +54,9 @@ export async function sendPostRequest<T>(endPoint: string, body: any) {
     }
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {
-      return handleError(err.response?.data);
+      return handleError<T>(err.response?.data);
+    } else {
+      return handleError<T>(err);
     }
   }
 }

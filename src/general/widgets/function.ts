@@ -1,31 +1,25 @@
-const FocusedColor = ({
-  typeBox,
+const FocusedColorBoxEmail = ({
+  color1,
+  color2,
   focusBox,
-  focusedColor,
-  unFocusedColor,
 }: {
-  typeBox: string;
-  focusBox: string;
-  focusedColor: string;
-  unFocusedColor: string;
+  color1: any;
+  color2: any;
+  focusBox: any;
 }) => {
-  return typeBox === focusBox ? focusedColor : unFocusedColor;
+  return focusBox === 'emailBox' ? color1 : color2;
 };
 
-const FocusedColorBoxEmail = (color1: any, color2: any, focusBox: any) =>
-  FocusedColor({
-    typeBox: 'emailBox',
-    focusBox: focusBox,
-    focusedColor: color1,
-    unFocusedColor: color2,
-  });
+const FocusedColorBoxPass = ({
+  color1,
+  color2,
+  focusBox,
+}: {
+  color1: any;
+  color2: any;
+  focusBox: any;
+}) => {
+  return focusBox === 'passBox' ? color1 : color2;
+};
 
-const FocusedColorBoxPass = (color1: any, color2: any, focusBox: any) =>
-  FocusedColor({
-    typeBox: 'passBox',
-    focusBox: focusBox,
-    focusedColor: color1,
-    unFocusedColor: color2,
-  });
-
-export {FocusedColor, FocusedColorBoxEmail, FocusedColorBoxPass};
+export {FocusedColorBoxEmail, FocusedColorBoxPass};

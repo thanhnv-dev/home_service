@@ -4,8 +4,8 @@ import {SignUpService} from '../application';
 import {signUp} from '../../../network/controllers/userControllers';
 
 export class UserService implements SignUpService {
-  async signUp(): Promise<IApiResponse<SignUpResponse>> {
-    const signUpResult: IApiResponse<SignUpResponse> = await signUp();
+  async signUp(data: any): Promise<IApiResponse<SignUpResponse>> {
+    const signUpResult: IApiResponse<SignUpResponse> = await signUp(data);
     return signUpResult;
   }
 }

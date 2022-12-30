@@ -11,11 +11,11 @@ const Button1 = ({
   onPress: any;
   title: string;
   style: any;
-  disabled: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <TouchableOpacity
-      disabled={disabled ? disabled : false}
+      disabled={disabled}
       style={[styles.button, styles.center, style]}
       onPress={() => onPress()}>
       <Text style={styles.textButton}>{title}</Text>

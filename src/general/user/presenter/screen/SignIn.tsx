@@ -8,67 +8,32 @@ import {
   Keyboard,
   Image,
 } from 'react-native';
-import {Button, Layout, Icon, Text} from '@ui-kitten/components';
+import {Button, Layout, Text} from '@ui-kitten/components';
 import {
-  FocusedColor,
   FocusedColorBoxEmail,
   FocusedColorBoxPass,
   Button1,
+  IconBack,
+  IconCheck,
+  IconEmail,
+  IconLock,
+  EyeIcon,
+  EyeOffIcon,
 } from '~/general/widgets';
 import Color from '~/constants/Color';
 import {Formik} from 'formik';
 import styles from '~/general/user/presenter/styles';
 import {fb_logo, g_logo, a_logo} from '~/assets/images';
-import {SignupSchema} from '../../../../validation/SchemaValidation';
-import {signUp} from '../../../../network/controllers/userControllers';
-import {IconApp} from '../../../widgets';
+import {SignupSchema} from '~/validation/SchemaValidation';
+// import {signUp} from '~/network/controllers/userControllers';
+import {UserService} from '~/general/user/infastructure/service';
 
 const SignIn = (props: any) => {
+  const goSignUp = () => props.navigation.navigate('SignUp');
   const [focusBox, setFocusBox] = useState('');
   const [remenber, setRemenber] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(false);
-  const goSignUp = () => props.navigation.navigate('SignUp');
-
-  // const ArrowIcon = () => (
-  //   <Icon name="arrow-back-outline" fill="#8F9BB3" style={styles.iconBack} />
-  // );
-
-  const EmailIcon = () => (
-    <Icon
-      name="email-outline"
-      fill={FocusedColor({
-        typeBox: 'emailBox',
-        focusBox: focusBox,
-        focusedColor: Color.violet,
-        unFocusedColor: Color.grayIcon,
-      })}
-      style={styles.iconInput}
-    />
-  );
-  const LockIcon = () => (
-    <Icon
-      name="lock-outline"
-      fill={FocusedColorBoxPass(Color.violet, Color.grayIcon, focusBox)}
-      style={styles.iconInput}
-    />
-  );
-  const EyeIcon = () => (
-    <Icon
-      name="eye-outline"
-      fill={FocusedColorBoxPass(Color.violet, Color.grayIcon, focusBox)}
-      style={styles.iconInput}
-    />
-  );
-  const EyeOffIcon = () => (
-    <Icon
-      name="eye-off-outline"
-      fill={FocusedColorBoxPass(Color.violet, Color.grayIcon, focusBox)}
-      style={styles.iconInput}
-    />
-  );
-  const CheckedIcon = () => (
-    <Icon name="checkmark-outline" fill="white" style={styles.iconChecked} />
-  );
+  console.log(UserService);
 
   return (
     <Layout style={styles.container}>
@@ -88,11 +53,7 @@ const SignIn = (props: any) => {
               <Button
                 style={styles.viewIconBack}
                 appearance="ghost"
-                accessoryLeft={IconApp({
-                  fill: '#8F9BB3',
-                  name: 'arrow-back-outline',
-                  style: styles.iconBack,
-                })}
+                accessoryLeft={IconBack}
                 onPress={() => props.navigation.goBack()}
               />
               <Text style={styles.textTitle}>{'Login to your \nAccount'}</Text>
@@ -118,11 +79,11 @@ const SignIn = (props: any) => {
                       style={[
                         styles.boxInput,
                         {
-                          borderColor: FocusedColorBoxEmail(
-                            Color.violet,
-                            Color.border,
-                            focusBox,
-                          ),
+                          borderColor: FocusedColorBoxEmail({
+                            color1: Color.violet,
+                            color2: Color.border,
+                            focusBox: focusBox,
+                          }),
                         },
                       ]}>
                       <Layout
@@ -130,24 +91,24 @@ const SignIn = (props: any) => {
                           styles.viewIconInput,
                           styles.center,
                           {
-                            backgroundColor: FocusedColorBoxEmail(
-                              Color.backgroundColorViolet,
-                              Color.border,
-                              focusBox,
-                            ),
+                            backgroundColor: FocusedColorBoxEmail({
+                              color1: Color.backgroundColorViolet,
+                              color2: Color.border,
+                              focusBox: focusBox,
+                            }),
                           },
                         ]}>
-                        <EmailIcon />
+                        <IconEmail focusBox={focusBox} />
                       </Layout>
                       <Layout
                         style={[
                           styles.viewInputEmail,
                           {
-                            backgroundColor: FocusedColorBoxEmail(
-                              Color.backgroundColorViolet,
-                              Color.border,
-                              focusBox,
-                            ),
+                            backgroundColor: FocusedColorBoxEmail({
+                              color1: Color.backgroundColorViolet,
+                              color2: Color.border,
+                              focusBox: focusBox,
+                            }),
                           },
                         ]}>
                         <TextInput
@@ -172,11 +133,11 @@ const SignIn = (props: any) => {
                       style={[
                         styles.boxInput,
                         {
-                          borderColor: FocusedColorBoxPass(
-                            Color.violet,
-                            Color.border,
-                            focusBox,
-                          ),
+                          borderColor: FocusedColorBoxPass({
+                            color1: Color.violet,
+                            color2: Color.border,
+                            focusBox: focusBox,
+                          }),
                         },
                       ]}>
                       <Layout
@@ -184,24 +145,24 @@ const SignIn = (props: any) => {
                           styles.viewIconInput,
                           styles.center,
                           {
-                            backgroundColor: FocusedColorBoxPass(
-                              Color.backgroundColorViolet,
-                              Color.border,
-                              focusBox,
-                            ),
+                            backgroundColor: FocusedColorBoxPass({
+                              color1: Color.backgroundColorViolet,
+                              color2: Color.border,
+                              focusBox: focusBox,
+                            }),
                           },
                         ]}>
-                        <LockIcon />
+                        <IconLock focusBox={focusBox} />
                       </Layout>
                       <Layout
                         style={[
                           styles.viewInputPass,
                           {
-                            backgroundColor: FocusedColorBoxPass(
-                              Color.backgroundColorViolet,
-                              Color.border,
-                              focusBox,
-                            ),
+                            backgroundColor: FocusedColorBoxPass({
+                              color1: Color.backgroundColorViolet,
+                              color2: Color.border,
+                              focusBox: focusBox,
+                            }),
                           },
                         ]}>
                         <TextInput
@@ -225,15 +186,19 @@ const SignIn = (props: any) => {
                         style={[
                           styles.viewIconEye,
                           {
-                            backgroundColor: FocusedColorBoxPass(
-                              Color.backgroundColorViolet,
-                              Color.border,
-                              focusBox,
-                            ),
+                            backgroundColor: FocusedColorBoxPass({
+                              color1: Color.backgroundColorViolet,
+                              color2: Color.border,
+                              focusBox: focusBox,
+                            }),
                           },
                         ]}
                         appearance="ghost"
-                        accessoryLeft={secureTextEntry ? EyeIcon : EyeOffIcon}
+                        accessoryLeft={
+                          secureTextEntry
+                            ? EyeIcon({focusBox: focusBox})
+                            : EyeOffIcon({focusBox: focusBox})
+                        }
                         onPress={() => setSecureTextEntry(!secureTextEntry)}
                       />
                     </Layout>
@@ -256,7 +221,7 @@ const SignIn = (props: any) => {
                           },
                         ]}
                         onPress={() => setRemenber(!remenber)}>
-                        <CheckedIcon />
+                        <IconCheck />
                       </TouchableOpacity>
                       <Text>{'  Remenber me'}</Text>
                     </Layout>

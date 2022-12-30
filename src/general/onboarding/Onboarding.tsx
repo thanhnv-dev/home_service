@@ -80,7 +80,7 @@ const Onboarding = ({navigation}: {navigation: any}) => {
         animated: true,
       });
     } else {
-      navigation.navigate('LetIsInStack', {screen: 'LetIsIn'});
+      navigation.replace('LetIsInStack', {screen: 'LetIsIn'});
     }
   };
   return (
@@ -114,7 +114,6 @@ const Onboarding = ({navigation}: {navigation: any}) => {
           onPress={() => nextPage()}
           title={currentIndex < lengthData ? 'Next' : 'Get Started'}
           style={styles.size80}
-          disabled={false}
         />
       </View>
     </View>

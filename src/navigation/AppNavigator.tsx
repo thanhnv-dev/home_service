@@ -8,7 +8,7 @@ import {
   SignIn,
   ChooseService,
   SignUp,
-} from '../general/index';
+} from '~/general/index';
 
 const Stack = createNativeStackNavigator();
 const AppNaviagtor = () => {
