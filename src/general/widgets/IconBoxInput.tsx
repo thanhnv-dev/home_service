@@ -1,51 +1,20 @@
-import {FocusedColorBoxPass, FocusedColorBoxEmail} from './function';
-import Color from '~/constants/Color';
 import {Icon} from '@ui-kitten/components';
 import styles from '~/general/user/presenter/styles';
 import React from 'react';
-// import {} from '~/assets/Icons/';
 
-const EyeIcon = ({focusBox}: {focusBox: any}) => (
-  <Icon
-    name="eye-outline"
-    fill={FocusedColorBoxPass({
-      color1: Color.violet,
-      color2: Color.grayIcon,
-      focusBox: focusBox,
-    })}
-    style={styles.iconInput}
-  />
+const EyeIcon = ({color}: {color: any}) => (
+  <Icon name="eye-outline" fill={color} style={styles.iconInput} />
 );
-const EyeOffIcon = ({focusBox}: {focusBox: any}) => (
-  <Icon
-    name="eye-off-outline"
-    fill={FocusedColorBoxPass({
-      color1: Color.violet,
-      color2: Color.grayIcon,
-      focusBox: focusBox,
-    })}
-    style={styles.iconInput}
-  />
+const EyeOffIcon = ({color}: {color: any}) => (
+  <Icon name="eye-off-outline" fill={color} style={styles.iconInput} />
 );
-const IconEmail = ({focusBox}: {focusBox: any}) => (
-  <Icon
-    name="email-outline"
-    fill={FocusedColorBoxEmail({
-      color1: Color.violet,
-      color2: Color.grayIcon,
-      focusBox: focusBox,
-    })}
-    style={styles.iconInput}
-  />
+const IconEmail = ({color}: {color: any}) => (
+  <Icon name="email-outline" fill={color} style={styles.iconInput} />
 );
-const IconLock = ({focusBox}: {focusBox: any}) => (
+const IconLock = ({color}: {color: any}) => (
   <Icon
     name="lock-outline"
-    fill={FocusedColorBoxPass({
-      color1: Color.violet,
-      color2: Color.grayIcon,
-      focusBox: focusBox,
-    })}
+    fill={color}
     styleContainer={styles.colorBorder}
     style={styles.iconInput}
   />

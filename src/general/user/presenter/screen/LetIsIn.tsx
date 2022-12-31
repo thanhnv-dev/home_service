@@ -2,19 +2,11 @@ import {View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from '~/general/user/presenter/styles';
 import {fb_logo, g_logo, a_logo, Logo} from '~/assets/images';
-import {Button1} from '~/general/widgets';
+import {MyButton} from '~/general/widgets';
 import {Layout, Text} from '@ui-kitten/components';
+import {ButtonLoginWith} from './ButtonLoginWith';
 
 const LetIsIn = ({navigation}: {navigation: any}) => {
-  const ButtonLoginWith = (props: any) => {
-    return (
-      <TouchableOpacity style={[styles.button, styles.center]}>
-        <Image source={props.icon} style={styles.icon} />
-        <Text style={styles.fs14bold}>{props.title}</Text>
-      </TouchableOpacity>
-    );
-  };
-
   const goSignIn = () => navigation.navigate('SignIn');
   const goSignUp = () => navigation.navigate('SignUp');
 
@@ -38,15 +30,15 @@ const LetIsIn = ({navigation}: {navigation: any}) => {
         <View style={styles.line} />
       </View>
       <View style={[styles.viewSignInButtons, styles.center]}>
-        <Button1
+        <MyButton
           title="Sign in with password"
-          onPress={() => goSignIn()}
+          onPress={goSignIn}
           style={styles.size80}
         />
       </View>
       <View style={[styles.viewSignUpButton, styles.center]}>
         <Text style={styles.textOr}>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => goSignUp()}>
+        <TouchableOpacity onPress={goSignUp}>
           <Text style={styles.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
       </View>

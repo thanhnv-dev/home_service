@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
@@ -10,41 +9,72 @@ import {
 } from 'react-native';
 import {Button, Layout, Text} from '@ui-kitten/components';
 import {
-  FocusedColorBoxEmail,
-  FocusedColorBoxPass,
-  Button1,
+  MyButton,
   IconBack,
   IconCheck,
   IconEmail,
   IconLock,
   EyeIcon,
   EyeOffIcon,
+  InputBox,
 } from '~/general/widgets';
 import Color from '~/constants/Color';
+import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
 import {Formik} from 'formik';
 import styles from '~/general/user/presenter/styles';
 import {fb_logo, g_logo, a_logo} from '~/assets/images';
 import {SignupSchema} from '~/validation/SchemaValidation';
 // import {signUp} from '~/network/controllers/userControllers';
-import {UserService} from '~/general/user/infastructure/service';
+// import {UserService} from '~/general/user/infastructure/service';
 
-const SignIn = (props: any) => {
-  const goSignUp = () => props.navigation.navigate('SignUp');
+const SignIn = ({navigation}: {navigation: any}) => {
+  const goSignUp = () => navigation.navigate('SignUp');
   const [focusBox, setFocusBox] = useState('');
   const [remenber, setRemenber] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(false);
-  console.log(UserService);
+  const cancelFocus = () => {
+    Keyboard.dismiss();
+    if (focusBox !== '') {
+      setFocusBox('');
+    }
+  };
+  const submitSignUp = (values: object) => {
+    Keyboard.dismiss();
+    // signUp(values);
+    console.log(values);
+  };
+  const goBack = () => navigation.goBack();
+  const focusBoxColor = ({
+    color1,
+    color2,
+    refBox,
+  }: {
+    color1?: any;
+    color2: any;
+    refBox: string;
+  }) => {
+    const color = color1 ? color1 : Color.violet;
+    return focusBox === refBox ? color : color2;
+  };
+  const swichIconEye = secureTextEntry
+    ? EyeIcon({
+        color: focusBoxColor({
+          color1: Color.violet,
+          color2: Color.grayIcon,
+          refBox: PASSWORD_BOX,
+        }),
+      })
+    : EyeOffIcon({
+        color: focusBoxColor({
+          color1: Color.violet,
+          color2: Color.grayIcon,
+          refBox: PASSWORD_BOX,
+        }),
+      });
 
   return (
     <Layout style={styles.container}>
-      <TouchableWithoutFeedback
-        style={styles.container}
-        onPress={() => {
-          Keyboard.dismiss();
-          if (focusBox !== '') {
-            setFocusBox('');
-          }
-        }}>
+      <TouchableWithoutFeedback style={styles.container} onPress={cancelFocus}>
         <Layout style={styles.childContainer}>
           <KeyboardAvoidingView
             style={styles.viewChange}
@@ -54,17 +84,14 @@ const SignIn = (props: any) => {
                 style={styles.viewIconBack}
                 appearance="ghost"
                 accessoryLeft={IconBack}
-                onPress={() => props.navigation.goBack()}
+                onPress={goBack}
               />
               <Text style={styles.textTitle}>{'Login to your \nAccount'}</Text>
             </Layout>
             <Formik
               initialValues={{email: '', password: ''}}
               validationSchema={SignupSchema}
-              onSubmit={values => {
-                Keyboard.dismiss();
-                signUp(values);
-              }}>
+              onSubmit={submitSignUp}>
               {({
                 handleChange,
                 handleBlur,
@@ -75,138 +102,71 @@ const SignIn = (props: any) => {
               }) => (
                 <Layout style={styles.viewInputSubmit}>
                   <Layout style={styles.viewInput}>
-                    <Layout
-                      style={[
-                        styles.boxInput,
-                        {
-                          borderColor: FocusedColorBoxEmail({
-                            color1: Color.violet,
-                            color2: Color.border,
-                            focusBox: focusBox,
-                          }),
-                        },
-                      ]}>
-                      <Layout
-                        style={[
-                          styles.viewIconInput,
-                          styles.center,
-                          {
-                            backgroundColor: FocusedColorBoxEmail({
-                              color1: Color.backgroundColorViolet,
-                              color2: Color.border,
-                              focusBox: focusBox,
-                            }),
-                          },
-                        ]}>
-                        <IconEmail focusBox={focusBox} />
-                      </Layout>
-                      <Layout
-                        style={[
-                          styles.viewInputEmail,
-                          {
-                            backgroundColor: FocusedColorBoxEmail({
-                              color1: Color.backgroundColorViolet,
-                              color2: Color.border,
-                              focusBox: focusBox,
-                            }),
-                          },
-                        ]}>
-                        <TextInput
-                          placeholder="Email"
-                          value={values.email}
-                          onChangeText={handleChange('email')}
-                          onBlur={handleBlur('email')}
-                          onFocus={() => setFocusBox('emailBox')}
-                          style={[
-                            styles.input,
-                            {
-                              color: errors.email ? Color.error : Color.violet,
-                            },
-                          ]}
-                        />
-                      </Layout>
-                    </Layout>
+                    <InputBox
+                      borderColorBox={focusBoxColor({
+                        color2: Color.border,
+                        refBox: EMAIL_BOX,
+                      })}
+                      backGroundColorBox={focusBoxColor({
+                        color1: Color.backgroundColorViolet,
+                        color2: Color.border,
+                        refBox: EMAIL_BOX,
+                      })}
+                      IconLeft={IconEmail({
+                        color: focusBoxColor({
+                          color2: Color.grayIcon,
+                          refBox: EMAIL_BOX,
+                        }),
+                      })}
+                      placeholder="Email"
+                      value={values.email}
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      onFocus={() => setFocusBox(EMAIL_BOX)}
+                      colorTextInput={errors.email ? Color.error : Color.violet}
+                      selectionColor={Color.violet}
+                    />
                     {errors.email && touched.email ? (
-                      <Text style={{color: Color.error}}>{errors.email}</Text>
-                    ) : null}
-                    <Layout
-                      style={[
-                        styles.boxInput,
-                        {
-                          borderColor: FocusedColorBoxPass({
-                            color1: Color.violet,
-                            color2: Color.border,
-                            focusBox: focusBox,
-                          }),
-                        },
-                      ]}>
-                      <Layout
-                        style={[
-                          styles.viewIconInput,
-                          styles.center,
-                          {
-                            backgroundColor: FocusedColorBoxPass({
-                              color1: Color.backgroundColorViolet,
-                              color2: Color.border,
-                              focusBox: focusBox,
-                            }),
-                          },
-                        ]}>
-                        <IconLock focusBox={focusBox} />
-                      </Layout>
-                      <Layout
-                        style={[
-                          styles.viewInputPass,
-                          {
-                            backgroundColor: FocusedColorBoxPass({
-                              color1: Color.backgroundColorViolet,
-                              color2: Color.border,
-                              focusBox: focusBox,
-                            }),
-                          },
-                        ]}>
-                        <TextInput
-                          placeholder="Password"
-                          value={values.password}
-                          onChangeText={handleChange('password')}
-                          onBlur={handleBlur('password')}
-                          onFocus={() => setFocusBox('passBox')}
-                          secureTextEntry={secureTextEntry}
-                          style={[
-                            styles.input,
-                            {
-                              color: errors.password
-                                ? Color.error
-                                : Color.violet,
-                            },
-                          ]}
-                        />
-                      </Layout>
-                      <Button
-                        style={[
-                          styles.viewIconEye,
-                          {
-                            backgroundColor: FocusedColorBoxPass({
-                              color1: Color.backgroundColorViolet,
-                              color2: Color.border,
-                              focusBox: focusBox,
-                            }),
-                          },
-                        ]}
-                        appearance="ghost"
-                        accessoryLeft={
-                          secureTextEntry
-                            ? EyeIcon({focusBox: focusBox})
-                            : EyeOffIcon({focusBox: focusBox})
-                        }
-                        onPress={() => setSecureTextEntry(!secureTextEntry)}
-                      />
-                    </Layout>
+                      <Text style={styles.colorError}>{errors.email}</Text>
+                    ) : (
+                      <Text />
+                    )}
+                    <InputBox
+                      borderColorBox={focusBoxColor({
+                        color2: Color.border,
+                        refBox: PASSWORD_BOX,
+                      })}
+                      backGroundColorBox={focusBoxColor({
+                        color1: Color.backgroundColorViolet,
+                        color2: Color.border,
+                        refBox: PASSWORD_BOX,
+                      })}
+                      IconLeft={IconLock({
+                        color: focusBoxColor({
+                          color2: Color.grayIcon,
+                          refBox: PASSWORD_BOX,
+                        }),
+                      })}
+                      IconRight={swichIconEye}
+                      placeholder={'Password'}
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      onFocus={() => setFocusBox(PASSWORD_BOX)}
+                      onPressIconRight={() =>
+                        setSecureTextEntry(!secureTextEntry)
+                      }
+                      secureTextEntry={secureTextEntry}
+                      colorTextInput={
+                        errors.password ? Color.error : Color.violet
+                      }
+                      selectionColor={Color.violet}
+                    />
                     {errors.password && touched.password ? (
-                      <Text style={{color: Color.error}}>
-                        {errors.password}
-                      </Text>
-                    ) : null}
+                      <Text style={styles.colorError}>{errors.password}</Text>
+                    ) : (
+                      <Text />
+                    )}
                   </Layout>
                   <Layout style={styles.viewButtonSign}>
                     <Layout style={[styles.viewRemember, styles.center]}>
@@ -225,7 +185,7 @@ const SignIn = (props: any) => {
                       </TouchableOpacity>
                       <Text>{'  Remenber me'}</Text>
                     </Layout>
-                    <Button1
+                    <MyButton
                       disabled={errors.password || errors.email ? true : false}
                       title={'Sign in'}
                       onPress={handleSubmit}
@@ -259,7 +219,7 @@ const SignIn = (props: any) => {
           </Layout>
           <Layout style={[styles.viewButtonText, styles.center]}>
             <Text style={styles.textOr}>Don't have an account? </Text>
-            <TouchableOpacity onPress={() => goSignUp()}>
+            <TouchableOpacity onPress={goSignUp}>
               <Text style={styles.textSignUp}> Sign Up</Text>
             </TouchableOpacity>
           </Layout>

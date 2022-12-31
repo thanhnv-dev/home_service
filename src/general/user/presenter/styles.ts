@@ -129,32 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: '700',
   },
-  boxInput: {
-    flexDirection: 'row',
-    height: 55,
-    borderWidth: 1,
-    borderRadius: 10,
-  },
-  input: {
-    flex: 1,
-  },
-  viewInputEmail: {
-    flex: 9.5,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  viewInputPass: {
-    flex: 8,
-  },
-  viewIconInput: {
-    flex: 1.5,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  viewIconEye: {
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
   viewIconCheck: {
     height: 20,
     width: 20,
@@ -189,6 +163,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: Color.border,
+  },
+  colorError: {
+    color: Color.error,
   },
 });
 

@@ -2,7 +2,7 @@ import {Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from '../onboarding/styles';
 
-const Button1 = ({
+const MyButton = ({
   onPress,
   title,
   style,
@@ -17,10 +17,10 @@ const Button1 = ({
     <TouchableOpacity
       disabled={disabled}
       style={[styles.button, styles.center, style]}
-      onPress={() => onPress()}>
+      onPress={onPress}>
       <Text style={styles.textButton}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-export default Button1;
+export default MyButton;

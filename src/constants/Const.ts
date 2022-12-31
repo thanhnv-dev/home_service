@@ -16,4 +16,6 @@ const onboardingData = [
     image: Onboarding3,
   },
 ];
-export {onboardingData};
+const EMAIL_BOX = 'email-box';
+const PASSWORD_BOX = 'password-box';
+export {onboardingData, EMAIL_BOX, PASSWORD_BOX};
