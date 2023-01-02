@@ -7,18 +7,16 @@ import {
   Keyboard,
 } from 'react-native';
 import {Button, Layout, Text} from '@ui-kitten/components';
+import {MyButton, InputBox, LoginButton3rdPparty2} from '~/general/widgets';
+import Color from '~/constants/Color';
 import {
-  MyButton,
-  IconBack,
-  IconCheck,
-  IconEmail,
-  IconLock,
   EyeIcon,
   EyeOffIcon,
-  InputBox,
-  LoginButton3rdPparty2,
-} from '~/general/widgets';
-import Color from '~/constants/Color';
+  IconEmail,
+  IconLock,
+  IconBack,
+  IconCheck,
+} from '~/assets/Icons/IconApp';
 import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
 import {Formik} from 'formik';
 import styles from '~/general/user/presenter/styles';
@@ -63,6 +61,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
           color2: Color.grayIcon,
           refBox: PASSWORD_BOX,
         }),
+        style: styles.iconInput,
       })
     : EyeOffIcon({
         color: focusBoxColor({
@@ -70,6 +69,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
           color2: Color.grayIcon,
           refBox: PASSWORD_BOX,
         }),
+        style: styles.iconInput,
       });
   return (
     <Layout style={styles.container}>
@@ -82,7 +82,10 @@ const SignIn = ({navigation}: {navigation: any}) => {
               <Button
                 style={styles.viewIconBack}
                 appearance="ghost"
-                accessoryLeft={IconBack}
+                accessoryLeft={IconBack({
+                  color: '#8F9BB3',
+                  style: styles.iconBack,
+                })}
                 onPress={goBack}
               />
               <Text style={styles.textTitle}>{'Login to your \nAccount'}</Text>
@@ -116,6 +119,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                           color2: Color.grayIcon,
                           refBox: EMAIL_BOX,
                         }),
+                        style: styles.iconInput,
                       })}
                       placeholder="Email"
                       value={values.email}
@@ -147,6 +151,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                           color2: Color.grayIcon,
                           refBox: PASSWORD_BOX,
                         }),
+                        style: styles.iconInput,
                       })}
                       IconRight={swichIconEye}
                       placeholder={'Password'}
@@ -184,7 +189,10 @@ const SignIn = ({navigation}: {navigation: any}) => {
                           },
                         ]}
                         onPress={() => setRemenber(!remenber)}>
-                        <IconCheck />
+                        <IconCheck
+                          color={Color.while}
+                          style={styles.iconChecked}
+                        />
                       </TouchableOpacity>
                       <Text>{'  Remenber me'}</Text>
                     </Layout>

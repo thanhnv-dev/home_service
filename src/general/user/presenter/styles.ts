@@ -131,6 +131,18 @@ const styles = StyleSheet.create({
   viewErrorInput: {
     marginVertical: 2,
   },
+  iconInput: {
+    width: 20,
+    height: 20,
+  },
+  iconBack: {
+    width: 30,
+    height: 30,
+  },
+  iconChecked: {
+    height: 16,
+    width: 16,
+  },
 });
 
 export default styles;
