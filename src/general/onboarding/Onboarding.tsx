@@ -33,7 +33,7 @@ const Onboarding = ({navigation}: {navigation: any}) => {
   const renderItem = ({
     item,
   }: {
-    item: {id: number; title: String; image: any};
+    item: {id: number; title: string; image: any};
   }) => {
     return (
       <View style={(styles.container, {width})}>
@@ -113,7 +113,6 @@ const Onboarding = ({navigation}: {navigation: any}) => {
         <MyButton
           onPress={() => nextPage()}
           title={currentIndex < lengthData ? 'Next' : 'Get Started'}
-          style={styles.size80}
         />
       </View>
     </View>

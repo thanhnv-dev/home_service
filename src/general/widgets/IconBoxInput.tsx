@@ -1,5 +1,5 @@
 import {Icon} from '@ui-kitten/components';
-import styles from '~/general/user/presenter/styles';
+import styles from './styles';
 import React from 'react';
 
 const EyeIcon = ({color}: {color: any}) => (

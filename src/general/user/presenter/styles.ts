@@ -5,9 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  colorBorder: {
-    backgroundColor: Color.border,
-  },
   childContainer: {
     marginHorizontal: 20,
     flex: 1,
@@ -31,6 +28,7 @@ const styles = StyleSheet.create({
   },
   viewSignInButtons: {
     flex: 0.5,
+    marginHorizontal: 20,
   },
   viewSignUpButton: {
     flex: 0.6,
@@ -47,15 +45,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-  },
-  button: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    marginHorizontal: 20,
-    flex: 1,
-    marginVertical: 10,
-    borderRadius: 10,
-    borderColor: Color.border,
   },
   icon: {
     height: 25,
@@ -99,7 +88,6 @@ const styles = StyleSheet.create({
   viewButtonSign: {
     flex: 4,
     justifyContent: 'space-around',
-    alignItems: 'center',
   },
   viewOrWith: {
     flex: 4,
@@ -112,14 +100,6 @@ const styles = StyleSheet.create({
   viewButtonText: {
     flex: 4.5,
     flexDirection: 'row',
-  },
-  iconBack: {
-    width: 30,
-    height: 30,
-  },
-  iconInput: {
-    width: 20,
-    height: 20,
   },
   viewIconBack: {
     width: 30,
@@ -136,36 +116,20 @@ const styles = StyleSheet.create({
     borderWidth: 2.3,
     borderColor: Color.violet,
   },
-  iconChecked: {
-    height: 16,
-    width: 16,
-  },
   viewRemember: {
     flexDirection: 'row',
   },
   textForgot: {
     color: Color.violet,
   },
-  size80: {
-    width: '80%',
-  },
-  sizeFull: {
-    width: '100%',
-  },
-  icon3rd: {
-    height: 25,
-    width: 25,
-  },
-  buttonSignWith: {
-    flex: 1,
-    marginHorizontal: 20,
-    marginVertical: 5,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: Color.border,
-  },
   colorError: {
     color: Color.error,
+  },
+  viewForgot: {
+    alignItems: 'center',
+  },
+  viewErrorInput: {
+    marginVertical: 2,
   },
 });
 

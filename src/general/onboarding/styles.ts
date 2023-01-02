@@ -41,38 +41,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  button: {
-    backgroundColor: Color.violet,
-    height: 50,
-    borderRadius: 100,
-    shadowColor: Color.violet,
-    shadowOpacity: 0.1,
-    shadowOffset: {
-      width: 3,
-      height: 10,
-    },
-  },
-  textButton: {
-    color: Color.while,
-    fontWeight: 'bold',
-  },
   viewPaginator: {
     flexDirection: 'row',
     flex: 1,
   },
   viewButton: {
     flex: 1,
-    alignItems: 'center',
     marginTop: 10,
+    marginHorizontal: 20,
   },
   dot: {
     height: 10,
     borderRadius: 5,
     marginHorizontal: 5,
     backgroundColor: Color.violet,
-  },
-  size80: {
-    width: '80%',
   },
 });
 

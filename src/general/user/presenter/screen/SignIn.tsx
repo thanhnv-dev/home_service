@@ -5,7 +5,6 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Image,
 } from 'react-native';
 import {Button, Layout, Text} from '@ui-kitten/components';
 import {
@@ -17,6 +16,7 @@ import {
   EyeIcon,
   EyeOffIcon,
   InputBox,
+  LoginButton3rdPparty2,
 } from '~/general/widgets';
 import Color from '~/constants/Color';
 import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
@@ -71,7 +71,6 @@ const SignIn = ({navigation}: {navigation: any}) => {
           refBox: PASSWORD_BOX,
         }),
       });
-
   return (
     <Layout style={styles.container}>
       <TouchableWithoutFeedback style={styles.container} onPress={cancelFocus}>
@@ -126,11 +125,13 @@ const SignIn = ({navigation}: {navigation: any}) => {
                       colorTextInput={errors.email ? Color.error : Color.violet}
                       selectionColor={Color.violet}
                     />
-                    {errors.email && touched.email ? (
-                      <Text style={styles.colorError}>{errors.email}</Text>
-                    ) : (
-                      <Text />
-                    )}
+                    <Layout style={styles.viewErrorInput}>
+                      {errors.email && touched.email ? (
+                        <Text style={styles.colorError}>{errors.email}</Text>
+                      ) : (
+                        <Text />
+                      )}
+                    </Layout>
                     <InputBox
                       borderColorBox={focusBoxColor({
                         color2: Color.border,
@@ -162,11 +163,13 @@ const SignIn = ({navigation}: {navigation: any}) => {
                       }
                       selectionColor={Color.violet}
                     />
-                    {errors.password && touched.password ? (
-                      <Text style={styles.colorError}>{errors.password}</Text>
-                    ) : (
-                      <Text />
-                    )}
+                    <Layout style={styles.viewErrorInput}>
+                      {errors.password && touched.password ? (
+                        <Text style={styles.colorError}>{errors.password}</Text>
+                      ) : (
+                        <Text />
+                      )}
+                    </Layout>
                   </Layout>
                   <Layout style={styles.viewButtonSign}>
                     <Layout style={[styles.viewRemember, styles.center]}>
@@ -189,9 +192,8 @@ const SignIn = ({navigation}: {navigation: any}) => {
                       disabled={errors.password || errors.email ? true : false}
                       title={'Sign in'}
                       onPress={handleSubmit}
-                      style={styles.sizeFull}
                     />
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.viewForgot}>
                       <Text style={styles.textForgot}>
                         Forgot the password?
                       </Text>
@@ -207,15 +209,9 @@ const SignIn = ({navigation}: {navigation: any}) => {
             <Layout style={styles.line} />
           </Layout>
           <Layout style={styles.viewButtonSignWith}>
-            <TouchableOpacity style={[styles.buttonSignWith, styles.center]}>
-              <Image source={fb_logo} style={styles.icon3rd} />
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.buttonSignWith, styles.center]}>
-              <Image source={g_logo} style={styles.icon3rd} />
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.buttonSignWith, styles.center]}>
-              <Image source={a_logo} style={styles.icon3rd} />
-            </TouchableOpacity>
+            <LoginButton3rdPparty2 icon={fb_logo} />
+            <LoginButton3rdPparty2 icon={g_logo} />
+            <LoginButton3rdPparty2 icon={a_logo} />
           </Layout>
           <Layout style={[styles.viewButtonText, styles.center]}>
             <Text style={styles.textOr}>Don't have an account? </Text>

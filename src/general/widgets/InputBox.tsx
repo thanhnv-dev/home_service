@@ -1,6 +1,7 @@
 import React from 'react';
-import {TextInput, StyleSheet} from 'react-native';
+import {TextInput} from 'react-native';
 import {Layout, Button} from '@ui-kitten/components';
+import styles from './styles';
 
 const InputBox = ({
   borderColorBox,
@@ -72,36 +73,5 @@ const InputBox = ({
     </Layout>
   );
 };
-
-const styles = StyleSheet.create({
-  boxInput: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderRadius: 10,
-    flex: 1,
-  },
-  viewIconLeft: {
-    flex: 1.5,
-    backgroundColor: 'transparent',
-  },
-  viewIconRight: {
-    backgroundColor: 'transparent',
-  },
-  viewInputAnIcon: {
-    flex: 9.5,
-    backgroundColor: 'transparent',
-  },
-  viewInputTwoIcon: {
-    backgroundColor: 'transparent',
-    flex: 8,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInput: {
-    flex: 1,
-  },
-});
 
 export {InputBox};
