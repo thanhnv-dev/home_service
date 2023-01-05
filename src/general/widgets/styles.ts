@@ -73,6 +73,10 @@ const styles = StyleSheet.create({
   viewIconRight: {
     backgroundColor: 'transparent',
   },
+  viewInputNotIcon: {
+    flex: 11,
+    backgroundColor: 'transparent',
+  },
   viewInputAnIcon: {
     flex: 9.5,
     backgroundColor: 'transparent',
@@ -83,6 +87,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
+  },
+  title: {
+    marginVertical: 5,
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 export default styles;

@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   viewIconBack: {
     width: 30,
     height: 30,
+    backgroundColor: Color.while,
   },
   textTitle: {
     fontSize: 45,
@@ -142,6 +143,15 @@ const styles = StyleSheet.create({
   iconChecked: {
     height: 16,
     width: 16,
+  },
+  viewTitleWithIconBack: {
+    flex: 1.6,
+    marginTop: 30,
+    justifyContent: 'space-around',
+  },
+  viewInput2: {
+    flex: 2.7,
+    marginHorizontal: 10,
   },
 });
 

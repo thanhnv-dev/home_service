@@ -1,4 +1,4 @@
-import {Icon} from '@ui-kitten/components';
+import {Icon, Layout} from '@ui-kitten/components';
 import React from 'react';
 
 const EyeIcon = ({style, color}: {color: any; style: any}) => (
@@ -14,7 +14,9 @@ const IconLock = ({style, color}: {color: any; style: any}) => (
   <Icon name="lock-outline" fill={color} style={style} />
 );
 const IconBack = ({style, color}: {color: any; style: any}) => (
-  <Icon name="arrow-back-outline" fill={color} style={style} />
+  <Layout>
+    <Icon name="arrow-back-outline" fill={color} style={style} />
+  </Layout>
 );
 const IconCheck = ({style, color}: {color: any; style: any}) => (
   <Icon name="checkmark-outline" fill={color} style={style} />
