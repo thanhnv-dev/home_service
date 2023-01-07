@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit';
-import cardSlice from './user.slide';
+import userSlice from './user.slide';
 
 export const store = configureStore({
-  reducer: {card: cardSlice},
+  reducer: {user: userSlice},
 });
 
 export type AppDispatch = typeof store.dispatch;

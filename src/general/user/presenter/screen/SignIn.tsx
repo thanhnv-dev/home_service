@@ -22,26 +22,39 @@ import {Formik} from 'formik';
 import styles from '~/general/user/presenter/styles';
 import {fb_logo, g_logo, a_logo} from '~/assets/images';
 import {SignupSchema} from '~/validation/SchemaValidation';
-// import {signUp} from '~/network/controllers/userControllers';
-// import {UserService} from '~/general/user/infastructure/service';
+import {signIn, signUp} from '~/redux/user.slide';
+import {useAppDispatch} from '~/redux/hooks';
+import {showToast} from '~/utils/helper';
 
 const SignIn = ({navigation}: {navigation: any}) => {
-  const goSignUp = () => navigation.navigate('SignUp');
+  const dispatch = useAppDispatch();
+
   const [focusBox, setFocusBox] = useState('');
   const [remenber, setRemenber] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(false);
+
+  const goSignUp = () => navigation.navigate('SignUp');
+  const onBack = () => navigation.goBack();
+
   const cancelFocus = () => {
     Keyboard.dismiss();
     if (focusBox !== '') {
       setFocusBox('');
     }
   };
-  const submitSignUp = (values: object) => {
+
+  const onLogin = async (values: object) => {
     Keyboard.dismiss();
-    // signUp(values);
-    console.log(values);
+    const Action = dispatch(signIn(values));
+    await Action.then((res: any) => {
+      const response = res.payload;
+      if (response.isSuccess) {
+        showToast({msg: response.msg, type: 'success'});
+        navigation.navigate('ChooseService');
+      }
+    });
   };
-  const goBack = () => navigation.goBack();
+
   const focusBoxColor = ({
     color1,
     color2,
@@ -54,6 +67,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
     const color = color1 ? color1 : Color.violet;
     return focusBox === refBox ? color : color2;
   };
+
   const swichIconEye = secureTextEntry
     ? EyeIcon({
         color: focusBoxColor({
@@ -71,6 +85,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
         }),
         style: styles.iconInput,
       });
+
   return (
     <Layout style={styles.container}>
       <TouchableWithoutFeedback style={styles.container} onPress={cancelFocus}>
@@ -86,14 +101,14 @@ const SignIn = ({navigation}: {navigation: any}) => {
                   color: '#8F9BB3',
                   style: styles.iconBack,
                 })}
-                onPress={goBack}
+                onPress={onBack}
               />
               <Text style={styles.textTitle}>{'Login to your \nAccount'}</Text>
             </Layout>
             <Formik
               initialValues={{email: '', password: ''}}
               validationSchema={SignupSchema}
-              onSubmit={submitSignUp}>
+              onSubmit={onLogin}>
               {({
                 handleChange,
                 handleBlur,

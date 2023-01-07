@@ -16,25 +16,24 @@ async function getAxiosInstance() {
   return instance;
 }
 
-function handleResponse<T>(data: any) {
+function handleResponse<T>(apiResponse: any) {
   let res: IApiResponse<T> = {
     isSuccess: true,
-    errors: undefined,
-    data: data.data as T,
-    msg: data.msg as T,
+    data: apiResponse.data.data,
+    status: apiResponse.status,
+    msg: apiResponse.data.msg,
   };
   // showToast({msg: data.msg, type: 'success'});
   return res;
 }
 
-function handleError<T>(data: any) {
+function handleError<T>(apiResponse: any) {
   let res: IApiResponse<T> = {
     isSuccess: false,
-    errors: data,
-    data: undefined,
-    msg: data.msg as T,
+    data: apiResponse,
+    msg: apiResponse.msg,
   };
-  showToast({msg: data.msg, type: 'error'});
+  showToast({msg: apiResponse.msg, type: 'error'});
   return res;
 }
 
@@ -45,13 +44,7 @@ export async function sendPostRequest<T>(endPoint: string, body: any) {
       APIConstants.BASE_URL + endPoint,
       JSON.stringify(body),
     );
-    if (apiResponse?.status === 200) {
-      //Success
-      return handleResponse<T>(apiResponse.data);
-    } else {
-      //fail
-      return handleError<T>(apiResponse.data);
-    }
+    return handleResponse<T>(apiResponse);
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {
       return handleError<T>(err.response?.data);

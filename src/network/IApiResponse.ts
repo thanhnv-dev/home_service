@@ -1,9 +1,9 @@
 export interface IApiResponse<T> extends ApiResponse {
-  data?: T;
-  msg?: T;
+  msg: string;
+  data?: object;
+  status?: number;
 }
 
 export interface ApiResponse {
   isSuccess: boolean;
-  errors?: Error;
 }

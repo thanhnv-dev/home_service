@@ -8,7 +8,7 @@ const EyeOffIcon = ({style, color}: {color: any; style: any}) => (
   <Icon name="eye-off-outline" fill={color} style={style} />
 );
 const IconEmail = ({style, color}: {color: any; style: any}) => (
-  <Icon name="eye-off-outline" fill={color} style={style} />
+  <Icon name="email-outline" fill={color} style={style} />
 );
 const IconLock = ({style, color}: {color: any; style: any}) => (
   <Icon name="lock-outline" fill={color} style={style} />

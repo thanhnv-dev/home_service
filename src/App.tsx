@@ -7,6 +7,8 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 // import {default as themeColorLight} from './utils/custom-theme-light.json';
 import {ThemeContext} from './theme/theme-context';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import {Provider} from 'react-redux';
+import {store} from '~/redux';
 
 const App = () => {
   const [theme, setTheme] = React.useState(eva.light);
@@ -20,7 +22,7 @@ const App = () => {
   const themeValue = React.useMemo(() => ({theme, toggleTheme}), [theme]);
 
   return (
-    <>
+    <Provider store={store}>
       <IconRegistry icons={EvaIconsPack} />
       <ThemeContext.Provider value={themeValue}>
         <ApplicationProvider {...eva} theme={theme}>
@@ -28,7 +30,7 @@ const App = () => {
         </ApplicationProvider>
       </ThemeContext.Provider>
       <Toast />
-    </>
+    </Provider>
   );
 };
 export default App;

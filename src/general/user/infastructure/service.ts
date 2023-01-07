@@ -1,11 +1,20 @@
 import {IApiResponse} from '../../../network/IApiResponse';
-import {SignUpResponse} from '../../../network/apiResponses/user';
-import {SignUpService} from '../application';
-import {signUp} from '../../../network/controllers/userControllers';
+import {
+  SignUpResponse,
+  SignInResponse,
+} from '../../../network/apiResponses/user';
+import {SignUpService, SignInService} from '../application';
+import {signUp, signIn} from '../../../network/controllers/userControllers';
 
-export class UserService implements SignUpService {
+export class UserSignUpService implements SignUpService {
   async signUp(data: any): Promise<IApiResponse<SignUpResponse>> {
     const signUpResult: IApiResponse<SignUpResponse> = await signUp(data);
     return signUpResult;
+  }
+}
+export class UserSignInService implements SignInService {
+  async signIn(data: any): Promise<IApiResponse<SignInResponse>> {
+    const signInResult: IApiResponse<SignUpResponse> = await signIn(data);
+    return signInResult;
   }
 }
