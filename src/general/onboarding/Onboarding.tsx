@@ -1,15 +1,16 @@
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  useWindowDimensions,
-  Animated,
-} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useRef, useState} from 'react';
-import styles from './styles';
+import {
+  Animated,
+  FlatList,
+  Image,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import {onboardingData} from '~/constants/Const';
 import {MyButton} from '~/general/widgets';
+import styles from './styles';
 
 const Onboarding = ({navigation}: {navigation: any}) => {
   const {width} = useWindowDimensions();
@@ -72,6 +73,13 @@ const Onboarding = ({navigation}: {navigation: any}) => {
       />
     );
   };
+  const storeOnboarding = async (value: any) => {
+    try {
+      await AsyncStorage.setItem('storeOnboarding', value);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const nextPage = () => {
     if (currentIndex < lengthData) {
@@ -80,7 +88,8 @@ const Onboarding = ({navigation}: {navigation: any}) => {
         animated: true,
       });
     } else {
-      navigation.replace('LetIsInStack', {screen: 'LetIsIn'});
+      storeOnboarding('true');
+      navigation.replace('AuthStack', {screen: 'LetIsIn'});
     }
   };
   return (

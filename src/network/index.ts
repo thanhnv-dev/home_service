@@ -1,15 +1,22 @@
 import axios from 'axios';
+import {showToast} from '~/utils/helper';
 import {APIConstants} from './APIConstants';
 import {IApiResponse} from './IApiResponse';
-import {showToast} from '~/utils/helper';
+import {store} from '~/redux';
 
 async function getAxiosInstance() {
+  const storeRedux = store.getState();
+  const token = storeRedux.user.token;
+  if (token === null) {
+    //not token
+  }
   const instance = axios.create({
     baseURL: APIConstants.BASE_URL,
     timeout: 30000,
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -19,10 +26,10 @@ async function getAxiosInstance() {
 function handleResponse<T>(apiResponse: any) {
   let res: IApiResponse<T> = {
     isSuccess: true,
-    data: apiResponse.data.data,
+    data: apiResponse.data,
     status: apiResponse.status,
-    msg: apiResponse.data.msg,
   };
+
   // showToast({msg: data.msg, type: 'success'});
   return res;
 }
@@ -30,10 +37,18 @@ function handleResponse<T>(apiResponse: any) {
 function handleError<T>(apiResponse: any) {
   let res: IApiResponse<T> = {
     isSuccess: false,
-    data: apiResponse,
-    msg: apiResponse.msg,
+    data: apiResponse.data,
+    status: apiResponse.status,
   };
-  showToast({msg: apiResponse.msg, type: 'error'});
+  showToast({msg: apiResponse.data.msg, type: 'error'});
+  return res;
+}
+
+function handleNetworkError<T>(apiResponse: any) {
+  let res: IApiResponse<T> = {
+    isSuccess: false,
+  };
+  showToast({msg: apiResponse.message, type: 'error'});
   return res;
 }
 
@@ -47,9 +62,9 @@ export async function sendPostRequest<T>(endPoint: string, body: any) {
     return handleResponse<T>(apiResponse);
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {
-      return handleError<T>(err.response?.data);
+      return handleError<T>(err.response);
     } else {
-      return handleError<T>(err);
+      return handleNetworkError<T>(err);
     }
   }
 }

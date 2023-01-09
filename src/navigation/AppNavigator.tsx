@@ -22,7 +22,7 @@ const AppNaviagtor = () => {
     );
   };
 
-  const LetIsInStack = () => {
+  const AuthStack = () => {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LetIsIn" component={LetIsIn} />
@@ -37,7 +37,7 @@ const AppNaviagtor = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="OnboardingStack" component={OnboardingStack} />
-        <Stack.Screen name="LetIsInStack" component={LetIsInStack} />
+        <Stack.Screen name="AuthStack" component={AuthStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

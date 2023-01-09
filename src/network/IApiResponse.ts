@@ -1,5 +1,4 @@
 export interface IApiResponse<T> extends ApiResponse {
-  msg: string;
   data?: object;
   status?: number;
 }

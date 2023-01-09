@@ -1,30 +1,31 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Button, Layout, Text} from '@ui-kitten/components';
+import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {
-  TouchableOpacity,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard,
 } from 'react-native';
-import {Button, Layout, Text} from '@ui-kitten/components';
-import {MyButton, InputBox, LoginButton3rdPparty2} from '~/general/widgets';
-import Color from '~/constants/Color';
 import {
   EyeIcon,
   EyeOffIcon,
-  IconEmail,
-  IconLock,
   IconBack,
   IconCheck,
+  IconEmail,
+  IconLock,
 } from '~/assets/Icons/IconApp';
+import {a_logo, fb_logo, g_logo} from '~/assets/images';
+import Color from '~/constants/Color';
 import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
-import {Formik} from 'formik';
 import styles from '~/general/user/presenter/styles';
-import {fb_logo, g_logo, a_logo} from '~/assets/images';
-import {SignupSchema} from '~/validation/SchemaValidation';
-import {signIn, signUp} from '~/redux/user.slide';
+import {InputBox, LoginButton3rdPparty2, MyButton} from '~/general/widgets';
 import {useAppDispatch} from '~/redux/hooks';
+import {signIn} from '~/redux/user.slide';
 import {showToast} from '~/utils/helper';
+import {SignupSchema} from '~/validation/SchemaValidation';
 
 const SignIn = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
@@ -42,6 +43,20 @@ const SignIn = ({navigation}: {navigation: any}) => {
       setFocusBox('');
     }
   };
+  const storeTokens = async ({
+    token,
+    refreshToken,
+  }: {
+    token: string;
+    refreshToken: string;
+  }) => {
+    try {
+      await AsyncStorage.setItem('token', token);
+      await AsyncStorage.setItem('refreshToken', refreshToken);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onLogin = async (values: object) => {
     Keyboard.dismiss();
@@ -49,7 +64,13 @@ const SignIn = ({navigation}: {navigation: any}) => {
     await Action.then((res: any) => {
       const response = res.payload;
       if (response.isSuccess) {
-        showToast({msg: response.msg, type: 'success'});
+        if (remenber) {
+          storeTokens({
+            token: response?.data.token,
+            refreshToken: response?.data.refreshToken,
+          });
+        }
+        showToast({msg: response?.data.msg, type: 'success'});
         navigation.navigate('ChooseService');
       }
     });

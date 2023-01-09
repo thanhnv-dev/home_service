@@ -7,7 +7,8 @@
     "ios": "react-native run-ios --simulator='iPhone 13'",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pod": "cd ios; arch -x86_64 pod install; cd .."
   },
   "dependencies": {
     "@eva-design/eva": "^2.1.1",
