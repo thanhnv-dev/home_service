@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
   viewChange: {
     flex: 24,
   },
+  viewChange2: {
+    flex: 1,
+  },
   viewTitleIconBack: {
     flex: 5,
     marginTop: 30,
@@ -123,14 +126,8 @@ const styles = StyleSheet.create({
   textForgot: {
     color: Color.violet,
   },
-  colorError: {
-    color: Color.error,
-  },
   viewForgot: {
     alignItems: 'center',
-  },
-  viewErrorInput: {
-    marginVertical: 2,
   },
   iconInput: {
     width: 20,
@@ -145,13 +142,17 @@ const styles = StyleSheet.create({
     width: 16,
   },
   viewTitleWithIconBack: {
-    flex: 1.6,
     marginTop: 30,
-    justifyContent: 'space-around',
   },
-  viewInput2: {
-    flex: 2.7,
-    marginHorizontal: 10,
+  viewTitle2: {
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  boxInput: {
+    height: 70,
+  },
+  ml20: {
+    marginLeft: 20,
   },
 });
 

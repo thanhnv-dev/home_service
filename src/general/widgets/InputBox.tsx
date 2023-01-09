@@ -19,10 +19,11 @@ const InputBox = ({
   selectionColor,
   paddingLeft,
   titleInput,
+  containerStyle,
 }: {
   borderColorBox: string;
   backGroundColorBox: string;
-  IconLeft: any;
+  IconLeft?: any;
   IconRight?: any;
   placeholder: string;
   value: string;
@@ -35,6 +36,7 @@ const InputBox = ({
   selectionColor: string;
   titleInput?: string;
   paddingLeft?: number;
+  containerStyle?: any;
 }) => {
   const checkTypeInput = () => {
     if (checkIcon(IconLeft) && checkIcon(IconRight)) {
@@ -47,7 +49,7 @@ const InputBox = ({
   };
   const checkIcon = (icon: any) => (icon ? true : false);
   return (
-    <>
+    <Layout style={containerStyle ? containerStyle : styles.textInput}>
       {titleInput && <Text style={styles.title}>{titleInput}</Text>}
       <Layout
         style={[
@@ -89,8 +91,20 @@ const InputBox = ({
           />
         )}
       </Layout>
-    </>
+    </Layout>
   );
 };
 
-export {InputBox};
+const ErrorInput = ({errors, touched}: {errors: any; touched: any}) => {
+  return (
+    <Layout style={styles.viewErrorInput}>
+      {errors && touched ? (
+        <Text style={styles.colorError}>{errors}</Text>
+      ) : (
+        <Text />
+      )}
+    </Layout>
+  );
+};
+
+export {InputBox, ErrorInput};

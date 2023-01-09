@@ -21,11 +21,16 @@ import {a_logo, fb_logo, g_logo} from '~/assets/images';
 import Color from '~/constants/Color';
 import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
 import styles from '~/general/user/presenter/styles';
-import {InputBox, LoginButton3rdPparty2, MyButton} from '~/general/widgets';
+import {
+  InputBox,
+  LoginButton3rdPparty2,
+  MyButton,
+  ErrorInput,
+} from '~/general/widgets';
 import {useAppDispatch} from '~/redux/hooks';
 import {signIn} from '~/redux/user.slide';
 import {showToast} from '~/utils/helper';
-import {SignupSchema} from '~/validation/SchemaValidation';
+import {SignInSchema} from '~/validation/SchemaValidation';
 
 const SignIn = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
@@ -128,7 +133,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
             </Layout>
             <Formik
               initialValues={{email: '', password: ''}}
-              validationSchema={SignupSchema}
+              validationSchema={SignInSchema}
               onSubmit={onLogin}>
               {({
                 handleChange,
@@ -165,13 +170,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                       colorTextInput={errors.email ? Color.error : Color.violet}
                       selectionColor={Color.violet}
                     />
-                    <Layout style={styles.viewErrorInput}>
-                      {errors.email && touched.email ? (
-                        <Text style={styles.colorError}>{errors.email}</Text>
-                      ) : (
-                        <Text />
-                      )}
-                    </Layout>
+                    <ErrorInput errors={errors.email} touched={touched.email} />
                     <InputBox
                       borderColorBox={focusBoxColor({
                         color2: Color.border,
@@ -204,13 +203,10 @@ const SignIn = ({navigation}: {navigation: any}) => {
                       }
                       selectionColor={Color.violet}
                     />
-                    <Layout style={styles.viewErrorInput}>
-                      {errors.password && touched.password ? (
-                        <Text style={styles.colorError}>{errors.password}</Text>
-                      ) : (
-                        <Text />
-                      )}
-                    </Layout>
+                    <ErrorInput
+                      errors={errors.password}
+                      touched={touched.password}
+                    />
                   </Layout>
                   <Layout style={styles.viewButtonSign}>
                     <Layout style={[styles.viewRemember, styles.center]}>

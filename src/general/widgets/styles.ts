@@ -93,5 +93,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  viewErrorInput: {
+    marginVertical: 2,
+  },
+  colorError: {
+    color: Color.error,
+  },
 });
 export default styles;
