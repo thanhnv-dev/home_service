@@ -13,6 +13,7 @@ import {
   EyeOffIcon,
   IconEmail,
   IconLock,
+  IconLock2,
   IconBack,
   IconCheck,
 } from '~/assets/Icons/IconApp';
@@ -28,6 +29,8 @@ import Color from '~/constants/Color';
 
 const SignUp = ({navigation}: {navigation: any}) => {
   const [focusBox, setFocusBox] = useState('');
+  const [secureTextEntry1, setSecureTextEntry1] = useState<boolean>(true);
+  const [secureTextEntry2, setSecureTextEntry2] = useState(true);
   const goBack = () => navigation.goBack();
   const submitSignUp = (values: object) => {
     Keyboard.dismiss();
@@ -36,14 +39,36 @@ const SignUp = ({navigation}: {navigation: any}) => {
   };
   const cancelFocus = () => {
     Keyboard.dismiss();
-    // if (focusBox !== '') {
-    //   setFocusBox('');
-    // }
+    if (focusBox !== '') {
+      setFocusBox('');
+    }
   };
+
+  const onPressSwichIcon1 = () => {
+    setSecureTextEntry1(!secureTextEntry1);
+  };
+  const onPressSwichIcon2 = () => {
+    setSecureTextEntry2(!secureTextEntry2);
+  };
+
+  const swichIcon = ({
+    icon1,
+    icon2,
+    styleIcon,
+    secureTextEntry,
+  }: {
+    icon1: any;
+    icon2: any;
+    styleIcon: any;
+    secureTextEntry: boolean;
+  }) => {
+    return secureTextEntry ? icon1(styleIcon) : icon2(styleIcon);
+  };
+
   return (
     <Layout style={styles.container}>
-      <TouchableWithoutFeedback style={styles.container} onPress={cancelFocus}>
-        <Layout>
+      <TouchableWithoutFeedback onPress={cancelFocus}>
+        <Layout style={styles.childContainer}>
           <Layout style={styles.viewTitleWithIconBack}>
             <Button
               style={styles.viewIconBack}
@@ -54,14 +79,14 @@ const SignUp = ({navigation}: {navigation: any}) => {
               })}
               onPress={goBack}
             />
-            <Text style={[styles.textTitle, styles.viewTitle2]}>
-              {'Create your \nAccount'}
-            </Text>
           </Layout>
           <KeyboardAvoidingView
-            contentContainerStyle={styles.viewChange2}
+            style={styles.viewChanged}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Layout style={styles.viewTitle2}>
+                <Text style={styles.textTitle}>{'Create your \nAccount'}</Text>
+              </Layout>
               <Formik
                 initialValues={{
                   email: '',
@@ -134,17 +159,20 @@ const SignUp = ({navigation}: {navigation: any}) => {
                       touched={touched.lastName}
                     />
                     <InputBox
-                      containerStyle={styles.boxInput}
+                      containerStyle={styles.boxInput2}
                       borderColorBox={
                         focusBox === 'email' ? Color.violet : Color.border
                       }
+                      IconLeft={IconEmail({
+                        color:
+                          focusBox === 'email' ? Color.violet : Color.grayIcon,
+                        style: styles.iconInput,
+                      })}
                       backGroundColorBox={
                         focusBox === 'email'
                           ? Color.backgroundColorViolet
                           : Color.border
                       }
-                      titleInput="Email"
-                      paddingLeft={10}
                       placeholder="Email"
                       value={values.email}
                       onChangeText={handleChange('email')}
@@ -155,17 +183,38 @@ const SignUp = ({navigation}: {navigation: any}) => {
                     />
                     <ErrorInput errors={errors.email} touched={touched.email} />
                     <InputBox
-                      containerStyle={styles.boxInput}
+                      containerStyle={styles.boxInput2}
+                      autoCorrect={false}
+                      spellCheck={false}
                       borderColorBox={
                         focusBox === 'password' ? Color.violet : Color.border
                       }
+                      IconLeft={IconLock2({
+                        color:
+                          focusBox === 'password'
+                            ? Color.violet
+                            : Color.grayIcon,
+                        style: styles.iconInput,
+                      })}
+                      IconRight={swichIcon({
+                        icon2: EyeIcon,
+                        icon1: EyeOffIcon,
+                        styleIcon: {
+                          color:
+                            focusBox === 'password'
+                              ? Color.violet
+                              : Color.grayIcon,
+                          style: styles.iconInput,
+                        },
+                        secureTextEntry: secureTextEntry1,
+                      })}
+                      secureTextEntry={secureTextEntry1}
                       backGroundColorBox={
                         focusBox === 'password'
                           ? Color.backgroundColorViolet
                           : Color.border
                       }
-                      titleInput="Password"
-                      paddingLeft={10}
+                      onPressIconRight={onPressSwichIcon1}
                       placeholder="Password"
                       value={values.password}
                       onChangeText={handleChange('password')}
@@ -181,7 +230,9 @@ const SignUp = ({navigation}: {navigation: any}) => {
                       touched={touched.password}
                     />
                     <InputBox
-                      containerStyle={styles.boxInput}
+                      containerStyle={styles.boxInput2}
+                      autoCorrect={false}
+                      spellCheck={false}
                       borderColorBox={
                         focusBox === 'confirmPassword'
                           ? Color.violet
@@ -192,7 +243,27 @@ const SignUp = ({navigation}: {navigation: any}) => {
                           ? Color.backgroundColorViolet
                           : Color.border
                       }
-                      titleInput="Confirm Password"
+                      IconLeft={IconLock({
+                        color:
+                          focusBox === 'confirmPassword'
+                            ? Color.violet
+                            : Color.grayIcon,
+                        style: styles.iconInput,
+                      })}
+                      IconRight={swichIcon({
+                        icon2: EyeIcon,
+                        icon1: EyeOffIcon,
+                        styleIcon: {
+                          color:
+                            focusBox === 'confirmPassword'
+                              ? Color.violet
+                              : Color.grayIcon,
+                          style: styles.iconInput,
+                        },
+                        secureTextEntry: secureTextEntry2,
+                      })}
+                      secureTextEntry={secureTextEntry2}
+                      onPressIconRight={onPressSwichIcon2}
                       paddingLeft={10}
                       placeholder="Confirm Password"
                       value={values.confirmPassword}
@@ -204,17 +275,19 @@ const SignUp = ({navigation}: {navigation: any}) => {
                       }
                       selectionColor={Color.violet}
                     />
-                    <ErrorInput
-                      errors={errors.confirmPassword}
-                      touched={touched.confirmPassword}
-                    />
+                    <Layout style={{marginBottom: 30}}>
+                      <ErrorInput
+                        errors={errors.confirmPassword}
+                        touched={touched.confirmPassword}
+                      />
+                    </Layout>
                   </>
                 )}
               </Formik>
             </ScrollView>
           </KeyboardAvoidingView>
-          {/* <Layout style={{flex: 0.3, borderWidth: 1}}></Layout>
-          <Layout style={{flex: 0.3, borderWidth: 1}}></Layout> */}
+          <Layout style={{flex: 2, borderWidth: 1}}></Layout>
+          <Layout style={{flex: 2, borderWidth: 1}}></Layout>
         </Layout>
       </TouchableWithoutFeedback>
     </Layout>

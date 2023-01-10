@@ -13,6 +13,9 @@ const IconEmail = ({style, color}: {color: any; style: any}) => (
 const IconLock = ({style, color}: {color: any; style: any}) => (
   <Icon name="lock-outline" fill={color} style={style} />
 );
+const IconLock2 = ({style, color}: {color: any; style: any}) => (
+  <Icon name="unlock-outline" fill={color} style={style} />
+);
 const IconBack = ({style, color}: {color: any; style: any}) => (
   <Layout>
     <Icon name="arrow-back-outline" fill={color} style={style} />
@@ -22,4 +25,12 @@ const IconCheck = ({style, color}: {color: any; style: any}) => (
   <Icon name="checkmark-outline" fill={color} style={style} />
 );
 
-export {EyeIcon, EyeOffIcon, IconBack, IconEmail, IconLock, IconCheck};
+export {
+  EyeIcon,
+  EyeOffIcon,
+  IconBack,
+  IconEmail,
+  IconLock,
+  IconCheck,
+  IconLock2,
+};

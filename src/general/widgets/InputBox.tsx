@@ -20,6 +20,8 @@ const InputBox = ({
   paddingLeft,
   titleInput,
   containerStyle,
+  autoCorrect,
+  spellCheck,
 }: {
   borderColorBox: string;
   backGroundColorBox: string;
@@ -32,6 +34,8 @@ const InputBox = ({
   onFocus: any;
   onPressIconRight?: any;
   secureTextEntry?: boolean;
+  autoCorrect?: boolean;
+  spellCheck?: boolean;
   colorTextInput: string;
   selectionColor: string;
   titleInput?: string;
@@ -67,6 +71,8 @@ const InputBox = ({
         <Layout style={checkTypeInput()}>
           <TextInput
             placeholder={placeholder}
+            autoCorrect={autoCorrect}
+            spellCheck={spellCheck}
             value={value}
             onChangeText={onChangeText}
             onBlur={onBlur}

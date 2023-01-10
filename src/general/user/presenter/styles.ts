@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   childContainer: {
+    backgroundColor: Color.while,
     marginHorizontal: 20,
     flex: 1,
   },
@@ -73,9 +74,6 @@ const styles = StyleSheet.create({
   viewChange: {
     flex: 24,
   },
-  viewChange2: {
-    flex: 1,
-  },
   viewTitleIconBack: {
     flex: 5,
     marginTop: 30,
@@ -107,6 +105,7 @@ const styles = StyleSheet.create({
   viewIconBack: {
     width: 30,
     height: 30,
+    marginTop: 30,
     backgroundColor: Color.while,
   },
   textTitle: {
@@ -141,15 +140,20 @@ const styles = StyleSheet.create({
     height: 16,
     width: 16,
   },
+  viewChanged: {
+    flex: 20,
+  },
   viewTitleWithIconBack: {
-    marginTop: 30,
+    flex: 3.5,
   },
   viewTitle2: {
-    marginTop: 50,
-    marginBottom: 20,
+    height: 130,
   },
   boxInput: {
     height: 70,
+  },
+  boxInput2: {
+    height: 45,
   },
   ml20: {
     marginLeft: 20,
