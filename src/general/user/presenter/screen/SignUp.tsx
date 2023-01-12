@@ -4,9 +4,12 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TouchableWithoutFeedback,
+  TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Button, Layout, Text} from '@ui-kitten/components';
+import DeviceInfo from 'react-native-device-info';
 import {Formik} from 'formik';
 import {
   EyeIcon,
@@ -32,6 +35,8 @@ const SignUp = ({navigation}: {navigation: any}) => {
   const [secureTextEntry1, setSecureTextEntry1] = useState<boolean>(true);
   const [secureTextEntry2, setSecureTextEntry2] = useState(true);
   const goBack = () => navigation.goBack();
+  const hasNotch = DeviceInfo.hasNotch();
+
   const submitSignUp = (values: object) => {
     Keyboard.dismiss();
     // signUp(values);
@@ -68,22 +73,20 @@ const SignUp = ({navigation}: {navigation: any}) => {
   return (
     <Layout style={styles.container}>
       <TouchableWithoutFeedback onPress={cancelFocus}>
-        <Layout style={styles.childContainer}>
-          <Layout style={styles.viewTitleWithIconBack}>
-            <Button
-              style={styles.viewIconBack}
-              appearance="ghost"
-              accessoryLeft={IconBack({
-                color: '#8F9BB3',
-                style: styles.iconBack,
-              })}
-              onPress={goBack}
-            />
-          </Layout>
+        <SafeAreaView style={styles.childContainer}>
           <KeyboardAvoidingView
             style={styles.viewChanged}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ScrollView showsVerticalScrollIndicator={false}>
+              <Button
+                style={styles.viewIconBack}
+                appearance="ghost"
+                accessoryLeft={IconBack({
+                  color: '#8F9BB3',
+                  style: styles.iconBack,
+                })}
+                onPress={goBack}
+              />
               <Layout style={styles.viewTitle2}>
                 <Text style={styles.textTitle}>{'Create your \nAccount'}</Text>
               </Layout>
@@ -275,20 +278,30 @@ const SignUp = ({navigation}: {navigation: any}) => {
                       }
                       selectionColor={Color.violet}
                     />
-                    <Layout style={{marginBottom: 30}}>
-                      <ErrorInput
-                        errors={errors.confirmPassword}
-                        touched={touched.confirmPassword}
-                      />
+                    <ErrorInput
+                      errors={errors.confirmPassword}
+                      touched={touched.confirmPassword}
+                    />
+                    <MyButton title={'Sign Up'} onPress={() => {}} />
+                    <Layout
+                      style={[
+                        styles.viewButtonText,
+                        styles.center,
+                        styles.mV10,
+                      ]}>
+                      <Text style={styles.textOr}>
+                        Already have an Account?{' '}
+                      </Text>
+                      <TouchableOpacity onPress={() => {}}>
+                        <Text style={styles.textSignUp}> Sign In</Text>
+                      </TouchableOpacity>
                     </Layout>
                   </>
                 )}
               </Formik>
             </ScrollView>
           </KeyboardAvoidingView>
-          <Layout style={{flex: 2, borderWidth: 1}}></Layout>
-          <Layout style={{flex: 2, borderWidth: 1}}></Layout>
-        </Layout>
+        </SafeAreaView>
       </TouchableWithoutFeedback>
     </Layout>
   );

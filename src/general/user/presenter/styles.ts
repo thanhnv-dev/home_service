@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   viewIconBack: {
     width: 30,
     height: 30,
-    marginTop: 30,
+    // marginTop: 30,
     backgroundColor: Color.while,
   },
   textTitle: {
@@ -157,6 +157,12 @@ const styles = StyleSheet.create({
   },
   ml20: {
     marginLeft: 20,
+  },
+  mt10: {
+    marginTop: 10,
+  },
+  mV10: {
+    marginVertical: 10,
   },
 });
 
