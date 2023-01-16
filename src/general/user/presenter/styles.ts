@@ -5,6 +5,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
   childContainer: {
     backgroundColor: Color.while,
     marginHorizontal: 20,
@@ -105,12 +110,17 @@ const styles = StyleSheet.create({
   viewIconBack: {
     width: 30,
     height: 30,
-    // marginTop: 30,
     backgroundColor: Color.while,
   },
   textTitle: {
     fontSize: 45,
     fontWeight: '700',
+  },
+  textTitle2: {
+    flex: 1,
+    fontSize: 20,
+    fontWeight: '500',
+    textAlign: 'center',
   },
   viewIconCheck: {
     height: 20,
@@ -140,15 +150,12 @@ const styles = StyleSheet.create({
     height: 16,
     width: 16,
   },
-  viewChanged: {
-    flex: 20,
-  },
   viewTitleWithIconBack: {
     flex: 3.5,
   },
-  viewTitle2: {
-    height: 130,
-  },
+  // viewTitle2: {
+  //   marginTop: 50,
+  // },
   boxInput: {
     height: 70,
   },

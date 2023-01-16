@@ -81,6 +81,14 @@ const SignIn = ({navigation}: {navigation: any}) => {
     });
   };
 
+  const handleSignIn = (handleSubmit: any, errors: any) => {
+    if (errors.email || errors.password) {
+      showToast({type: 'error', msg: 'Please complete all information'});
+    } else {
+      handleSubmit();
+    }
+  };
+
   const focusBoxColor = ({
     color1,
     color2,
@@ -146,6 +154,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                 <Layout style={styles.viewInputSubmit}>
                   <Layout style={styles.viewInput}>
                     <InputBox
+                      containerStyle={styles.boxInput2}
                       borderColorBox={focusBoxColor({
                         color2: Color.border,
                         refBox: EMAIL_BOX,
@@ -172,6 +181,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                     />
                     <ErrorInput errors={errors.email} touched={touched.email} />
                     <InputBox
+                      containerStyle={styles.boxInput2}
                       borderColorBox={focusBoxColor({
                         color2: Color.border,
                         refBox: PASSWORD_BOX,
@@ -229,9 +239,10 @@ const SignIn = ({navigation}: {navigation: any}) => {
                       <Text>{'  Remenber me'}</Text>
                     </Layout>
                     <MyButton
-                      disabled={errors.password || errors.email ? true : false}
                       title={'Sign in'}
-                      onPress={handleSubmit}
+                      onPress={() => {
+                        handleSignIn(handleSubmit, errors);
+                      }}
                     />
                     <TouchableOpacity style={styles.viewForgot}>
                       <Text style={styles.textForgot}>
