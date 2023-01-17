@@ -1,14 +1,8 @@
-export interface dataSignUp {
-  _id: string;
-}
+import {User} from '~/general/user/domain';
+
 export interface SignUpResponse {
-  data: dataSignUp;
-  msg: string;
-}
-export interface dataSignIp {
-  _id: string;
+  data: User;
 }
 export interface SignInResponse {
-  data: dataSignUp;
-  msg: string;
+  data: User;
 }

@@ -67,6 +67,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
     Keyboard.dismiss();
     const Action = dispatch(signIn(values));
     await Action.then((res: any) => {
+      console.log(res);
       const response = res.payload;
       if (response.isSuccess) {
         if (remenber) {
