@@ -9,6 +9,7 @@ import {
   ChooseService,
   SignUp,
 } from '~/general/index';
+import CustomerStack from './CustomerStack';
 
 const Stack = createNativeStackNavigator();
 const AppNaviagtor = () => {
@@ -38,6 +39,7 @@ const AppNaviagtor = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="OnboardingStack" component={OnboardingStack} />
         <Stack.Screen name="AuthStack" component={AuthStack} />
+        <Stack.Screen name="CustomerStack" component={CustomerStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

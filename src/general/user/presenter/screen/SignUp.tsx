@@ -16,7 +16,7 @@ import {
   IconLock2,
   IconBack,
 } from '~/assets/Icons/IconApp';
-import {MyButton, InputBox, ErrorInput} from '~/general/widgets';
+import {MyButton, MyButton1, InputBox, ErrorInput} from '~/general/widgets';
 import {SignUpSchema} from '~/validation/SchemaValidation';
 import styles from '../styles';
 import Color from '~/constants/Color';
@@ -24,6 +24,9 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {showToast} from '~/utils/helper';
 import {useAppDispatch} from '~/redux/hooks';
 import {signUp} from '~/redux/user.slide';
+import {IApiResponse} from '~/network/IApiResponse';
+import {SignUpResponse} from '~/network/apiResponses/user';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
@@ -31,22 +34,49 @@ const SignUp = ({navigation}: {navigation: any}) => {
   const [secureTextEntry1, setSecureTextEntry1] = useState<boolean>(true);
   const [secureTextEntry2, setSecureTextEntry2] = useState(true);
   const [keyboardShow, setKeyboardShow] = useState(false);
+  const [typeService, setTypeService] = useState<any>(null);
   const goBack = () => navigation.goBack();
   const goSignIn = () => navigation.navigate('SignIn');
 
+  const saveData = async ({
+    token,
+    refreshToken,
+    _id,
+  }: {
+    token: string;
+    refreshToken: string;
+    _id: string;
+  }) => {
+    try {
+      await AsyncStorage.setItem('token', token);
+      await AsyncStorage.setItem('refreshToken', refreshToken);
+      await AsyncStorage.setItem('_id', _id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onSignUp = async (values: object) => {
     Keyboard.dismiss();
-    const Action = dispatch(signUp(values));
-    await Action.then((res: any) => {
-      const response = res.payload;
-
-      if (response.isSuccess) {
-        navigation.navigate('ChooseService');
-        showToast({msg: response?.data.msg, type: 'success'});
-      } else {
-        showToast({msg: response?.data.msg, type: 'error'});
+    const Action = await dispatch(signUp({...values, type: typeService}));
+    const response: IApiResponse<SignUpResponse> = Action.payload;
+    if (response.isSuccess) {
+      showToast({msg: response.data?.msg!, type: 'success'});
+      saveData({
+        token: response.data?.token!,
+        refreshToken: response.data?.refreshToken!,
+        _id: response.data?._id!,
+      });
+      switch (response.data?.type) {
+        case 'PROVIDER':
+          return navigation.navigate('ProviderStack');
+        case 'CUSTOMER':
+          return navigation.replace('CustomerStack', {screen: 'Home'});
+        default:
       }
-    });
+    } else {
+      showToast({msg: response.data?.msg!, type: 'error'});
+    }
   };
   const cancelFocus = () => {
     Keyboard.dismiss();
@@ -68,17 +98,26 @@ const SignUp = ({navigation}: {navigation: any}) => {
     };
   }, []);
 
-  const handleSignUp = (handleSubmit: any, errors: any) => {
+  const handleSignUp = (handleSubmit: any, errors: any, values: any) => {
     if (
       errors.email ||
       errors.password ||
       errors.firstName ||
       errors.lastName ||
-      errors.confirmPassword
+      errors.confirmPassword ||
+      !values.email ||
+      !values.password ||
+      !values.firstName ||
+      !values.lastName ||
+      !values.confirmPassword
     ) {
       showToast({type: 'error', msg: 'Please complete all information'});
     } else {
-      handleSubmit();
+      if (typeService == null) {
+        showToast({type: 'error', msg: 'Please select an account type'});
+      } else {
+        handleSubmit();
+      }
     }
   };
 
@@ -87,6 +126,12 @@ const SignUp = ({navigation}: {navigation: any}) => {
   };
   const onPressSwichIcon2 = () => {
     setSecureTextEntry2(!secureTextEntry2);
+  };
+  const onSetProvider = () => {
+    setTypeService('PROVIDER');
+  };
+  const onSetCustomer = () => {
+    setTypeService('CUSTOMER');
   };
 
   const swichIcon = ({
@@ -127,7 +172,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
               initialValues={{
                 email: '',
                 password: '',
-                fistName: '',
+                firstName: '',
                 lastName: '',
                 confirmPassword: '',
               }}
@@ -144,7 +189,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
                 <>
                   <InputBox
                     containerStyle={styles.boxInput}
-                    value={values.fistName}
+                    value={values.firstName}
                     paddingLeft={10}
                     borderColorBox={
                       focusBox === 'firstName' ? Color.violet : Color.border
@@ -156,17 +201,17 @@ const SignUp = ({navigation}: {navigation: any}) => {
                     }
                     titleInput="First Name"
                     placeholder="First Name"
-                    onChangeText={handleChange('fistName')}
-                    onBlur={handleBlur('fistName')}
+                    onChangeText={handleChange('firstName')}
+                    onBlur={handleBlur('firstName')}
                     onFocus={() => setFocusBox('firstName')}
                     colorTextInput={
-                      errors.fistName ? Color.error : Color.violet
+                      errors.firstName ? Color.error : Color.violet
                     }
                     selectionColor={Color.violet}
                   />
                   <ErrorInput
-                    errors={errors.fistName}
-                    touched={touched.fistName}
+                    errors={errors.firstName}
+                    touched={touched.firstName}
                   />
                   <InputBox
                     containerStyle={styles.boxInput}
@@ -195,6 +240,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
                     touched={touched.lastName}
                   />
                   <InputBox
+                    autoCapitalize={'none'}
                     containerStyle={styles.boxInput2}
                     borderColorBox={
                       focusBox === 'email' ? Color.violet : Color.border
@@ -312,10 +358,49 @@ const SignUp = ({navigation}: {navigation: any}) => {
                     errors={errors.confirmPassword}
                     touched={touched.confirmPassword}
                   />
+                  <Text style={styles.title2}>Choose an account type</Text>
+                  <Layout style={styles.viewButtonChoose}>
+                    <TouchableOpacity style={[styles.container, styles.mH10]}>
+                      <MyButton1
+                        title="Provider"
+                        backgroundColor={{
+                          backgroundColor:
+                            typeService === 'PROVIDER'
+                              ? Color.violet
+                              : Color.border,
+                        }}
+                        titleStyle={{
+                          color:
+                            typeService === 'PROVIDER'
+                              ? Color.while
+                              : Color.black,
+                        }}
+                        onPress={onSetProvider}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.container, styles.mH10]}>
+                      <MyButton1
+                        backgroundColor={{
+                          backgroundColor:
+                            typeService === 'CUSTOMER'
+                              ? Color.violet
+                              : Color.border,
+                        }}
+                        titleStyle={{
+                          color:
+                            typeService === 'CUSTOMER'
+                              ? Color.while
+                              : Color.black,
+                        }}
+                        title="Customer"
+                        onPress={onSetCustomer}
+                      />
+                    </TouchableOpacity>
+                  </Layout>
                   <MyButton
                     title={'Sign Up'}
                     onPress={() => {
-                      handleSignUp(handleSubmit, errors);
+                      handleSignUp(handleSubmit, errors, values);
                     }}
                   />
                   <Layout

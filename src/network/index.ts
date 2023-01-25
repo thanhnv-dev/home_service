@@ -2,11 +2,10 @@ import axios from 'axios';
 import {showToast} from '~/utils/helper';
 import {APIConstants} from './APIConstants';
 import {IApiResponse} from './IApiResponse';
-import {store} from '~/redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function getAxiosInstance() {
-  const storeRedux = store.getState();
-  const token = storeRedux.user.token;
+  const token = await AsyncStorage.getItem('token');
   if (token === null) {
     //not token
   }

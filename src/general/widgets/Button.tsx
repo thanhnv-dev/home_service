@@ -64,10 +64,33 @@ const MyButton = ({
     </TouchableOpacity>
   );
 };
+const MyButton1 = ({
+  onPress,
+  title,
+  backgroundColor,
+  disabled,
+  titleStyle,
+}: {
+  onPress: any;
+  title: string;
+  backgroundColor: any;
+  titleStyle?: any;
+  disabled?: boolean;
+}) => {
+  return (
+    <TouchableOpacity
+      disabled={disabled}
+      style={[styles.button3, styles.center, backgroundColor]}
+      onPress={onPress}>
+      <Text style={titleStyle ? titleStyle : styles.textButton}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
 
 export {
   LoginButton3rdPparty,
   LoginButton3rdPparty1,
   LoginButton3rdPparty2,
   MyButton,
+  MyButton1,
 };

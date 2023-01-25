@@ -9,6 +9,7 @@ import {ThemeContext} from './theme/theme-context';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {Provider} from 'react-redux';
 import {store} from '~/redux';
+import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 
 const App = () => {
   const [theme, setTheme] = React.useState(eva.light);
@@ -26,6 +27,7 @@ const App = () => {
       <IconRegistry icons={EvaIconsPack} />
       <ThemeContext.Provider value={themeValue}>
         <ApplicationProvider {...eva} theme={theme}>
+          <FlipperAsyncStorage />
           <AppNaviagtor />
         </ApplicationProvider>
       </ThemeContext.Provider>

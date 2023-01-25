@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {SignUp, SignIn} from '~/general/user/application';
+import {SignUp, SignIn, GetProfile} from '~/general/user/application';
 import {
   UserSignInService,
   UserSignUpService,
+  UserGetProfileService,
 } from '~/general/user/infastructure/service';
 
 export const signUp = createAsyncThunk(
@@ -29,23 +30,35 @@ export const signIn = createAsyncThunk(
     return rejectWithValue(signinResult);
   },
 );
+export const getProfile = createAsyncThunk(
+  'user/getProfile',
+  async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
+    const service = new UserGetProfileService();
+    const interactor = new GetProfile(service);
+    const signinResult = await interactor.getProfileService.getProfile(data);
+    if (signinResult.isSuccess) {
+      return signinResult;
+    }
+    return rejectWithValue(signinResult);
+  },
+);
 
 export const userSlice = createSlice({
   name: 'counter',
   initialState: {
-    idUser: null,
-    token: null,
-    refreshToken: null,
+    _id: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    type: null,
   },
   reducers: {
-    setIdUser: (state, action) => {
-      state.idUser = action?.payload;
-    },
-    setToken: (state, action) => {
-      state.token = action?.payload;
-    },
-    setRefreshToken: (state, action) => {
-      state.refreshToken = action?.payload;
+    setUser: (state, action) => {
+      state._id = action?.payload._id;
+      state.firstName = action?.payload.firstName;
+      state.lastName = action?.payload.lastName;
+      state.email = action?.payload.email;
+      state.type = action?.payload.type;
     },
   },
   extraReducers: builder => {
@@ -57,9 +70,18 @@ export const userSlice = createSlice({
 
     // Khi thực hiện action login thành công (Promise fulfilled)
     builder.addCase(signIn.fulfilled, (state: any, action: any) => {
-      state.idUser = action.payload?.data?.idUser;
-      state.token = action.payload?.data?.token;
-      state.refreshToken = action.payload?.data?.refreshToken;
+      state._id = action?.payload.data._id;
+      state.firstName = action?.payload.data.firstName;
+      state.lastName = action?.payload.data.lastName;
+      state.email = action?.payload.data.email;
+      state.type = action?.payload.data.type;
+    });
+    builder.addCase(getProfile.fulfilled, (state: any, action: any) => {
+      state._id = action?.payload.data._id;
+      state.firstName = action?.payload.data.firstName;
+      state.lastName = action?.payload.data.lastName;
+      state.email = action?.payload.data.email;
+      state.type = action?.payload.data.type;
     });
 
     // Khi thực hiện action login thất bại (Promise rejected)
@@ -72,6 +94,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {setIdUser, setToken} = userSlice.actions;
+export const {setUser} = userSlice.actions;
 
 export default userSlice.reducer;

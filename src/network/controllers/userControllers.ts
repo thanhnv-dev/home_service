@@ -7,3 +7,6 @@ export const signUp = async (body: object) => {
 export const signIn = async (body: object) => {
   return await sendPostRequest<SignInResponse>('/users/signin', body);
 };
+export const getProfile = async (body: object) => {
+  return await sendPostRequest<SignInResponse>('/users/getprofile', body);
+};

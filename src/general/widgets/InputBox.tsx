@@ -22,7 +22,9 @@ const InputBox = ({
   containerStyle,
   autoCorrect,
   spellCheck,
+  autoCapitalize,
 }: {
+  autoCapitalize?: any;
   borderColorBox: string;
   backGroundColorBox: string;
   IconLeft?: any;
@@ -70,6 +72,7 @@ const InputBox = ({
         )}
         <Layout style={checkTypeInput()}>
           <TextInput
+            autoCapitalize={autoCapitalize}
             placeholder={placeholder}
             autoCorrect={autoCorrect}
             spellCheck={spellCheck}

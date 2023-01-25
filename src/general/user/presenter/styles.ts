@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
   },
+  title2: {
+    marginVertical: 5,
+    fontSize: 16,
+    fontWeight: '500',
+  },
   icon: {
     height: 25,
     width: 25,
@@ -170,6 +175,13 @@ const styles = StyleSheet.create({
   },
   mV10: {
     marginVertical: 10,
+  },
+  mH10: {
+    marginHorizontal: 10,
+  },
+  viewButtonChoose: {
+    flexDirection: 'row',
+    marginBottom: 20,
   },
 });
 

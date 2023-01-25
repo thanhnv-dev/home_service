@@ -31,13 +31,15 @@ import {useAppDispatch} from '~/redux/hooks';
 import {signIn} from '~/redux/user.slide';
 import {showToast} from '~/utils/helper';
 import {SignInSchema} from '~/validation/SchemaValidation';
+import {SignInResponse} from '~/network/apiResponses/user';
+import {IApiResponse} from '~/network/IApiResponse';
 
 const SignIn = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
 
   const [focusBox, setFocusBox] = useState('');
   const [remenber, setRemenber] = useState(false);
-  const [secureTextEntry, setSecureTextEntry] = useState(false);
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const goSignUp = () => navigation.navigate('SignUp');
   const onBack = () => navigation.goBack();
@@ -48,16 +50,19 @@ const SignIn = ({navigation}: {navigation: any}) => {
       setFocusBox('');
     }
   };
-  const storeTokens = async ({
+  const saveData = async ({
     token,
     refreshToken,
+    _id,
   }: {
     token: string;
     refreshToken: string;
+    _id: string;
   }) => {
     try {
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('refreshToken', refreshToken);
+      await AsyncStorage.setItem('_id', _id);
     } catch (err) {
       console.log(err);
     }
@@ -65,21 +70,26 @@ const SignIn = ({navigation}: {navigation: any}) => {
 
   const onLogin = async (values: object) => {
     Keyboard.dismiss();
-    const Action = dispatch(signIn(values));
-    await Action.then((res: any) => {
-      console.log(res);
-      const response = res.payload;
-      if (response.isSuccess) {
-        if (remenber) {
-          storeTokens({
-            token: response?.data.token,
-            refreshToken: response?.data.refreshToken,
-          });
-        }
-        showToast({msg: response?.data.msg, type: 'success'});
-        navigation.navigate('ChooseService');
+    const Action = await dispatch(signIn(values));
+    const response: IApiResponse<SignInResponse> = Action.payload;
+    if (response.isSuccess) {
+      if (remenber) {
+        saveData({
+          token: response.data?.token!,
+          refreshToken: response.data?.refreshToken!,
+          _id: response.data?._id!,
+        });
       }
-    });
+      showToast({msg: response?.data?.msg!, type: 'success'});
+      switch (response.data?.type) {
+        case 'PROVIDER':
+          return navigation.navigate('ProviderStack');
+        case 'CUSTOMER':
+          return navigation.navigate('CustomerStack', {screen: 'Home'});
+        default:
+        // return navigation.navigate('ChooseService');
+      }
+    }
   };
 
   const handleSignIn = (handleSubmit: any, errors: any) => {
@@ -155,6 +165,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                 <Layout style={styles.viewInputSubmit}>
                   <Layout style={styles.viewInput}>
                     <InputBox
+                      autoCapitalize={'none'}
                       containerStyle={styles.boxInput2}
                       borderColorBox={focusBoxColor({
                         color2: Color.border,

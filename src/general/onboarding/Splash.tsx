@@ -9,29 +9,42 @@ import {
   LogoLight,
 } from '../../assets/images/index';
 import styles from './styles';
+import {getProfile} from '~/redux/user.slide';
+import {SignInResponse} from '~/network/apiResponses/user';
+import {IApiResponse} from '~/network/IApiResponse';
+import {useAppDispatch} from '~/redux/hooks';
 
 const Splash = ({navigation}: {navigation: any}) => {
   const isFocused: boolean = useIsFocused();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     let newPage: any = null;
     if (isFocused) {
       newPage = setInterval(async () => {
         const token = await AsyncStorage.getItem('token');
+        const _id = await AsyncStorage.getItem('_id');
         const storeOnboarding = await AsyncStorage.getItem('storeOnboarding');
-        if (token) {
-          return navigation.replace('AuthStack', {screen: 'ChooseService'});
-        }
         if (storeOnboarding) {
-          return navigation.replace('AuthStack', {screen: 'LetIsIn'});
+          if (token) {
+            const getUser = await dispatch(getProfile({_id: _id}));
+            const response: IApiResponse<SignInResponse> = getUser.payload;
+            // showToast({msg: response?.data?.msg!, type: 'success'});
+            return response.data?.type === 'PROVIDER'
+              ? navigation.replace('ProviderStack', {screen: 'Home'})
+              : navigation.replace('CustomerStack', {screen: 'Home'});
+          } else {
+            navigation.replace('AuthStack', {screen: 'LetIsIn'});
+          }
+        } else {
+          navigation.navigate('Onboarding');
         }
-        return navigation.navigate('Onboarding');
       }, 1500);
     }
     return () => {
       clearInterval(newPage);
     };
-  }, [isFocused, navigation]);
+  }, [dispatch, isFocused, navigation]);
   return (
     <View style={styles.container}>
       <View style={[styles.viewLogo, styles.center]}>

@@ -8,7 +8,7 @@ export interface UserInterface {
   _refreshToken: string;
 }
 
-export class User implements UserInterface {
+export class User {
   _id: string;
   _email: string;
   _firstName: string;
@@ -18,7 +18,7 @@ export class User implements UserInterface {
   _refreshToken: string;
 
   constructor(
-    id: string,
+    _id: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -26,7 +26,7 @@ export class User implements UserInterface {
     token: string,
     refreshToken: string,
   ) {
-    this._id = id;
+    this._id = _id;
     this._firstName = firstName;
     this._email = email;
     this._lastName = lastName;
@@ -35,7 +35,26 @@ export class User implements UserInterface {
     this._refreshToken = refreshToken;
   }
 
-  get name(): string {
-    return this._email;
+  get id(): string {
+    return this._id;
+  }
+  get firstName(): string {
+    return this._firstName;
+  }
+  get lastName(): string {
+    return this._lastName;
+  }
+  get email(): string {
+    // return this._email;
+    return 'x';
+  }
+  get type(): string {
+    return this._type;
+  }
+  get token(): string {
+    return this._token;
+  }
+  get refreshToken(): string {
+    return this._refreshToken;
   }
 }
