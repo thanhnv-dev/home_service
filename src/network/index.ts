@@ -3,22 +3,53 @@ import {showToast} from '~/utils/helper';
 import {APIConstants} from './APIConstants';
 import {IApiResponse} from './IApiResponse';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {refreshTokenResponse} from './apiResponses/refreshToke';
 
 async function getAxiosInstance() {
-  const token = await AsyncStorage.getItem('token');
-  if (token === null) {
-    //not token
-  }
   const instance = axios.create({
     baseURL: APIConstants.BASE_URL,
     timeout: 30000,
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${token}`,
     },
   });
 
+  instance.interceptors.request.use(
+    async (config: any) => {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = 'Bearer ' + token;
+      }
+      return config;
+    },
+    error => {
+      return Promise.reject(error);
+    },
+  );
+
+  instance.interceptors.response.use(
+    res => {
+      return res;
+    },
+    async err => {
+      const originalConfig = err.config;
+      if (originalConfig.url !== '/auth/signin' && err.response) {
+        if (err.response.status === 401 && !originalConfig._retry) {
+          originalConfig._retry = true;
+          try {
+            const callRefreshTokenRequest = await refreshTokenRequest();
+            const newToken = callRefreshTokenRequest.data?.token!;
+            await AsyncStorage.setItem('token', newToken);
+            return instance(originalConfig);
+          } catch (_error) {
+            return Promise.reject(_error);
+          }
+        }
+      }
+      return Promise.reject(err);
+    },
+  );
   return instance;
 }
 
@@ -28,8 +59,6 @@ function handleResponse<T>(apiResponse: any) {
     data: apiResponse.data,
     status: apiResponse.status,
   };
-
-  // showToast({msg: data.msg, type: 'success'});
   return res;
 }
 
@@ -44,10 +73,11 @@ function handleError<T>(apiResponse: any) {
 }
 
 function handleNetworkError<T>(apiResponse: any) {
+  console.log('apiResponse', apiResponse);
   let res: IApiResponse<T> = {
     isSuccess: false,
   };
-  showToast({msg: apiResponse.message, type: 'error'});
+  showToast({msg: `${apiResponse.message}/ Service error`, type: 'error'});
   return res;
 }
 
@@ -66,4 +96,30 @@ export async function sendPostRequest<T>(endPoint: string, body: any) {
       return handleNetworkError<T>(err);
     }
   }
+}
+export async function sendGetRequest<T>(endPoint: string) {
+  try {
+    let axiosInstance = await getAxiosInstance();
+    var apiResponse = await axiosInstance.get(APIConstants.BASE_URL + endPoint);
+    return handleResponse<T>(apiResponse);
+  } catch (err) {
+    if (axios.isAxiosError(err) && err.response) {
+      return handleError<T>(err.response);
+    } else {
+      return handleNetworkError<T>(err);
+    }
+  }
+}
+async function refreshTokenRequest() {
+  const refreshToken = await AsyncStorage.getItem('refreshToken');
+  const _id = await AsyncStorage.getItem('_id');
+
+  const refresh = await sendPostRequest<refreshTokenResponse>(
+    '/users/refreshToken',
+    {
+      refreshToken: refreshToken,
+      _id: _id,
+    },
+  );
+  return refresh;
 }

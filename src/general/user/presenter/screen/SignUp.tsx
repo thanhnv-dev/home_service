@@ -15,7 +15,7 @@ import {
   IconLock,
   IconLock2,
   IconBack,
-} from '~/assets/Icons/IconApp';
+} from '~/components/IconApp';
 import {MyButton, MyButton1, InputBox, ErrorInput} from '~/general/widgets';
 import {SignUpSchema} from '~/validation/SchemaValidation';
 import styles from '../styles';

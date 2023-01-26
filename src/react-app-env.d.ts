@@ -6,3 +6,9 @@ declare module '*.jpg';
 declare module '*.json';
 declare module 'react-native-vector-icons/AntDesign';
 declare module 'rn-flipper-async-storage-advanced';
+declare module '*.svg' {
+  import React from 'react';
+  import {SvgProps} from 'react-native-svg';
+  const content: React.FC<SvgProps>;
+  export default content;
+}

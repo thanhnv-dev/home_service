@@ -16,7 +16,7 @@ import {
   IconCheck,
   IconEmail,
   IconLock,
-} from '~/assets/Icons/IconApp';
+} from '~/components/IconApp';
 import {a_logo, fb_logo, g_logo} from '~/assets/images';
 import Color from '~/constants/Color';
 import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
@@ -50,18 +50,22 @@ const SignIn = ({navigation}: {navigation: any}) => {
       setFocusBox('');
     }
   };
-  const saveData = async ({
+  const saveToken = async ({
     token,
     refreshToken,
-    _id,
   }: {
     token: string;
     refreshToken: string;
-    _id: string;
   }) => {
     try {
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('refreshToken', refreshToken);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const saveUser = async ({_id}: {_id: string}) => {
+    try {
       await AsyncStorage.setItem('_id', _id);
     } catch (err) {
       console.log(err);
@@ -74,12 +78,14 @@ const SignIn = ({navigation}: {navigation: any}) => {
     const response: IApiResponse<SignInResponse> = Action.payload;
     if (response.isSuccess) {
       if (remenber) {
-        saveData({
-          token: response.data?.token!,
-          refreshToken: response.data?.refreshToken!,
+        saveUser({
           _id: response.data?._id!,
         });
       }
+      saveToken({
+        token: response.data?.token!,
+        refreshToken: response.data?.refreshToken!,
+      });
       showToast({msg: response?.data?.msg!, type: 'success'});
       switch (response.data?.type) {
         case 'PROVIDER':
@@ -87,7 +93,6 @@ const SignIn = ({navigation}: {navigation: any}) => {
         case 'CUSTOMER':
           return navigation.navigate('CustomerStack', {screen: 'Home'});
         default:
-        // return navigation.navigate('ChooseService');
       }
     }
   };

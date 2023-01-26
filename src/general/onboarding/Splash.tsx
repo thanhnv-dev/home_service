@@ -22,20 +22,20 @@ const Splash = ({navigation}: {navigation: any}) => {
     let newPage: any = null;
     if (isFocused) {
       newPage = setInterval(async () => {
-        const token = await AsyncStorage.getItem('token');
         const _id = await AsyncStorage.getItem('_id');
         const storeOnboarding = await AsyncStorage.getItem('storeOnboarding');
         if (storeOnboarding) {
-          if (token) {
+          if (_id) {
             const getUser = await dispatch(getProfile({_id: _id}));
             const response: IApiResponse<SignInResponse> = getUser.payload;
             // showToast({msg: response?.data?.msg!, type: 'success'});
-            return response.data?.type === 'PROVIDER'
-              ? navigation.replace('ProviderStack', {screen: 'Home'})
-              : navigation.replace('CustomerStack', {screen: 'Home'});
-          } else {
-            navigation.replace('AuthStack', {screen: 'LetIsIn'});
+            if (response.isSuccess) {
+              return response.data?.type === 'PROVIDER'
+                ? navigation.replace('ProviderStack', {screen: 'Home'})
+                : navigation.replace('CustomerStack', {screen: 'Home'});
+            }
           }
+          return navigation.replace('AuthStack', {screen: 'LetIsIn'});
         } else {
           navigation.navigate('Onboarding');
         }

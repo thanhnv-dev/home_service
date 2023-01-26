@@ -1,1 +1,1 @@
-export {default as Home} from './screens/Home';
+export {default as Home} from './persenter/screens/Home';

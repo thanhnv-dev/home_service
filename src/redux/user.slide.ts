@@ -46,20 +46,20 @@ export const getProfile = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'counter',
   initialState: {
-    _id: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    type: null,
+    // _id: null,
+    // firstName: null,
+    // lastName: null,
+    // email: null,
+    // type: null,
   },
   reducers: {
-    setUser: (state, action) => {
-      state._id = action?.payload._id;
-      state.firstName = action?.payload.firstName;
-      state.lastName = action?.payload.lastName;
-      state.email = action?.payload.email;
-      state.type = action?.payload.type;
-    },
+    // setUser: (state, action) => {
+    //   state._id = action?.payload._id;
+    //   state.firstName = action?.payload.firstName;
+    //   state.lastName = action?.payload.lastName;
+    //   state.email = action?.payload.email;
+    //   state.type = action?.payload.type;
+    // },
   },
   extraReducers: builder => {
     // Bắt đầu thực hiện action login (Promise pending)
@@ -94,6 +94,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {setUser} = userSlice.actions;
+// export const {setUser} = userSlice.actions;
 
 export default userSlice.reducer;

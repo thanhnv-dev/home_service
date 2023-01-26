@@ -1,14 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  Splash,
-  Onboarding,
-  LetIsIn,
-  SignIn,
-  ChooseService,
-  SignUp,
-} from '~/general/index';
+import {Splash, Onboarding, LetIsIn, SignIn, SignUp} from '~/general/index';
 import CustomerStack from './CustomerStack';
 
 const Stack = createNativeStackNavigator();
@@ -29,7 +22,6 @@ const AppNaviagtor = () => {
         <Stack.Screen name="LetIsIn" component={LetIsIn} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="ChooseService" component={ChooseService} />
       </Stack.Navigator>
     );
   };
