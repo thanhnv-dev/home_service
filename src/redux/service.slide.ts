@@ -36,7 +36,6 @@ export const serviceSlice = createSlice({
     // Khi thực hiện action login thành công (Promise fulfilled)
     builder.addCase(getService.fulfilled, (state: any, action: any) => {
       state = [...action?.payload.data];
-      console.log(state);
       return state;
     });
     // builder.addCase(getProfile.fulfilled, (state: any, action: any) => {

@@ -25,7 +25,7 @@ import {showToast} from '~/utils/helper';
 import {useAppDispatch} from '~/redux/hooks';
 import {signUp} from '~/redux/user.slide';
 import {IApiResponse} from '~/network/IApiResponse';
-import {SignUpResponse} from '~/network/apiResponses/user';
+import {UserResponse} from '~/network/apiResponses/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({navigation}: {navigation: any}) => {
@@ -59,7 +59,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
   const onSignUp = async (values: object) => {
     Keyboard.dismiss();
     const Action = await dispatch(signUp({...values, type: typeService}));
-    const response: IApiResponse<SignUpResponse> = Action.payload;
+    const response: IApiResponse<UserResponse> = Action.payload;
     if (response.isSuccess) {
       showToast({msg: response.data?.msg!, type: 'success'});
       saveData({

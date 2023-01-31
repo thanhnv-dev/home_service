@@ -31,7 +31,7 @@ import {useAppDispatch} from '~/redux/hooks';
 import {signIn} from '~/redux/user.slide';
 import {showToast} from '~/utils/helper';
 import {SignInSchema} from '~/validation/SchemaValidation';
-import {SignInResponse} from '~/network/apiResponses/user';
+import {UserResponse} from '~/network/apiResponses/user';
 import {IApiResponse} from '~/network/IApiResponse';
 
 const SignIn = ({navigation}: {navigation: any}) => {
@@ -75,7 +75,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
   const onLogin = async (values: object) => {
     Keyboard.dismiss();
     const Action = await dispatch(signIn(values));
-    const response: IApiResponse<SignInResponse> = Action.payload;
+    const response: IApiResponse<UserResponse> = Action.payload;
     if (response.isSuccess) {
       if (remenber) {
         saveUser({

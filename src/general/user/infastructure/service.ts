@@ -1,8 +1,5 @@
 import {IApiResponse} from '../../../network/IApiResponse';
-import {
-  SignUpResponse,
-  SignInResponse,
-} from '../../../network/apiResponses/user';
+import {UserResponse} from '../../../network/apiResponses/user';
 import {SignUpService, SignInService, GetProfileService} from '../application';
 import {
   signUp,
@@ -11,22 +8,20 @@ import {
 } from '../../../network/controllers/userControllers';
 
 export class UserSignUpService implements SignUpService {
-  async signUp(data: object): Promise<IApiResponse<SignUpResponse>> {
-    const signUpResult: IApiResponse<SignUpResponse> = await signUp(data);
+  async signUp(data: object): Promise<IApiResponse<UserResponse>> {
+    const signUpResult: IApiResponse<UserResponse> = await signUp(data);
     return signUpResult;
   }
 }
 export class UserSignInService implements SignInService {
-  async signIn(data: object): Promise<IApiResponse<SignInResponse>> {
-    const signInResult: IApiResponse<SignInResponse> = await signIn(data);
+  async signIn(data: object): Promise<IApiResponse<UserResponse>> {
+    const signInResult: IApiResponse<UserResponse> = await signIn(data);
     return signInResult;
   }
 }
 export class UserGetProfileService implements GetProfileService {
-  async getProfile(data: object): Promise<IApiResponse<SignInResponse>> {
-    const getProfileResult: IApiResponse<SignInResponse> = await getProfile(
-      data,
-    );
+  async getProfile(data: object): Promise<IApiResponse<UserResponse>> {
+    const getProfileResult: IApiResponse<UserResponse> = await getProfile(data);
     return getProfileResult;
   }
 }

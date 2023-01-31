@@ -1,12 +1,12 @@
 import {sendPostRequest} from '../index';
-import {SignUpResponse, SignInResponse} from '../apiResponses/user';
+import {UserResponse} from '../apiResponses/user';
 
 export const signUp = async (body: object) => {
-  return await sendPostRequest<SignUpResponse>('/users/signup', body);
+  return await sendPostRequest<UserResponse>('/users/signup', body);
 };
 export const signIn = async (body: object) => {
-  return await sendPostRequest<SignInResponse>('/users/signin', body);
+  return await sendPostRequest<UserResponse>('/users/signin', body);
 };
 export const getProfile = async (body: object) => {
-  return await sendPostRequest<SignInResponse>('/users/getprofile', body);
+  return await sendPostRequest<UserResponse>('/users/getprofile', body);
 };

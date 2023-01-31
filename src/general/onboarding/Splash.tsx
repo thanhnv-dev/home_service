@@ -10,7 +10,7 @@ import {
 } from '../../assets/images/index';
 import styles from './styles';
 import {getProfile} from '~/redux/user.slide';
-import {SignInResponse} from '~/network/apiResponses/user';
+import {UserResponse} from '~/network/apiResponses/user';
 import {IApiResponse} from '~/network/IApiResponse';
 import {useAppDispatch} from '~/redux/hooks';
 
@@ -27,7 +27,7 @@ const Splash = ({navigation}: {navigation: any}) => {
         if (storeOnboarding) {
           if (_id) {
             const getUser = await dispatch(getProfile({_id: _id}));
-            const response: IApiResponse<SignInResponse> = getUser.payload;
+            const response: IApiResponse<UserResponse> = getUser.payload;
             // showToast({msg: response?.data?.msg!, type: 'success'});
             if (response.isSuccess) {
               return response.data?.type === 'PROVIDER'

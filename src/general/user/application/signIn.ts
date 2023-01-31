@@ -1,8 +1,8 @@
-import {SignInResponse} from '../../../network/apiResponses/user';
+import {UserResponse} from '../../../network/apiResponses/user';
 import {IApiResponse} from '../../../network/IApiResponse';
 
 export interface SignInService {
-  signIn: (data: object) => Promise<IApiResponse<SignInResponse>>;
+  signIn: (data: object) => Promise<IApiResponse<UserResponse>>;
 }
 
 export class SignIn {
@@ -12,7 +12,7 @@ export class SignIn {
     this.signInService = signIpService;
   }
 
-  async fetchUser(data: object): Promise<IApiResponse<SignInResponse>> {
+  async fetchUser(data: object): Promise<IApiResponse<UserResponse>> {
     return this.signInService.signIn(data);
   }
 }
