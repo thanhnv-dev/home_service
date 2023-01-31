@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {GetService} from '~/customer/application';
 import {SvGetListService} from '~/customer/infastructure/service';
+import {ServiceInterface} from '~/customer/domain';
 
 export const getService = createAsyncThunk(
   'service/getService',
@@ -17,7 +18,9 @@ export const getService = createAsyncThunk(
 
 export const serviceSlice = createSlice({
   name: 'counter',
-  initialState: [],
+  initialState: {
+    serviceList: [] as ServiceInterface[],
+  },
   reducers: {
     // setUser: (state, action) => {
     //   state._id = action?.payload._id;
@@ -35,7 +38,7 @@ export const serviceSlice = createSlice({
     // });
     // Khi thực hiện action login thành công (Promise fulfilled)
     builder.addCase(getService.fulfilled, (state: any, action: any) => {
-      state = [...action?.payload.data];
+      state.serviceList = [...action?.payload.data];
       return state;
     });
     // builder.addCase(getProfile.fulfilled, (state: any, action: any) => {

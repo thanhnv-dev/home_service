@@ -1,8 +1,5 @@
-export interface Service {
+export interface ServiceItem {
   _id: string;
   serviceName: string;
-  image: string;
-}
-export interface ServiceListItem {
-  cards: Service[];
+  imageEndPoint: string;
 }

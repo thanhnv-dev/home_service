@@ -5,6 +5,7 @@ import {
   UserSignUpService,
   UserGetProfileService,
 } from '~/general/user/infastructure/service';
+import {IUser} from '~/general/user/domain';
 
 export const signUp = createAsyncThunk(
   'user/signUp',
@@ -45,13 +46,14 @@ export const getProfile = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: 'counter',
-  initialState: {
-    // _id: null,
-    // firstName: null,
-    // lastName: null,
-    // email: null,
-    // type: null,
-  },
+  initialState: {} as IUser,
+  // {
+  //   _id: null,
+  //   firstName: null,
+  //   lastName: null,
+  //   email: null,
+  //   type: null,
+  // },
   reducers: {
     // setUser: (state, action) => {
     //   state._id = action?.payload._id;

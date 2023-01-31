@@ -1,11 +1,11 @@
 import {IApiResponse} from '~/network/IApiResponse';
-import {ServiceListItem} from '~/network/apiResponses/service';
+import {ServiceItem} from '~/network/apiResponses/service';
 import {GetListService} from '../application';
 import {getService} from '~/network/controllers/serviceControllers';
 
 export class SvGetListService implements GetListService {
-  async getService(): Promise<IApiResponse<ServiceListItem>> {
-    const getServiceResult: IApiResponse<ServiceListItem> = await getService();
+  async getService(): Promise<IApiResponse<ServiceItem[]>> {
+    const getServiceResult: IApiResponse<ServiceItem[]> = await getService();
     return getServiceResult;
   }
 }

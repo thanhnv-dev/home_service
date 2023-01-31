@@ -1,8 +1,8 @@
-import {ServiceListItem} from '~/network/apiResponses/service';
+import {ServiceItem} from '~/network/apiResponses/service';
 import {IApiResponse} from '~/network/IApiResponse';
 
 export interface GetListService {
-  getService: () => Promise<IApiResponse<ServiceListItem>>;
+  getService: () => Promise<IApiResponse<ServiceItem[]>>;
 }
 
 export class GetService {
@@ -12,7 +12,7 @@ export class GetService {
     this.getListService = getListService;
   }
 
-  async getService(): Promise<IApiResponse<ServiceListItem>> {
+  async getService(): Promise<IApiResponse<ServiceItem[]>> {
     return this.getListService.getService();
   }
 }

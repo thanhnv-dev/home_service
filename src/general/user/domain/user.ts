@@ -6,6 +6,7 @@ export interface IUser {
   type: string;
   token: string;
   refreshToken: string;
+  image: string;
 }
 
 // export class User {
