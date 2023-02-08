@@ -1,7 +1,7 @@
 export interface ServiceInterface {
-  _id: string;
-  serviceName: string;
-  image: string;
+    _id: string;
+    serviceName: string;
+    image: string;
 }
 
 // export class Service implements ServiceInterface {
