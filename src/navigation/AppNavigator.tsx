@@ -22,17 +22,17 @@ const AppNaviagtor = () => {
                     </Stack.Navigator>
                 </NavigationContainer>
             );
-        case 'PROVIDER':
-            return (
-                <NavigationContainer>
-                    <Stack.Navigator screenOptions={{headerShown: false}}>
-                        <Stack.Screen
-                            name="ProviderStack"
-                            component={ProviderStack}
-                        />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            );
+        // case 'PROVIDER':
+        //     return (
+        //         <NavigationContainer>
+        //             <Stack.Navigator screenOptions={{headerShown: false}}>
+        //                 <Stack.Screen
+        //                     name="ProviderStack"
+        //                     component={ProviderStack}
+        //                 />
+        //             </Stack.Navigator>
+        //         </NavigationContainer>
+        //     );
         default:
             return (
                 <NavigationContainer>
