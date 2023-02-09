@@ -2,7 +2,7 @@ import axios from 'axios';
 // import {showToast} from '~/utils/helper';
 import APIConstants from './APIConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import refreshTokenRequest from '../requests/refreshTokenRequest';
+import {refreshTokenRequest} from '../requests';
 
 async function getAxiosInstance() {
     const instance = axios.create({

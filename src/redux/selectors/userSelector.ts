@@ -1,11 +1,13 @@
 import {createSelector} from 'reselect';
 import {RootState} from '../index';
 
-export const getUser = createSelector(
+const getUser = createSelector(
     (state: RootState) => state,
     state => state.user,
 );
-export const getUserType = createSelector(
+const getUserType = createSelector(
     (state: RootState) => state,
     state => state.user.type,
 );
+
+export {getUser, getUserType};

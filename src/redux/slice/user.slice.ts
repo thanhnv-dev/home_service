@@ -1,50 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {SignUp, SignIn, GetProfile} from '~/general/user/application';
-import {
-    UserSignInService,
-    UserSignUpService,
-    UserGetProfileService,
-} from '~/general/user/infastructure/service';
+import {createSlice} from '@reduxjs/toolkit';
 import {IUser} from '~/general/user/domain';
-
-export const signUp = createAsyncThunk(
-    'user/signUp',
-    async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
-        const service = new UserSignUpService();
-        const interactor = new SignUp(service);
-        const signUpResult = await interactor.signUpService.signUp(data);
-        if (signUpResult.isSuccess) {
-            return signUpResult;
-        }
-        return rejectWithValue(signUpResult);
-    },
-);
-export const signIn = createAsyncThunk(
-    'user/signIn',
-    async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
-        const service = new UserSignInService();
-        const interactor = new SignIn(service);
-        const signinResult = await interactor.signInService.signIn(data);
-        if (signinResult.isSuccess) {
-            return signinResult;
-        }
-        return rejectWithValue(signinResult);
-    },
-);
-export const getProfile = createAsyncThunk(
-    'user/getProfile',
-    async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
-        const service = new UserGetProfileService();
-        const interactor = new GetProfile(service);
-        const signinResult = await interactor.getProfileService.getProfile(
-            data,
-        );
-        if (signinResult.isSuccess) {
-            return signinResult;
-        }
-        return rejectWithValue(signinResult);
-    },
-);
+import {signIn, getProfile} from '../thunkAction/userThunk';
 
 export const userSlice = createSlice({
     name: 'user',

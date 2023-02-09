@@ -23,8 +23,8 @@ import Color from '~/constants/Color';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {showToast} from '~/utils/helper';
 import {useAppDispatch} from '~/redux/hooks';
-import {signUp} from '~/redux/user.slide';
-import {IApiResponse} from '~/network/IApiResponse';
+import {signUp} from '~/redux/slice/user.slice';
+import {IApiResponse} from '~/network/apiResponses/IApiResponse';
 import {UserResponse} from '~/network/apiResponses/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

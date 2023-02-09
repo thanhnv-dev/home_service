@@ -1,5 +1,5 @@
 import {UserResponse} from '../../../network/apiResponses/user';
-import {IApiResponse} from '../../../network/IApiResponse';
+import {IApiResponse} from '../../../network/apiResponses/IApiResponse';
 
 export interface SignUpService {
     signUp: (data: object) => Promise<IApiResponse<UserResponse>>;

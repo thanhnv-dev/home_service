@@ -28,11 +28,11 @@ import {
     ErrorInput,
 } from '~/general/widgets';
 import {useAppDispatch} from '~/redux/hooks';
-import {signIn} from '~/redux/user.slide';
+import {signIn} from '~/redux/slice/user.slice';
 import {showToast} from '~/utils/helper';
 import {SignInSchema} from '~/validation/SchemaValidation';
 import {UserResponse} from '~/network/apiResponses/user';
-import {IApiResponse} from '~/network/IApiResponse';
+import {IApiResponse} from '~/network/apiResponses/IApiResponse';
 
 const SignIn = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();

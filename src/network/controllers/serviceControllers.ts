@@ -1,4 +1,4 @@
-import {sendGetRequest} from '../index';
+import {sendGetRequest} from '../requests';
 import {ServiceItem} from '../apiResponses/service';
 
 export const getService = async () => {

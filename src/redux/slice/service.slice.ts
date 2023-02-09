@@ -8,7 +8,6 @@ export const serviceSlice = createSlice({
     },
     reducers: {
         setService: (state, action) => {
-            console.log(action);
             state.serviceList = action.payload;
         },
     },

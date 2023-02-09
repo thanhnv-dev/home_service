@@ -1,4 +1,4 @@
-import {IApiResponse} from '../IApiResponse';
+import {IApiResponse} from '../apiResponses/IApiResponse';
 import helper from '~/utils/helper';
 
 function Response<T>(apiResponse: any) {

@@ -8,11 +8,11 @@ import {
     LogoLight,
 } from '../../assets/images/index';
 import styles from './styles';
-import {getProfile} from '~/redux/user.slide';
+import {getProfile} from '~/redux/thunkAction/userThunk';
 import {UserResponse} from '~/network/apiResponses/user';
-import {IApiResponse} from '~/network/IApiResponse';
+import {IApiResponse} from '~/network/apiResponses/IApiResponse';
 import {useAppDispatch} from '~/redux/hooks';
-import {showToast} from '~/utils/helper';
+import helper from '~/utils/helper';
 
 const Splash = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();
@@ -26,7 +26,10 @@ const Splash = ({navigation}: {navigation: any}) => {
                     const getUser = await dispatch(getProfile({_id: _id}));
                     const response: IApiResponse<UserResponse> =
                         getUser.payload;
-                    showToast({msg: response?.data?.msg!, type: 'success'});
+                    helper.showToast({
+                        msg: response?.data?.msg!,
+                        type: 'success',
+                    });
                 }
                 return navigation.replace('LetIsIn');
             } else {

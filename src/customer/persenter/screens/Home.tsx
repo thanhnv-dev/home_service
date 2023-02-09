@@ -8,7 +8,7 @@ import {Loader} from '~/components';
 import {user, hand, notification, bookmark} from '~/assets/images';
 import {useSelector} from 'react-redux';
 import {getUser} from '~/redux/selectors/userSelector';
-import {useSvGetListServiceQuery} from '~/network';
+import {useSvGetListServiceQuery} from '~/redux/query/getListService';
 import {useAppDispatch} from '~/redux/hooks';
 
 const Home = ({navigation}: {navigation: any}) => {

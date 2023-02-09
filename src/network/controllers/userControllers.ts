@@ -1,4 +1,4 @@
-import {sendPostRequest} from '../index';
+import {sendPostRequest} from '../requests';
 import {UserResponse} from '../apiResponses/user';
 
 export const signUp = async (body: object) => {

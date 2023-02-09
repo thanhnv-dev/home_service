@@ -1,4 +1,4 @@
-import {IApiResponse} from '../../../network/IApiResponse';
+import {IApiResponse} from '../../../network/apiResponses/IApiResponse';
 import {UserResponse} from '../../../network/apiResponses/user';
 import {SignUpService, SignInService, GetProfileService} from '../application';
 import {
