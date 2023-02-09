@@ -1,12 +1,12 @@
 export interface IUser {
-  _id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  type: string;
-  token: string;
-  refreshToken: string;
-  image: string;
+    _id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    type: string;
+    token: string;
+    refreshToken: string;
+    image: string;
 }
 
 // export class User {

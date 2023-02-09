@@ -1,3 +1,3 @@
 export interface refreshTokenResponse {
-  token: string;
+    token: string;
 }

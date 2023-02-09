@@ -44,7 +44,7 @@
     "color-danger-700": "#B71D8C",
     "color-danger-800": "#93127C",
     "color-danger-900": "#7A0B71",
-  
-    "background-basic-color-1":	"red",
+
+    "background-basic-color-1": "red"
     // "text-basic-color": "red"
-  }
+}

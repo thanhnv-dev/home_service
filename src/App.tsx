@@ -12,27 +12,27 @@ import {store} from '~/redux';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 
 const App = () => {
-  const [theme, setTheme] = React.useState(eva.light);
+    const [theme, setTheme] = React.useState(eva.light);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === eva.light ? eva.dark : eva.light;
-    setTheme(nextTheme);
-  };
+    const toggleTheme = () => {
+        const nextTheme = theme === eva.light ? eva.dark : eva.light;
+        setTheme(nextTheme);
+    };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const themeValue = React.useMemo(() => ({theme, toggleTheme}), [theme]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const themeValue = React.useMemo(() => ({theme, toggleTheme}), [theme]);
 
-  return (
-    <Provider store={store}>
-      <IconRegistry icons={EvaIconsPack} />
-      <ThemeContext.Provider value={themeValue}>
-        <ApplicationProvider {...eva} theme={theme}>
-          <FlipperAsyncStorage />
-          <AppNaviagtor />
-        </ApplicationProvider>
-      </ThemeContext.Provider>
-      <Toast />
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <IconRegistry icons={EvaIconsPack} />
+            <ThemeContext.Provider value={themeValue}>
+                <ApplicationProvider {...eva} theme={theme}>
+                    <FlipperAsyncStorage />
+                    <AppNaviagtor />
+                </ApplicationProvider>
+            </ThemeContext.Provider>
+            <Toast />
+        </Provider>
+    );
 };
 export default App;

@@ -10,5 +10,5 @@ import {IUser} from '~/general/user/domain';
 // }
 
 export interface UserResponse extends IUser {
-  msg: string;
+    msg: string;
 }
