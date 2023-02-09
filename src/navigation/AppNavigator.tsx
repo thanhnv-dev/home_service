@@ -3,14 +3,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
 import CustomerStack from './CustomerStack';
 import {useSelector} from 'react-redux';
-import {getUser} from '~/redux/selectors/userSelector';
+import {getUserType} from '~/redux/selectors/userSelector';
 import PublicStack from './PulicStack';
 
 const Stack = createNativeStackNavigator();
 const AppNaviagtor = () => {
-    const userProfile = useSelector(getUser);
+    const useType = useSelector(getUserType);
 
-    switch (userProfile.type) {
+    switch (useType) {
         case 'CUSTOMER':
             return (
                 <NavigationContainer>
