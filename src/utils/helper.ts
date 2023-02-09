@@ -7,4 +7,4 @@ const showToast = ({msg, type}: {msg: string; type: string}) => {
     });
 };
 
-export {showToast};
+export default {showToast};

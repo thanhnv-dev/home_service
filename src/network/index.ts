@@ -1,6 +1,6 @@
 import axios, {AxiosError} from 'axios';
 import {showToast} from '~/utils/helper';
-import {APIConstants} from './APIConstants';
+import {APIConstants} from './config/APIConstants';
 import {IApiResponse} from './IApiResponse';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {refreshTokenResponse} from './apiResponses/refreshToke';

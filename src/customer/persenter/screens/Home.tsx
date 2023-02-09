@@ -3,7 +3,7 @@ import {Layout, Text} from '@ui-kitten/components';
 import React, {useEffect, useState} from 'react';
 import styles from '../style';
 import {SvgUri} from 'react-native-svg';
-import {APIConstants} from '~/network/APIConstants';
+import {APIConstants} from '~/network/config/APIConstants';
 import {Loader} from '~/components';
 import {user, hand, notification, bookmark} from '~/assets/images';
 import {useSelector} from 'react-redux';
