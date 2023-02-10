@@ -1,7 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import userSlice from './slice/user.slice';
 import serviceSlide from './slice/service.slice';
-import {getListService} from './query/getListService';
+import {getListService} from './query';
 
 const createDebugger = require('redux-flipper').default;
 

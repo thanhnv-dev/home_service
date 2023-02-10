@@ -1,8 +1,8 @@
 import axios from 'axios';
-// import {showToast} from '~/utils/helper';
+// import {showToast} from 'src/utils/helper';
 import APIConstants from './APIConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {refreshTokenRequest} from '../requests';
+import {refreshToken} from 'src/network/requests';
 
 async function getAxiosInstance() {
     const instance = axios.create({
@@ -17,9 +17,11 @@ async function getAxiosInstance() {
     instance.interceptors.request.use(
         async (config: any) => {
             const token = await AsyncStorage.getItem('token');
+
             if (token) {
                 config.headers.Authorization = 'Bearer ' + token;
             }
+
             return config;
         },
         error => {
@@ -33,14 +35,18 @@ async function getAxiosInstance() {
         },
         async err => {
             const originalConfig = err.config;
+
             if (originalConfig.url !== '/auth/signin' && err.response) {
                 if (err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
+
                     try {
-                        const callRefreshTokenRequest =
-                            await refreshTokenRequest();
+                        const callRefreshTokenRequest = await refreshToken();
+
                         const newToken = callRefreshTokenRequest.data?.token!;
+
                         await AsyncStorage.setItem('token', newToken);
+
                         return instance(originalConfig);
                     } catch (_error) {
                         return Promise.reject(_error);

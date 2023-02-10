@@ -1,8 +1,8 @@
 import {AxiosError} from 'axios';
 import type {BaseQueryFn} from '@reduxjs/toolkit/query';
-import {sendGetRequest} from '~/network/requests';
+import {sendGet} from 'src/network/requests';
 
-const axiosGetBaseQuery =
+const axiosGetBaseQueryRTK =
     (): BaseQueryFn<
         {
             url: string;
@@ -12,7 +12,7 @@ const axiosGetBaseQuery =
     > =>
     async ({url}) => {
         try {
-            const result = await sendGetRequest(url);
+            const result = await sendGet(url);
             return {data: result.data};
         } catch (axiosError) {
             let err = axiosError as AxiosError;
@@ -24,4 +24,4 @@ const axiosGetBaseQuery =
             };
         }
     };
-export default axiosGetBaseQuery;
+export default axiosGetBaseQueryRTK;

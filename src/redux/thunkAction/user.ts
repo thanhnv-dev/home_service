@@ -1,10 +1,10 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {SignUp, SignIn, GetProfile} from '~/general/user/application';
+import {SignUp, SignIn, GetProfile} from 'src/general/user/application';
 import {
     UserSignInService,
     UserSignUpService,
     UserGetProfileService,
-} from '~/general/user/infastructure/service';
+} from 'src/general/user/infastructure/service';
 
 const signUp = createAsyncThunk(
     'user/signUp',

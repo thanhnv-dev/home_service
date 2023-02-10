@@ -16,7 +16,7 @@ module.exports = {
                     '.png',
                 ],
                 alias: {
-                    '~': './src',
+                    src: './src',
                 },
             },
         ],

@@ -1,3 +1,4 @@
-export {default as refreshTokenRequest} from './refreshTokenRequest';
-export {default as sendGetRequest} from './sendGetRequest';
-export {default as sendPostRequest} from './sendPostRequest';
+export {default as refreshToken} from './refreshToken';
+export {default as sendGet} from './sendGet';
+export {default as sendPost} from './sendPost';
+export {default as axiosGetBaseQueryRTK} from '../requests/axiosGetBaseQueryRTK';

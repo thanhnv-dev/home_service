@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Bookings, Calendar, Inbox, Profile} from '~/customer';
+import {Home, Bookings, Calendar, Inbox, Profile} from 'src/customer';
 import {
     home_select,
     home_unselect,
@@ -13,7 +13,7 @@ import {
     chat_unselect,
     profile_select,
     profile_unselect,
-} from '~/assets/images';
+} from 'src/assets/images';
 
 const Tab = createBottomTabNavigator();
 const CustomerStack = () => {

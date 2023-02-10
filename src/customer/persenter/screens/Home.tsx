@@ -1,15 +1,21 @@
-import {ScrollView, Image, SafeAreaView, TouchableOpacity} from 'react-native';
+import {
+    ScrollView,
+    Image,
+    SafeAreaView,
+    TouchableOpacity,
+    Button,
+} from 'react-native';
 import {Layout, Text} from '@ui-kitten/components';
 import React, {useEffect, useState} from 'react';
 import styles from '../style';
 import {SvgUri} from 'react-native-svg';
-import {APIConstants} from '~/network/config/APIConstants';
-import {Loader} from '~/components';
-import {user, hand, notification, bookmark} from '~/assets/images';
+import {APIConstants} from 'src/network/config/APIConstants';
+import {Loader} from 'src/components';
+import {user, hand, notification, bookmark} from 'src/assets/images';
 import {useSelector} from 'react-redux';
-import {getUser} from '~/redux/selectors/userSelector';
-import {useSvGetListServiceQuery} from '~/redux/query/getListService';
-import {useAppDispatch} from '~/redux/hooks';
+import {getUser} from 'src/redux/selectors';
+import {useSvGetListServiceQuery} from 'src/redux/query';
+import {useAppDispatch} from 'src/redux/hooks';
 
 const Home = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();
@@ -19,6 +25,8 @@ const Home = ({navigation}: {navigation: any}) => {
     const userProfile = useSelector(getUser);
 
     const goProfile = () => navigation.navigate('Profile');
+
+    console.log('renderHome');
 
     return (
         <Layout style={styles.container}>
@@ -31,6 +39,10 @@ const Home = ({navigation}: {navigation: any}) => {
       )} */}
             <ScrollView>
                 <SafeAreaView style={styles.childContainer}>
+                    <Button
+                        title="go"
+                        onPress={() => navigation.navigate('New')}
+                    />
                     <Layout style={styles.viewHeader}>
                         <Layout style={styles.viewUser}>
                             <TouchableOpacity

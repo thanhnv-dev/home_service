@@ -8,28 +8,36 @@ import {
     LogoLight,
 } from '../../assets/images/index';
 import styles from './styles';
-import {getProfile} from '~/redux/thunkAction/userThunk';
-import {UserResponse} from '~/network/apiResponses/user';
-import {IApiResponse} from '~/network/apiResponses/IApiResponse';
-import {useAppDispatch} from '~/redux/hooks';
-import helper from '~/utils/helper';
+import {getProfile} from 'src/redux/thunkAction/user';
+import {UserResponse} from 'src/network/apiResponses/user';
+import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
+import {useAppDispatch} from 'src/redux/hooks';
+import helper from 'src/utils/helper';
 
 const Splash = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();
+
+    console.log('Splash');
+
     const initApp = async () => {
         const _id = await AsyncStorage.getItem('_id');
+
         const storeOnboarding = await AsyncStorage.getItem('storeOnboarding');
+
         setTimeout(async () => {
-            console.log('Onboarding');
             if (storeOnboarding) {
                 if (_id) {
                     const getUser = await dispatch(getProfile({_id: _id}));
+
                     const response: IApiResponse<UserResponse> =
                         getUser.payload;
-                    helper.showToast({
-                        msg: response?.data?.msg!,
-                        type: 'success',
-                    });
+
+                    if (response.isSuccess) {
+                        helper.showToast({
+                            msg: response?.data?.msg!,
+                            type: 'success',
+                        });
+                    }
                 }
                 return navigation.replace('LetIsIn');
             } else {

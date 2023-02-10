@@ -1,4 +1,4 @@
-import {IUser} from '~/general/user/domain';
+import {IUser} from 'src/general/user/domain';
 // export interface User {
 //   _id: string;
 //   firstName: string;

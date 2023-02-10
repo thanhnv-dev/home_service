@@ -16,23 +16,23 @@ import {
     IconCheck,
     IconEmail,
     IconLock,
-} from '~/components/IconApp';
-import {a_logo, fb_logo, g_logo} from '~/assets/images';
-import Color from '~/constants/Color';
-import {EMAIL_BOX, PASSWORD_BOX} from '~/constants/Const';
-import styles from '~/general/user/presenter/styles';
+} from 'src/components/IconApp';
+import {a_logo, fb_logo, g_logo} from 'src/assets/images';
+import Color from 'src/constants/Color';
+import {EMAIL_BOX, PASSWORD_BOX} from 'src/constants/Const';
+import styles from 'src/general/user/presenter/styles';
 import {
     InputBox,
     LoginButton3rdPparty2,
     MyButton,
     ErrorInput,
-} from '~/general/widgets';
-import {useAppDispatch} from '~/redux/hooks';
-import {signIn} from '~/redux/slice/user.slice';
-import {showToast} from '~/utils/helper';
-import {SignInSchema} from '~/validation/SchemaValidation';
-import {UserResponse} from '~/network/apiResponses/user';
-import {IApiResponse} from '~/network/apiResponses/IApiResponse';
+} from 'src/general/widgets';
+import {useAppDispatch} from 'src/redux/hooks';
+import {signIn} from 'src/redux/thunkAction/user';
+import helper from 'src/utils/helper';
+import {SignInSchema} from 'src/validation/SchemaValidation';
+import {UserResponse} from 'src/network/apiResponses/user';
+import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
 
 const SignIn = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();
@@ -86,7 +86,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                 token: response.data?.token!,
                 refreshToken: response.data?.refreshToken!,
             });
-            showToast({msg: response?.data?.msg!, type: 'success'});
+            helper.showToast({msg: response?.data?.msg!, type: 'success'});
             switch (response.data?.type) {
                 case 'PROVIDER':
                     return navigation.navigate('ProviderStack');
@@ -101,7 +101,10 @@ const SignIn = ({navigation}: {navigation: any}) => {
 
     const handleSignIn = (handleSubmit: any, errors: any) => {
         if (errors.email || errors.password) {
-            showToast({type: 'error', msg: 'Please complete all information'});
+            helper.showToast({
+                type: 'error',
+                msg: 'Please complete all information',
+            });
         } else {
             handleSubmit();
         }

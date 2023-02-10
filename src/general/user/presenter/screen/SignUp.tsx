@@ -15,17 +15,17 @@ import {
     IconLock,
     IconLock2,
     IconBack,
-} from '~/components/IconApp';
-import {MyButton, MyButton1, InputBox, ErrorInput} from '~/general/widgets';
-import {SignUpSchema} from '~/validation/SchemaValidation';
+} from 'src/components/IconApp';
+import {MyButton, MyButton1, InputBox, ErrorInput} from 'src/general/widgets';
+import {SignUpSchema} from 'src/validation/SchemaValidation';
 import styles from '../styles';
-import Color from '~/constants/Color';
+import Color from 'src/constants/Color';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {showToast} from '~/utils/helper';
-import {useAppDispatch} from '~/redux/hooks';
-import {signUp} from '~/redux/slice/user.slice';
-import {IApiResponse} from '~/network/apiResponses/IApiResponse';
-import {UserResponse} from '~/network/apiResponses/user';
+import {showToast} from 'src/utils/helper';
+import {useAppDispatch} from 'src/redux/hooks';
+import {signUp} from 'src/redux/slice/user.slice';
+import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
+import {UserResponse} from 'src/network/apiResponses/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({navigation}: {navigation: any}) => {

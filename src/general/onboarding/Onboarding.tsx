@@ -8,8 +8,8 @@ import {
     useWindowDimensions,
     View,
 } from 'react-native';
-import {onboardingData} from '~/constants/Const';
-import {MyButton} from '~/general/widgets';
+import {onboardingData} from 'src/constants/Const';
+import {MyButton} from 'src/general/widgets';
 import styles from './styles';
 
 const Onboarding = ({navigation}: {navigation: any}) => {

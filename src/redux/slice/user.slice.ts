@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {IUser} from '~/general/user/domain';
-import {signIn, getProfile} from '../thunkAction/userThunk';
+import {IUser} from 'src/general/user/domain';
+import {signIn, getProfile} from '../thunkAction/user';
 
 export const userSlice = createSlice({
     name: 'user',

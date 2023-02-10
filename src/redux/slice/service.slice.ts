@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {ServiceInterface} from '~/customer/domain';
+import {ServiceInterface} from 'src/customer/domain';
 
 export const serviceSlice = createSlice({
     name: 'service',
