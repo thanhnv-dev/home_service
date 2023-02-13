@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {IUser} from 'src/general/user/domain';
+import {IUser} from 'src/public/auth/domain';
 import {signIn, getProfile} from '../thunkAction/user';
 
 export const userSlice = createSlice({

@@ -14,21 +14,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    logo: {
-        height: 170,
-        width: 150,
-    },
-    viewLogo: {
-        flex: 8,
-    },
-    viewLoading: {
-        flex: 2,
-        alignItems: 'center',
-    },
-    loading: {
-        height: 70,
-        width: 70,
-    },
     image: {
         height: 300,
         width: 300,

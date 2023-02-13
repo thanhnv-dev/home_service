@@ -39,10 +39,6 @@ const Home = ({navigation}: {navigation: any}) => {
       )} */}
             <ScrollView>
                 <SafeAreaView style={styles.childContainer}>
-                    <Button
-                        title="go"
-                        onPress={() => navigation.navigate('New')}
-                    />
                     <Layout style={styles.viewHeader}>
                         <Layout style={styles.viewUser}>
                             <TouchableOpacity

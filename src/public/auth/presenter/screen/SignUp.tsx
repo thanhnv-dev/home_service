@@ -16,14 +16,14 @@ import {
     IconLock2,
     IconBack,
 } from 'src/components/IconApp';
-import {MyButton, MyButton1, InputBox, ErrorInput} from 'src/general/widgets';
+import {MyButton, MyButton1, InputBox, ErrorInput} from 'src/components';
 import {SignUpSchema} from 'src/validation/SchemaValidation';
 import styles from '../styles';
 import Color from 'src/constants/Color';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {showToast} from 'src/utils/helper';
+import helper from 'src/utils/helper';
 import {useAppDispatch} from 'src/redux/hooks';
-import {signUp} from 'src/redux/slice/user.slice';
+import {signUp} from 'src/redux/thunkAction/user';
 import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
 import {UserResponse} from 'src/network/apiResponses/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -61,7 +61,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
         const Action = await dispatch(signUp({...values, type: typeService}));
         const response: IApiResponse<UserResponse> = Action.payload;
         if (response.isSuccess) {
-            showToast({msg: response.data?.msg!, type: 'success'});
+            helper.showToast({msg: response.data?.msg!, type: 'success'});
             saveData({
                 token: response.data?.token!,
                 refreshToken: response.data?.refreshToken!,
@@ -77,7 +77,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
                 default:
             }
         } else {
-            showToast({msg: response.data?.msg!, type: 'error'});
+            helper.showToast({msg: response.data?.msg!, type: 'error'});
         }
     };
     const cancelFocus = () => {
@@ -119,10 +119,13 @@ const SignUp = ({navigation}: {navigation: any}) => {
             !values.lastName ||
             !values.confirmPassword
         ) {
-            showToast({type: 'error', msg: 'Please complete all information'});
+            helper.showToast({
+                type: 'error',
+                msg: 'Please complete all information',
+            });
         } else {
             if (typeService == null) {
-                showToast({
+                helper.showToast({
                     type: 'error',
                     msg: 'Please select an account type',
                 });

@@ -5,9 +5,9 @@ import CustomerStack from './CustomerStack';
 import {useSelector} from 'react-redux';
 import {getUserType} from 'src/redux/selectors';
 import PublicStack from './PulicStack';
-import New from 'src/customer/persenter/screens/New';
 
 const Stack = createNativeStackNavigator();
+
 const AppNaviagtor = () => {
     const useType = useSelector(getUserType);
 
@@ -20,7 +20,6 @@ const AppNaviagtor = () => {
                             name="CustomerStack"
                             component={CustomerStack}
                         />
-                        <Stack.Screen name="New" component={New} />
                     </Stack.Navigator>
                 </NavigationContainer>
             );

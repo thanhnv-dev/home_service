@@ -1,4 +1,4 @@
-import {IUser} from 'src/general/user/domain';
+import {IUser} from 'src/public/auth/domain';
 // export interface User {
 //   _id: string;
 //   firstName: string;

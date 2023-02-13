@@ -20,13 +20,13 @@ import {
 import {a_logo, fb_logo, g_logo} from 'src/assets/images';
 import Color from 'src/constants/Color';
 import {EMAIL_BOX, PASSWORD_BOX} from 'src/constants/Const';
-import styles from 'src/general/user/presenter/styles';
+import styles from 'src/public/auth/presenter/styles';
 import {
     InputBox,
     LoginButton3rdPparty2,
     MyButton,
     ErrorInput,
-} from 'src/general/widgets';
+} from 'src/components';
 import {useAppDispatch} from 'src/redux/hooks';
 import {signIn} from 'src/redux/thunkAction/user';
 import helper from 'src/utils/helper';
