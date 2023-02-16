@@ -1,5 +1,5 @@
-import {AxiosError} from 'axios';
 import type {BaseQueryFn} from '@reduxjs/toolkit/query';
+import {AxiosError} from 'axios';
 import {sendGet} from 'src/network/requests';
 
 const axiosGetBaseQueryRTK =

@@ -1,6 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect} from 'react';
 import {Image, View} from 'react-native';
+import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
+import {UserResponse} from 'src/network/apiResponses/user';
+import {useAppDispatch} from 'src/redux/hooks';
+import {getProfile} from 'src/redux/thunkAction/user';
+import helper from 'src/utils/helper';
 import {
     // LoadingDark,
     LoadingLight,
@@ -8,11 +13,6 @@ import {
     LogoLight,
 } from '../../assets/images/index';
 import styles from './styles';
-import {getProfile} from 'src/redux/thunkAction/user';
-import {UserResponse} from 'src/network/apiResponses/user';
-import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
-import {useAppDispatch} from 'src/redux/hooks';
-import helper from 'src/utils/helper';
 
 const Splash = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();

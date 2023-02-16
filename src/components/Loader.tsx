@@ -1,5 +1,5 @@
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import React from 'react';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 export const Loader = ({loading}: {loading: boolean}) => {
     return loading ? (

@@ -1,11 +1,11 @@
 import {IApiResponse} from '../../../network/apiResponses/IApiResponse';
 import {UserResponse} from '../../../network/apiResponses/user';
-import {SignUpService, SignInService, GetProfileService} from '../application';
 import {
-    signUp,
-    signIn,
     getProfile,
+    signIn,
+    signUp,
 } from '../../../network/controllers/userControllers';
+import {GetProfileService, SignInService, SignUpService} from '../application';
 
 export class UserSignUpService implements SignUpService {
     async signUp(data: object): Promise<IApiResponse<UserResponse>> {

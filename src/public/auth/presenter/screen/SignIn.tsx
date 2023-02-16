@@ -9,6 +9,13 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
 } from 'react-native';
+import {a_logo, fb_logo, g_logo} from 'src/assets/images';
+import {
+    ErrorInput,
+    InputBox,
+    LoginButton3rdPparty2,
+    MyButton,
+} from 'src/components';
 import {
     EyeIcon,
     EyeOffIcon,
@@ -17,22 +24,15 @@ import {
     IconEmail,
     IconLock,
 } from 'src/components/IconApp';
-import {a_logo, fb_logo, g_logo} from 'src/assets/images';
 import Color from 'src/constants/Color';
 import {EMAIL_BOX, PASSWORD_BOX} from 'src/constants/Const';
+import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
+import {UserResponse} from 'src/network/apiResponses/user';
 import styles from 'src/public/auth/presenter/styles';
-import {
-    InputBox,
-    LoginButton3rdPparty2,
-    MyButton,
-    ErrorInput,
-} from 'src/components';
 import {useAppDispatch} from 'src/redux/hooks';
 import {signIn} from 'src/redux/thunkAction/user';
 import helper from 'src/utils/helper';
 import {SignInSchema} from 'src/utils/SchemaValidation';
-import {UserResponse} from 'src/network/apiResponses/user';
-import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
 
 const SignIn = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-const Stack = createNativeStackNavigator();
 import {LetIsIn, Onboarding, SignIn, SignUp, Splash} from 'src/public/index';
+const Stack = createNativeStackNavigator();
 
 const PublicStack = () => {
     return (

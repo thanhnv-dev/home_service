@@ -1,32 +1,32 @@
-import {
-    Keyboard,
-    TouchableWithoutFeedback,
-    TouchableOpacity,
-    SafeAreaView,
-    View,
-} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Layout, Text} from '@ui-kitten/components';
 import {Formik} from 'formik';
+import React, {useEffect, useState} from 'react';
+import {
+    Keyboard,
+    SafeAreaView,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View,
+} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {ErrorInput, InputBox, MyButton, MyButton1} from 'src/components';
 import {
     EyeIcon,
     EyeOffIcon,
+    IconBack,
     IconEmail,
     IconLock,
     IconLock2,
-    IconBack,
 } from 'src/components/IconApp';
-import {MyButton, MyButton1, InputBox, ErrorInput} from 'src/components';
-import {SignUpSchema} from 'src/utils/SchemaValidation';
-import styles from '../styles';
 import Color from 'src/constants/Color';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import helper from 'src/utils/helper';
-import {useAppDispatch} from 'src/redux/hooks';
-import {signUp} from 'src/redux/thunkAction/user';
 import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
 import {UserResponse} from 'src/network/apiResponses/user';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useAppDispatch} from 'src/redux/hooks';
+import {signUp} from 'src/redux/thunkAction/user';
+import helper from 'src/utils/helper';
+import {SignUpSchema} from 'src/utils/SchemaValidation';
+import styles from '../styles';
 
 const SignUp = ({navigation}: {navigation: any}) => {
     const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
-import {Image, TouchableOpacity} from 'react-native';
-import React from 'react';
 import {Text} from '@ui-kitten/components';
+import React from 'react';
+import {Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
 const LoginButton3rdPparty = ({

@@ -1,9 +1,9 @@
-import {View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
-import styles from 'src/public/auth/presenter/styles';
-import {fb_logo, g_logo, a_logo, Logo} from 'src/assets/images';
-import {MyButton, LoginButton3rdPparty1} from 'src/components';
 import {Layout, Text} from '@ui-kitten/components';
+import React from 'react';
+import {Image, TouchableOpacity, View} from 'react-native';
+import {a_logo, fb_logo, g_logo, Logo} from 'src/assets/images';
+import {LoginButton3rdPparty1, MyButton} from 'src/components';
+import styles from 'src/public/auth/presenter/styles';
 
 const LetIsIn = ({navigation}: {navigation: any}) => {
     const goSignIn = () => navigation.navigate('SignIn');

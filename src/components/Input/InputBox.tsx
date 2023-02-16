@@ -1,6 +1,6 @@
+import {Button, Layout, Text} from '@ui-kitten/components';
 import React from 'react';
 import {TextInput} from 'react-native';
-import {Layout, Button, Text} from '@ui-kitten/components';
 import styles from './styles';
 
 const InputBox = ({

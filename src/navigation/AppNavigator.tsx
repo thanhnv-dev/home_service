@@ -1,9 +1,9 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import CustomerStack from './CustomerStack';
 import {useSelector} from 'react-redux';
 import {getUserType} from 'src/redux/selectors';
+import CustomerStack from './CustomerStack';
 import PublicStack from './PulicStack';
 
 const Stack = createNativeStackNavigator();

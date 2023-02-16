@@ -1,5 +1,5 @@
-import {IApiResponse} from '../apiResponses/IApiResponse';
 import helper from 'src/utils/helper';
+import {IApiResponse} from '../apiResponses/IApiResponse';
 
 function Response<T>(apiResponse: any) {
     let res: IApiResponse<T> = {
