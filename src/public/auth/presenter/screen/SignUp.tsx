@@ -17,7 +17,7 @@ import {
     IconBack,
 } from 'src/components/IconApp';
 import {MyButton, MyButton1, InputBox, ErrorInput} from 'src/components';
-import {SignUpSchema} from 'src/validation/SchemaValidation';
+import {SignUpSchema} from 'src/utils/SchemaValidation';
 import styles from '../styles';
 import Color from 'src/constants/Color';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';

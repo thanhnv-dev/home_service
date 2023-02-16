@@ -30,7 +30,7 @@ import {
 import {useAppDispatch} from 'src/redux/hooks';
 import {signIn} from 'src/redux/thunkAction/user';
 import helper from 'src/utils/helper';
-import {SignInSchema} from 'src/validation/SchemaValidation';
+import {SignInSchema} from 'src/utils/SchemaValidation';
 import {UserResponse} from 'src/network/apiResponses/user';
 import {IApiResponse} from 'src/network/apiResponses/IApiResponse';
 
