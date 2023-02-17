@@ -1,15 +1,15 @@
-import React from 'react';
-import AppNaviagtor from './navigation/AppNavigator';
-import Toast from 'react-native-toast-message';
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import React from 'react';
+import Toast from 'react-native-toast-message';
+import AppNaviagtor from './navigation/AppNavigator';
 // import {default as themeColorDark} from './utils/custom-theme-dark.json';
 // import {default as themeColorLight} from './utils/custom-theme-light.json';
-import {ThemeContext} from './theme/theme-context';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {Provider} from 'react-redux';
-import {store} from 'src/redux';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
+import {store} from 'src/redux';
+import {ThemeContext} from './theme/theme-context';
 
 const App = () => {
     const [theme, setTheme] = React.useState(eva.light);
