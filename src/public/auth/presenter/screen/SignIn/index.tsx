@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Keyboard,
     KeyboardAvoidingView,
@@ -36,10 +36,11 @@ import helper from 'src/utils/helper';
 import {SignInSchema} from 'src/utils/SchemaValidation';
 import SignInScreenContent from './SignInScreenContent';
 
-const SignIn = () => {
+const SignIn = ({navigation}: {navigation: any}) => {
     let containerStyles = [styles.flex1, styles.backgroundColorWhite];
 
     const [focusBox, setFocusBox] = useState<any>(null);
+    const [keyboardShow, setKeyboardShow] = useState<boolean>(false);
 
     const cancelInputAndKeyboard = () => {
         Keyboard.dismiss();
@@ -47,11 +48,36 @@ const SignIn = () => {
             setFocusBox(null);
         }
     };
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener(
+            'keyboardWillShow',
+            () => {
+                setKeyboardShow(true);
+            },
+        );
+        const hideSubscription = Keyboard.addListener(
+            'keyboardWillHide',
+            () => {
+                setKeyboardShow(false);
+            },
+        );
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
 
     return (
-        <View style={containerStyles}>
-            <SignInScreenContent focusBox={focusBox} />
-        </View>
+        <TouchableDismissKeyboard keyboardShow={keyboardShow}>
+            <View style={containerStyles}>
+                <SignInScreenContent
+                    focusBox={focusBox}
+                    navigation={navigation}
+                    keyboardShow={keyboardShow}
+                />
+            </View>
+        </TouchableDismissKeyboard>
     );
 };
 

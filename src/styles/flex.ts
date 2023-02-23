@@ -1,4 +1,6 @@
-export default {
+import {StyleSheet} from 'react-native';
+
+const flex = StyleSheet.create({
     flex1: {
         flex: 1,
     },
@@ -11,4 +13,25 @@ export default {
     flex4: {
         flex: 4,
     },
-};
+    flexRow: {
+        flexDirection: 'row',
+    },
+    justifyContentCenter: {
+        justifyContent: 'center',
+    },
+    justifyContentStart: {
+        justifyContent: 'flex-start',
+    },
+
+    justifyContentEnd: {
+        justifyContent: 'flex-end',
+    },
+
+    justifyContentBetween: {
+        justifyContent: 'space-between',
+    },
+    justifyContentAround: {
+        justifyContent: 'space-around',
+    },
+});
+export default flex;

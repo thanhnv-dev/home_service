@@ -3,10 +3,10 @@ import React from 'react';
 
 const TouchableDismissKeyboard = (props: any) => {
     const dismissKeyboardWhenTappedOutsideOfInput = () => {
-        if (props.isKeyboardShow) {
-            return;
+        if (props.keyboardShow) {
+            Keyboard.dismiss();
         }
-        Keyboard.dismiss();
+        return;
     };
     return (
         <TouchableWithoutFeedback
