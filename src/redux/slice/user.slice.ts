@@ -13,23 +13,20 @@ export const userSlice = createSlice({
     //   type: null,
     // },
     reducers: {
-        // setUser: (state, action) => {
-        //   state._id = action?.payload._id;
-        //   state.firstName = action?.payload.firstName;
-        //   state.lastName = action?.payload.lastName;
-        //   state.email = action?.payload.email;
-        //   state.type = action?.payload.type;
-        // },
+        setUser: (state, action) => {
+            state._id = action?.payload._id;
+            state.firstName = action?.payload.firstName;
+            state.lastName = action?.payload.lastName;
+            state.email = action?.payload.email;
+            state.type = action?.payload.type;
+        },
     },
     extraReducers: builder => {
-        // Bắt đầu thực hiện action login (Promise pending)
         // builder.addCase(signIn.pending, state => {
-        //   // Bật trạng thái loading
         //   // state.isLoading = true;
         // });
 
-        // Khi thực hiện action login thành công (Promise fulfilled)
-        builder.addCase(signIn.fulfilled, (state: any, action: any) => {
+        builder.addCase(signIn.fulfilled, (state: IUser, action: any) => {
             state._id = action?.payload.data._id;
             state.firstName = action?.payload.data.firstName;
             state.lastName = action?.payload.data.lastName;
@@ -44,9 +41,7 @@ export const userSlice = createSlice({
             state.type = action?.payload.data.type;
         });
 
-        // Khi thực hiện action login thất bại (Promise rejected)
         // builder.addCase(signIn.rejected, (state, action) => {
-        // Tắt trạng thái loading, lưu thông báo lỗi vào store
         // console.log('rejected: ', action);
         // state.isLoading = false;
         // state.errorMessage = action.payload;
@@ -54,6 +49,6 @@ export const userSlice = createSlice({
     },
 });
 
-// export const {setUser} = userSlice.actions;
+export const {setUser} = userSlice.actions;
 
 export default userSlice.reducer;

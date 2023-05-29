@@ -11,8 +11,8 @@ const PublicStack = () => {
             <Stack.Screen name="Onboarding" component={Onboarding} />
             <Stack.Screen name="LetIsIn" component={LetIsIn} />
             <Stack.Screen name="SignIn" component={SignIn} />
-            <Stack.Screen name="New" component={New} />
             <Stack.Screen name="SignUp" component={SignUp} />
+            {/* <Stack.Screen name="New" component={New} /> */}
         </Stack.Navigator>
     );
 };
