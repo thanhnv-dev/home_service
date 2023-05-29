@@ -4,7 +4,6 @@
     "private": true,
     "scripts": {
         "android": "react-native run-android",
-        "ios13": "react-native run-ios --simulator='iPhone 13'",
         "ios14": "react-native run-ios --simulator='iPhone 14 Pro'",
         "ios8": "react-native run-ios --simulator='iPhone 8'",
         "start": "react-native start",

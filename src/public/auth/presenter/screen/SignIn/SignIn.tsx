@@ -41,7 +41,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
     const [remenber, setRemenber] = useState(false);
     const [secureTextEntry, setSecureTextEntry] = useState(true);
 
-    const goSignUp = () => navigation.navigate('New');
+    const goSignUp = () => navigation.navigate('SignUp');
     const onBack = () => navigation.goBack();
 
     const cancelFocus = () => {
