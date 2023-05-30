@@ -1,6 +1,6 @@
-const Ip = '127.0.0.1';
-const Port = '3000';
+// const Ip = 'localhost';
+// const Port = '3000';
 const APIConstants = {
-    BASE_URL: `http://${Ip}:${Port}`,
+    BASE_URL: 'https://server-home-service.vercel.app',
 };
 export default APIConstants;

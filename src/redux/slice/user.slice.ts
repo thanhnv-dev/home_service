@@ -5,13 +5,6 @@ import {getProfile, signIn} from '../thunkAction/user';
 export const userSlice = createSlice({
     name: 'user',
     initialState: {} as IUser,
-    // {
-    //   _id: null,
-    //   firstName: null,
-    //   lastName: null,
-    //   email: null,
-    //   type: null,
-    // },
     reducers: {
         setUser: (state, action) => {
             state._id = action?.payload._id;
@@ -33,6 +26,7 @@ export const userSlice = createSlice({
             state.email = action?.payload.data.email;
             state.type = action?.payload.data.type;
         });
+
         builder.addCase(getProfile.fulfilled, (state: any, action: any) => {
             state._id = action?.payload.data._id;
             state.firstName = action?.payload.data.firstName;

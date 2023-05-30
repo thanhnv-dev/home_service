@@ -1,11 +1,33 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {styles} from './styles/index';
 import {MyButton} from './components/Button';
+import {
+    couterDecremented,
+    couterIncremented,
+    couterSet,
+} from './redux-core/action/counterAction';
 
 const ExampleReduxCode = () => {
-    const counter = useSelector((state: any) => state.counter);
+    const dispatch = useDispatch();
+
+    const counter = useSelector(state => state.counter);
+
+    const [input, setInput] = useState('');
+
+    const up = () => {
+        dispatch(couterIncremented());
+    };
+
+    const down = () => {
+        dispatch(couterDecremented());
+    };
+
+    const set = () => {
+        dispatch(couterSet(parseInt(input, 10)));
+    };
+
     return (
         <View
             style={[
@@ -16,16 +38,20 @@ const ExampleReduxCode = () => {
             <Text style={styles.tile}>Counter: {counter.value}</Text>
             <View style={[styles.flexRow, styles.mt20]}>
                 <View style={[styles.flex1, styles.mh20]}>
-                    <MyButton title="Up" onPress={() => {}} />
+                    <MyButton title="Up" onPress={up} />
                 </View>
                 <View style={[styles.flex1, styles.mh20]}>
-                    <MyButton title="Down" onPress={() => {}} />
+                    <MyButton title="Down" onPress={down} />
                 </View>
             </View>
             <View style={[styles.flexRow, styles.mt20]}>
-                <TextInput style={[Styles.textInput]} />
+                <TextInput
+                    style={[Styles.textInput]}
+                    value={input}
+                    onChangeText={setInput}
+                />
                 <View style={[styles.mh20, Styles.w100]}>
-                    <MyButton title="Set" onPress={() => {}} />
+                    <MyButton title="Set" onPress={set} />
                 </View>
             </View>
         </View>

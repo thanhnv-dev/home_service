@@ -10,6 +10,9 @@ const counterReducer = (state = initState, action) => {
         case Action.COUNTER_DECREMENTED:
             return {value: state.value - 1};
 
+        case Action.COUNTER_SET:
+            return {value: action.value};
+
         default:
             return state;
     }

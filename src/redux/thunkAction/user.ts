@@ -6,18 +6,6 @@ import {
     UserSignUpService,
 } from 'src/public/auth/infastructure/service';
 
-const signUp = createAsyncThunk(
-    'user/signUp',
-    async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
-        const service = new UserSignUpService();
-        const interactor = new SignUp(service);
-        const signUpResult = await interactor.signUpService.signUp(data);
-        if (signUpResult.isSuccess) {
-            return signUpResult;
-        }
-        return rejectWithValue(signUpResult);
-    },
-);
 const signIn = createAsyncThunk(
     'user/signIn',
     async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
@@ -30,6 +18,20 @@ const signIn = createAsyncThunk(
         return rejectWithValue(signinResult);
     },
 );
+
+const signUp = createAsyncThunk(
+    'user/signUp',
+    async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {
+        const service = new UserSignUpService();
+        const interactor = new SignUp(service);
+        const signUpResult = await interactor.signUpService.signUp(data);
+        if (signUpResult.isSuccess) {
+            return signUpResult;
+        }
+        return rejectWithValue(signUpResult);
+    },
+);
+
 const getProfile = createAsyncThunk(
     'user/getProfile',
     async (data: object, {rejectWithValue}: {rejectWithValue: any}) => {

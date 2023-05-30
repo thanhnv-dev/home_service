@@ -8,6 +8,7 @@ import AppNaviagtor from './navigation/AppNavigator';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import {ThemeContext} from './theme/theme-context';
+
 import {Provider} from 'react-redux';
 import {store} from 'src/redux';
 

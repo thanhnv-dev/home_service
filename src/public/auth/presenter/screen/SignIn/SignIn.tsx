@@ -75,7 +75,9 @@ const SignIn = ({navigation}: {navigation: any}) => {
     const onLogin = async (values: object) => {
         Keyboard.dismiss();
         const Action = await dispatch(signIn(values));
+
         const response: IApiResponse<UserResponse> = Action.payload;
+
         if (response.isSuccess) {
             if (remenber) {
                 saveUser({
