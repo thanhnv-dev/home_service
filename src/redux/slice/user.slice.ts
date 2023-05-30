@@ -15,9 +15,9 @@ export const userSlice = createSlice({
         },
     },
     extraReducers: builder => {
-        // builder.addCase(signIn.pending, state => {
-        //   // state.isLoading = true;
-        // });
+        builder.addCase(signIn.pending, state => {
+            console.log('pending', state);
+        });
 
         builder.addCase(signIn.fulfilled, (state: IUser, action: any) => {
             state._id = action?.payload.data._id;
@@ -27,6 +27,10 @@ export const userSlice = createSlice({
             state.type = action?.payload.data.type;
         });
 
+        builder.addCase(signIn.rejected, (state, action) => {
+            console.log('rejected: ', action);
+        });
+
         builder.addCase(getProfile.fulfilled, (state: any, action: any) => {
             state._id = action?.payload.data._id;
             state.firstName = action?.payload.data.firstName;
@@ -34,12 +38,6 @@ export const userSlice = createSlice({
             state.email = action?.payload.data.email;
             state.type = action?.payload.data.type;
         });
-
-        // builder.addCase(signIn.rejected, (state, action) => {
-        // console.log('rejected: ', action);
-        // state.isLoading = false;
-        // state.errorMessage = action.payload;
-        // });
     },
 });
 

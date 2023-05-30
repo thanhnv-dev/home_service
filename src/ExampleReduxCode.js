@@ -8,6 +8,11 @@ import {
     couterIncremented,
     couterSet,
 } from './redux-core/action/counterAction';
+import {
+    incremented,
+    decremented,
+    setCounter,
+} from './redux-toolkit/slice/counterSlice';
 
 const ExampleReduxCode = () => {
     const dispatch = useDispatch();
@@ -17,15 +22,18 @@ const ExampleReduxCode = () => {
     const [input, setInput] = useState('');
 
     const up = () => {
-        dispatch(couterIncremented());
+        // dispatch(couterIncremented());
+        dispatch(incremented());
     };
 
     const down = () => {
-        dispatch(couterDecremented());
+        // dispatch(couterDecremented());
+        dispatch(decremented());
     };
 
     const set = () => {
-        dispatch(couterSet(parseInt(input, 10)));
+        // dispatch(couterSet(parseInt(input, 10)));
+        dispatch(setCounter(parseInt(input, 10)));
     };
 
     return (

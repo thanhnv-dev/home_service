@@ -7,9 +7,9 @@ import ExampleReduxCode from './ExampleReduxCode';
 
 import {Provider} from 'react-redux';
 // import store_core from 'src/redux-core/store';
-import store_toolkit from 'src/redux-toolkit/store';
+import {store_toolkit} from 'src/redux-toolkit/store';
 
-const AppCore = () => {
+const AppExample = () => {
     return (
         <Provider store={store_toolkit}>
             <IconRegistry icons={EvaIconsPack} />
@@ -20,4 +20,4 @@ const AppCore = () => {
         </Provider>
     );
 };
-export default AppCore;
+export default AppExample;

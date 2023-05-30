@@ -1,8 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit';
 import counterSlice from './slice/counterSlice';
 
-const store_toolkit = configureStore({
-    reducer: counterSlice,
-});
+const createDebugger = require('redux-flipper').default;
 
-export default store_toolkit;
+export const store_toolkit = configureStore({
+    reducer: {
+        counter: counterSlice,
+    },
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({serializableCheck: false}).concat(
+            createDebugger(),
+        ),
+});
