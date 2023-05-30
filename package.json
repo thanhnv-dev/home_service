@@ -9,7 +9,8 @@
         "start": "react-native start",
         "test": "jest",
         "lint": "eslint .",
-        "pod": "cd ios; arch -x86_64 pod install; cd ..",
+        "podm1": "cd ios; arch -x86_64 pod install; cd ..",
+        "pod": "cd ios; pod install; cd ..",
         "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
     },
     "dependencies": {

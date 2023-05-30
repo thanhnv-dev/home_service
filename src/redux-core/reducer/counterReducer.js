@@ -1,5 +1,6 @@
-const initState = {value: 0};
 import * as Action from '../action/actionType';
+
+const initState = {value: 0};
 
 const counterReducer = (state = initState, action) => {
     switch (action.type) {

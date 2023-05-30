@@ -1,4 +1,13 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import rootReducer from './reducer';
 
-export const store = createStore(rootReducer);
+const middlewares = [];
+if (__DEV__) {
+    const createDebugger = require('redux-flipper').default;
+    middlewares.push(createDebugger());
+}
+
+export const store_core = createStore(
+    rootReducer,
+    applyMiddleware(...middlewares),
+);
