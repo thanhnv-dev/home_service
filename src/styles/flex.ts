@@ -33,5 +33,8 @@ const flex = StyleSheet.create({
     justifyContentAround: {
         justifyContent: 'space-around',
     },
+    alignItemsCenter: {
+        alignItems: 'center',
+    },
 });
 export default flex;

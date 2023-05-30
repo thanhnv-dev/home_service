@@ -1,16 +1,21 @@
+import * as eva from '@eva-design/eva';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import React from 'react';
-import Toast from 'react-native-toast-message';
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
+import ExampleReduxCode from './ExampleReduxCode';
+
 import {Provider} from 'react-redux';
 import {store_core} from 'src/redux-core/store';
-import ExampleReduxCode from './ExampleReduxCode';
 
 const AppCore = () => {
     return (
         <Provider store={store_core}>
-            <FlipperAsyncStorage />
-            <ExampleReduxCode />
-            <Toast />
+            <IconRegistry icons={EvaIconsPack} />
+            <ApplicationProvider {...eva} theme={eva.light}>
+                <FlipperAsyncStorage />
+                <ExampleReduxCode />
+            </ApplicationProvider>
         </Provider>
     );
 };

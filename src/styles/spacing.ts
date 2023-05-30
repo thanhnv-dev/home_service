@@ -10,5 +10,8 @@ const spacing = StyleSheet.create({
     mv20: {
         marginVertical: 20,
     },
+    mt20: {
+        marginTop: 20,
+    },
 });
 export default spacing;
