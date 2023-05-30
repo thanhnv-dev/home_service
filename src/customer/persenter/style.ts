@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 import Color from 'src/constants/Color';
+import {flex, spacing, text} from 'src/styles';
 const styles = StyleSheet.create({
+    ...flex,
+    ...spacing,
+    ...text,
     container: {
         flex: 1,
         backgroundColor: Color.while,

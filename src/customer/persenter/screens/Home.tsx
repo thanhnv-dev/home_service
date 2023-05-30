@@ -4,29 +4,36 @@ import {
     SafeAreaView,
     TouchableOpacity,
     Button,
+    View,
 } from 'react-native';
 import {Layout, Text} from '@ui-kitten/components';
 import React, {useEffect, useState} from 'react';
 import styles from '../style';
 import {SvgUri} from 'react-native-svg';
 import {APIConstants} from 'src/network/config/APIConstants';
-import {Loader} from 'src/components';
+import {Loader, MyButton} from 'src/components';
 import {user, hand, notification, bookmark} from 'src/assets/images';
 import {useSelector} from 'react-redux';
 import {getUser} from 'src/redux/selectors';
-import {useSvGetListServiceQuery} from 'src/redux/query';
-import {useAppDispatch} from 'src/redux/hooks';
+import {useSvGetListServiceQuery, usePrefetch} from 'src/redux/query';
+// import {useAppDispatch} from 'src/redux/hooks';
 
 const Home = ({navigation}: {navigation: any}) => {
-    const dispatch = useAppDispatch();
-
-    const {data, isLoading} = useSvGetListServiceQuery();
+    // const dispatch = useAppDispatch();
 
     const userProfile = useSelector(getUser);
 
     const goProfile = () => navigation.navigate('Profile');
 
-    console.log('renderHome');
+    const nextScreen = () => {
+        navigation.replace('TestScreen');
+    };
+
+    const prefetchPage = usePrefetch('SvGetListService');
+
+    const onPrefetch = () => {
+        prefetchPage();
+    };
 
     return (
         <Layout style={styles.container}>
@@ -79,9 +86,13 @@ const Home = ({navigation}: {navigation: any}) => {
                             </TouchableOpacity>
                         </Layout>
                     </Layout>
+                    <MyButton title="Next Screen" onPress={nextScreen} />
+                    <View style={styles.mt20}>
+                        <MyButton title="Prefetch" onPress={onPrefetch} />
+                    </View>
                 </SafeAreaView>
             </ScrollView>
-            <Loader loading={isLoading} />
+            {/* <Loader loading={isLoading} /> */}
         </Layout>
     );
 };

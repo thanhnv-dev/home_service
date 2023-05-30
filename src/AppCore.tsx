@@ -6,11 +6,12 @@ import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import ExampleReduxCode from './ExampleReduxCode';
 
 import {Provider} from 'react-redux';
-import {store_core} from 'src/redux-core/store';
+// import store_core from 'src/redux-core/store';
+import store_toolkit from 'src/redux-toolkit/store';
 
 const AppCore = () => {
     return (
-        <Provider store={store_core}>
+        <Provider store={store_toolkit}>
             <IconRegistry icons={EvaIconsPack} />
             <ApplicationProvider {...eva} theme={eva.light}>
                 <FlipperAsyncStorage />

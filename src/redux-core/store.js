@@ -7,7 +7,6 @@ if (__DEV__) {
     middlewares.push(createDebugger());
 }
 
-export const store_core = createStore(
-    rootReducer,
-    applyMiddleware(...middlewares),
-);
+const store_core = createStore(rootReducer, applyMiddleware(...middlewares));
+
+export default store_core;

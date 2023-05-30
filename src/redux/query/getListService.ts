@@ -11,4 +11,4 @@ export const getListService = createApi({
         }),
     }),
 });
-export const {useSvGetListServiceQuery} = getListService;
+export const {useSvGetListServiceQuery, usePrefetch} = getListService;
