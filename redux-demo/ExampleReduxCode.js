@@ -1,8 +1,14 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
+import Color from 'src/constants/Color';
 import {useDispatch, useSelector} from 'react-redux';
-import {styles} from './styles/index';
-import {MyButton} from './components/Button';
+import {styles} from 'src/styles';
 import {
     couterDecremented,
     couterIncremented,
@@ -46,10 +52,26 @@ const ExampleReduxCode = () => {
             <Text style={styles.tile}>Counter: {counter.value}</Text>
             <View style={[styles.flexRow, styles.mt20]}>
                 <View style={[styles.flex1, styles.mh20]}>
-                    <MyButton title="Up" onPress={up} />
+                    <TouchableOpacity
+                        onPress={up}
+                        style={[
+                            Styles.button,
+                            styles.justifyContentCenter,
+                            styles.alignItemsCenter,
+                        ]}>
+                        <Text style={Styles.textButton}>Up</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={[styles.flex1, styles.mh20]}>
-                    <MyButton title="Down" onPress={down} />
+                    <TouchableOpacity
+                        onPress={down}
+                        style={[
+                            Styles.button,
+                            styles.justifyContentCenter,
+                            styles.alignItemsCenter,
+                        ]}>
+                        <Text style={Styles.textButton}>Down</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={[styles.flexRow, styles.mt20]}>
@@ -59,7 +81,15 @@ const ExampleReduxCode = () => {
                     onChangeText={setInput}
                 />
                 <View style={[styles.mh20, Styles.w100]}>
-                    <MyButton title="Set" onPress={set} />
+                    <TouchableOpacity
+                        onPress={set}
+                        style={[
+                            Styles.button,
+                            styles.justifyContentCenter,
+                            styles.alignItemsCenter,
+                        ]}>
+                        <Text style={Styles.textButton}>Set</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -76,6 +106,21 @@ const Styles = StyleSheet.create({
     },
     w100: {
         width: 100,
+    },
+    button: {
+        backgroundColor: Color.violet,
+        height: 50,
+        borderRadius: 100,
+        shadowColor: Color.violet,
+        shadowOpacity: 0.1,
+        shadowOffset: {
+            width: 3,
+            height: 10,
+        },
+    },
+    textButton: {
+        color: Color.while,
+        fontWeight: 'bold',
     },
 });
 export default ExampleReduxCode;

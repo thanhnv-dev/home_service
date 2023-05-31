@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
 import {styles} from 'src/styles/index';
 import {MyButton} from 'src/components/Button';
@@ -25,8 +25,11 @@ const TestScreen = ({navigation}: {navigation: any}) => {
                 styles.justifyContentCenter,
                 styles.alignItemsCenter,
             ]}>
-            <View style={styles.mv20}>
+            <View style={[styles.mv20, Styles.w120]}>
                 <MyButton title="Go Home" onPress={goHome} />
+            </View>
+            <View style={[styles.mv20, Styles.w120]}>
+                <MyButton title="Refetch data" onPress={refetch} />
             </View>
             {data?.length !== 0 ? (
                 <View>
@@ -43,5 +46,9 @@ const TestScreen = ({navigation}: {navigation: any}) => {
         </View>
     );
 };
-
+const Styles = StyleSheet.create({
+    w120: {
+        width: 120,
+    },
+});
 export default TestScreen;

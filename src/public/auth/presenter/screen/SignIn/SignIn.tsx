@@ -342,8 +342,8 @@ const SignIn = ({navigation}: {navigation: any}) => {
                         </TouchableOpacity>
                     </Layout>
                 </Layout>
-                <Loader loading={loading} />
             </TouchableWithoutFeedback>
+            <Loader loading={loading} mode={2} />
         </Layout>
     );
 };
