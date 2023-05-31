@@ -37,6 +37,7 @@
         "react-query": "^3.39.2",
         "react-redux": "^8.0.5",
         "redux": "^4.2.0",
+        "redux-persist": "^6.0.0",
         "rn-flipper-async-storage-advanced": "^1.0.4",
         "yup": "^0.32.11"
     },

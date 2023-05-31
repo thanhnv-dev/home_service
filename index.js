@@ -7,4 +7,4 @@ import AppExample from './redux-demo/AppExample';
 import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => AppExample);
