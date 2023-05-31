@@ -8,8 +8,8 @@ const createDebugger = require('redux-flipper').default;
 export const store = configureStore({
     reducer: {
         user: userSlice,
-        service: serviceSlide,
-        [getListService.reducerPath]: getListService.reducer,
+        // service: serviceSlide,
+        // [getListService.reducerPath]: getListService.reducer,
     },
     middleware: getDefaultMiddleware =>
         __DEV__

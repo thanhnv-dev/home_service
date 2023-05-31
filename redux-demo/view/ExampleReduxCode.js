@@ -13,12 +13,12 @@ import {
     couterDecremented,
     couterIncremented,
     couterSet,
-} from './redux-core/action/counterAction';
+} from '../redux-core/action/counterAction';
 import {
     incremented,
     decremented,
     setCounter,
-} from './redux-toolkit/slice/counterSlice';
+} from '../redux-toolkit/slice/counterSlice';
 
 const ExampleReduxCode = () => {
     const dispatch = useDispatch();

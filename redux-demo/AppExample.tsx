@@ -1,5 +1,5 @@
 import React from 'react';
-import ExampleReduxCode from './ExampleReduxCode';
+import ExampleReduxCode from './view/ExampleReduxCode';
 
 import {Provider} from 'react-redux';
 // import store_core from 'src/redux-core/store';
