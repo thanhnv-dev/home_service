@@ -15,6 +15,7 @@ import {
     InputBox,
     LoginButton3rdPparty2,
     MyButton,
+    Loader,
 } from 'src/components';
 import {
     EyeIcon,
@@ -40,6 +41,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
     const [focusBox, setFocusBox] = useState('');
     const [remenber, setRemenber] = useState(false);
     const [secureTextEntry, setSecureTextEntry] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const goSignUp = () => navigation.navigate('SignUp');
     const onBack = () => navigation.goBack();
@@ -74,21 +76,28 @@ const SignIn = ({navigation}: {navigation: any}) => {
 
     const onLogin = async (values: object) => {
         Keyboard.dismiss();
+
+        setLoading(true);
+
         const Action = await dispatch(signIn(values));
 
         const response: IApiResponse<UserResponse> = Action.payload;
 
+        setLoading(false);
+
         if (response.isSuccess) {
             if (remenber) {
-                saveUser({
+                await saveUser({
                     _id: response.data?._id!,
                 });
             }
-            saveToken({
+            await saveToken({
                 token: response.data?.token!,
                 refreshToken: response.data?.refreshToken!,
             });
+
             helper.showToast({msg: response?.data?.msg!, type: 'success'});
+
             switch (response.data?.type) {
                 case 'PROVIDER':
                     return navigation.navigate('ProviderStack');
@@ -97,6 +106,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                         screen: 'Home',
                     });
                 default:
+                    return;
             }
         }
     };
@@ -332,6 +342,7 @@ const SignIn = ({navigation}: {navigation: any}) => {
                         </TouchableOpacity>
                     </Layout>
                 </Layout>
+                <Loader loading={loading} />
             </TouchableWithoutFeedback>
         </Layout>
     );
